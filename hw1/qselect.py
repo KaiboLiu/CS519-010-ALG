@@ -1,15 +1,25 @@
-def qselect(a,k):  
-    if len(a)<k:return a  
-    pivot = a[-1]  
-    right = [pivot] + [x for x in a[:-1] if x>=pivot]  
-    rlen = len(right)  
-    if rlen==k:  
-        return right  
-    if rlen>k:  
-        return qselect(right, k)  
-    else:  
-        left = [x for x in a[:-1] if x<pivot]  
-        return qselect(left, k-rlen) + right  
+from random import randint
+
+def qselect_sort(k,a):
+    if len(a)<k:return a
+    pivot = a[randint(0,len(a)-1)]
+    a[0],pivot = pivot, a[0]
+    left = [x for x in a[1:] if x<pivot] + [pivot]
+    llen = len(left)
+    if llen==k:
+        return left
+    if llen>k:
+        return qselect_sort(k,left)
+    else:
+        right = [x for x in a[1:] if x>=pivot]
+        return left + qselect_sort(k-llen,right)
+
+def qselect(k,a):
+    if k > len(a): k = len(a)
+    if k < 1: k = 1
+    b = qselect_sort(k,a)
+    return b
   
-for i in range(1, 10):  
-    print('k =',i, qselect([11,8,4,1,5,2,7,9], i))
+for i in range(0,10):  
+    #print('k =',i, qselect(i,[11,8,4,1,5,2,7,9]))
+    print('k =',i, qselect(i,[11,8,5,1,5,2,7,5]))
