@@ -13,9 +13,9 @@ def qsort(a):
     if a == []:
         return []
     else:
-        #pivot = a[0]
-        pivot = a[randint(0,len(a)-1)]
-        a[0], pivot = pivot, a[0]
+        pidx = randint(0,len(a)-1)
+        a[0], a[pidx] = a[pidx], a[0]
+        pivot = a[0]
         left = [x for x in a if x < pivot]
         right = [x for x in a[1:] if x >= pivot]
         return qsort(left) + [pivot] + qsort(right)

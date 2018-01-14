@@ -12,86 +12,47 @@ Due electronically on flip on Sunday Jan 14, 11:59pm.
 
    A: For quicksort, the time complexities for each casee are:
       best-case: O(nlogn). 
-         In the most balanced case, we can divide the list into two nearly equal pieces after each partition . So we can make only logn nested recursions before we reach a list of size 1. This means that the depth of the recursion tree is logn, and it's almost an balanced tree. Each level of calls needs only O(n) time to generate sublists. The result is that the algorithm uses only O(nlogn) time. 
+         In the most balanced case, we can divide the array into two nearly equal pieces after each partition . So we can make only logn nested recursions before we reach a array of size 1. This means that the depth of the recursion tree is logn, and it's almost an balanced tree. Each level of calls needs only O(n) time to generate subarrays. The result is that the algorithm uses only O(nlogn) time. 
       worst-case: O(n^2). 
-         In common, the most unbalanced partition occurs when the pivot divides the list into two sublists of sizes 1 and n − 1. This may occur if the pivot repeatedly happensto be the smallest or largest element in the list, or when the list is all equal. If the pivot is fixed, then the worst-case is in a sorted, reversely sorted, or an all-equal list. Then each recursive call processes a list of size one less than the previous list. Finally, we can make n − 1 nested calls before we reach a list of size 1. This means that the call tree is a linear chain of n − 1 nested calls. The ith call does O(n − i) work to do the partition, and sum (1..n)=O(n^2), so in that case Quicksort takes O(n²) time.
+         In common, the most unbalanced partition occurs when the pivot divides the array into two subarrays of sizes 1 and n − 1. This may occur if the pivot repeatedly happensto be the smallest or largest element in the array, or when the array is all equal. If the pivot is fixed, then the worst-case is in a sorted, reversely sorted, or an all-equal array. Then each recursive call processes a array of size one less than the previous array. Finally, we can make n − 1 nested calls before we reach a array of size 1. This means that the call tree is a linear chain of n − 1 nested calls. The ith call does O(n − i) work to do the partition, and sum (1..n)=O(n^2), so in that case Quicksort takes O(n^2) time.
       average-case: O(nlogn).
-         A comparison sort cannot use less than log(n!) comparisons on average to sort n items. That is appoximately equal to n(log n − log e). Quicksort is not much worse than an ideal comparison sort. On average, quicksort has O(n^2) time complexity.
+         A comparison sort cannot use less than log(n!) comparisons on average to sort n items. That is appoximately equal to n(log n − log e). Quicksort is not much worse than an ideal comparison sort. On average, quicksort has O(nlogn) time complexity.
 
    
 1. [WILL BE GRADED] 
+
    Quickselect with Randomized Pivot (CLRS Ch. 9.2).
    Filename: qselect.py
    Submitted.
 
+   Q: What's the best-case, worst-case, and average-case time complexities? Briefly explain.
+   A: For quick select sort, the time complexities for each casee are:
+      best-case: O(n). 
+         If luckly we could choose a good pivots, we can throw half of the array each time, the search set decreases in size exponentially. The generatrion of subarray costs n + n/2 + n/4 + n/8 + ... = 2n, which make it O(n).
+      worst-case: O(n^2). 
+         If we choose a bad pivot consistently, such as decreasing by only a single element each time, then worst-case performance is quadratic. An example is, the array is sorted, the pivot is fixed to the 1st one while we want to find the maximum element, which k==len(array)==n. So each time an array with the original length n is passed to a nested call, we need O(n) to search in each call, and we have n calls, so in that case qselect takes O(n2) time.
+      average-case: O(n).
+         If we choose a random pivot each time, it yields almost certain linear time. Finer computations of the average time complexity yield a worst case of n(2+2log 2+O(1)) <= 3.4n+O(n).
 
 2. Buggy Qsort Revisited
 
-   In the slides we showed a buggy version of qsort which is weird in an interesting way:
-   it actually returns a binary search tree for the given array, rooted at the pivot:
-
-   >>> from qsort import *
-   >>> tree = sort([4,2,6,3,5,7,1,9])
-   >>> tree
-   [[[[], 1, []], 2, [[], 3, []]], 4, [[[], 5, []], 6, [[], 7, [[], 9, []]]]]
-
-   which encodes a binary search tree:
-
-                      4
-                    /   \
-                  2       6
-                 / \     / \
-                1   3   5   7
-                             \
-                              9
-   
-   Now on top of that piece of code, add three functions: 
-   * sorted(t): returns the sorted order (infix traversal)
-   * search(t, x): returns whether x is in t
-   * insert(t, x): inserts x into t (in-place) if it is missing, otherwise does nothing.
-
-   >>> sorted(tree)
-   [1, 2, 3, 4, 5, 6, 7, 9]
-   >>> search(tree, 6)
-   True
-   >>> search(tree, 6.5)
-   False
-   >>> insert(tree, 6.5)
-   >>> tree
-   [[[[], 1, []], 2, [[], 3, []]], 4, [[[], 5, []], 6, [[[], 6.5, []], 7, [[], 9, []]]]]
-   >>> insert(tree, 3)
-   >>> tree
-   [[[[], 1, []], 2, [[], 3, []]], 4, [[[], 5, []], 6, [[[], 6.5, []], 7, [[], 9, []]]]]
-
-   Hint: both search and insert should depend on a helper function _search(tree, x) which 
-   returns the subtree (a list) rooted at x when x is found, or the [] where x should 
-   be inserted.
-
-   e.g., 
-   >>> tree = sort([4,2,6,3,5,7,1,9])        # starting from the initial tree
-   >>> _search(tree, 3)
-   [[], 3, []]
-   >>> _search(tree, 0)
-   []
-   >>> _search(tree, 6.5)
-   []
-   >>> _search(tree, 0) is _search(tree, 6.5)
-   False
-   >>> _search(tree, 0) == _search(tree, 6.5)
-   True
-   
-   Note the last two []'s are different nodes (with different memory addresses): 
-   the first one is the left child of 1, while the second one is the left child of 7
-   (so that insert is very easy).
-   
+   Functions such as 'sorted(t,x)', '_search(t, x)', 'search(t, x)' and 'insert(t, x)' are added on top of the buggy Qsort code.
    Filename: qsort.py
-   
+   Submitted.
+
    Q: What are the time complexities for the operations implemented?
+   A: sorted(t,x): O(n), we need to go through each int element in tree
+      _search(t, x): O(log n), which is a binary search
+      search(t, x): O(log n), which is based on _search(t,x)
+      insert(t, x): O(log n), which is _search(t,x) + 3 times of array append
+
+
+
 
 Debriefing (required!): --------------------------
 
 1. Approximately how many hours did you spend on this assignment?
-   A: 2 hours.
+   A: 3 hours.
 2. Would you rate it as easy, moderate, or difficult?
    A: I would rate it as easy.
 3. Did you work on it mostly alone, or mostly with other people?
@@ -99,8 +60,18 @@ Debriefing (required!): --------------------------
 4. How deeply do you feel you understand the material it covers (0%–100%)? 
    A: I think I understand all what Professor Huang expects.
 5. Any other comments?
-   A: It's interesting to dig into the nature of BST. 
+   A: 5.1. It's interesting to dig into the nature of BST. 
+      5.2. _search(t,x) in 'Buggy Qsort' section can not be import with *, should be explicitly imported with 'from qsort import _search'
+      5.3. I tried to compare the time between qsort(fixed pivot), qsort(random pivot) and default sort in python, here is the result:
 
-This section is intended to help us calibrate the homework assignments. 
-Your answers to this section will *not* affect your grade; however, skipping it
-will certainly do.
+               list a = range(0, 10000)
+               fixed pivot, time: 6.968477010726929
+               random pivot, time: 0.08530902862548828
+               default sort, time: 0.0002841949462890625
+
+               sort after shuffle a:
+               fixed pivot, time: 0.0549159049987793
+               random pivot, time: 0.08585977554321289
+               default sort, time: 0.003314971923828125
+
+           An interesting find is that, default sort in python is much faster than optimized qsort(random pivot). And it's even faster in extremely unbalanced case, which was the worst case for regular qsort. I think there are many tricks in the default sort, and it should be implemented in C, not python.
