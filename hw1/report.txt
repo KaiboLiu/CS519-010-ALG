@@ -11,24 +11,18 @@ Due electronically on flip on Sunday Jan 14, 11:59pm.
    Briefly explain each case.
 
    A: For quicksort, the time complexities for each casee are:
-best-case: O(nlogn). In the most balanced case, we can divide the list into two nearly equal pieces after each partition . So we can make only logn nested recursions before we reach a list of size 1. This means that the depth of the recursion tree is logn, and it's almost an balanced tree. Each level of calls needs only O(n) time to generate sublists. The result is that the algorithm uses only O(n log n) time. 
-worst-case: O(n^2),
-average-case: O(nlogn),
-
+      best-case: O(nlogn). 
+         In the most balanced case, we can divide the list into two nearly equal pieces after each partition . So we can make only logn nested recursions before we reach a list of size 1. This means that the depth of the recursion tree is logn, and it's almost an balanced tree. Each level of calls needs only O(n) time to generate sublists. The result is that the algorithm uses only O(nlogn) time. 
+      worst-case: O(n^2). 
+         In common, the most unbalanced partition occurs when the pivot divides the list into two sublists of sizes 1 and n − 1. This may occur if the pivot repeatedly happensto be the smallest or largest element in the list, or when the list is all equal. If the pivot is fixed, then the worst-case is in a sorted, reversely sorted, or an all-equal list. Then each recursive call processes a list of size one less than the previous list. Finally, we can make n − 1 nested calls before we reach a list of size 1. This means that the call tree is a linear chain of n − 1 nested calls. The ith call does O(n − i) work to do the partition, and sum (1..n)=O(n^2), so in that case Quicksort takes O(n²) time.
+      average-case: O(nlogn).
+         A comparison sort cannot use less than log(n!) comparisons on average to sort n items. That is appoximately equal to n(log n − log e). Quicksort is not much worse than an ideal comparison sort. On average, quicksort has O(n^2) time complexity.
 
    
 1. [WILL BE GRADED] 
    Quickselect with Randomized Pivot (CLRS Ch. 9.2).
-
-   >>> from qselect import *
-   >>> qselect(2, [3, 10, 4, 7, 19])
-   4
-   >>> qselect(4, [11, 2, 8, 3])
-   11
-
-   Q: What's the best-case, worst-case, and average-case time complexities? Briefly explain.
-
    Filename: qselect.py
+   Submitted.
 
 
 2. Buggy Qsort Revisited
@@ -97,10 +91,15 @@ average-case: O(nlogn),
 Debriefing (required!): --------------------------
 
 1. Approximately how many hours did you spend on this assignment?
+   A: 2 hours.
 2. Would you rate it as easy, moderate, or difficult?
+   A: I would rate it as easy.
 3. Did you work on it mostly alone, or mostly with other people?
+   A: Completely alone.
 4. How deeply do you feel you understand the material it covers (0%–100%)? 
+   A: I think I understand all what Professor Huang expects.
 5. Any other comments?
+   A: It's interesting to dig into the nature of BST. 
 
 This section is intended to help us calibrate the homework assignments. 
 Your answers to this section will *not* affect your grade; however, skipping it
