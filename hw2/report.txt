@@ -12,13 +12,14 @@ longest.py will be graded for correctness (1%).
 Textbooks for References:
 [1] CLRS 
 
-0. Which of the following sorting algorithms are (or can be made) stable?
+0. Which of the following sorting algorithms are (or can be made) stable? 
+   A: (a),(b),(e)
    (a) mergesort
    (b) quicksort with the first element as pivot
-   (c) quicksort with randomized pivot
-   (d) selection sort
-   (e) insertion sort
-   (f) heap sort --- not covered yet (see CLRS Ch. 6)
+   (c) quicksort with randomized pivot (x)
+   (d) selection sort (x)
+   (e) insertion sort 
+   (f) heap sort --- not covered yet (see CLRS Ch. 6) (x)
 
 1. Implement mergesort.
    
@@ -39,37 +40,25 @@ Textbooks for References:
 
 3. [WILL BE GRADED] 
 
-   Length of the longest path in a binary tree (number of edges).
-   
-   We will use the "buggy qsort" representation of binary trees:
-   [ left_subtree, root_number, right_subtree]
-
-   >>> longest([[], 1, []])
-   0
-
-   >>> longest([[[], 1, []], 2, [[], 3, []]])
-   2
-
-   >>> longest([[[[], 1, []], 2, [[], 3, []]], 4, [[[], 5, []], 6, [[], 7, [[], 9, []]]]])
-   5
-
->>longest([[], 2, [[[[], 6, []], 4, []], 3, [[], 5, [[], 7, []]]]])
-   Note the answer is 5 because the longest path is 1-2-4-6-7-9.   
-
    Filename: longest.py
    Must run in O(n) time.
-
+   Submitted.
 
 
 Debriefing (required!): --------------------------
 
 0. What's your name?
+   A: Kaibo Liu
 1. Approximately how many hours did you spend on this assignment?
+   A: 
 2. Would you rate it as easy, moderate, or difficult?
+   A: moderate
 3. Did you work on it mostly alone, or mostly with other people?
    Note you are encouraged to discuss with your classmates, 
    but each students should submit his/her own code.
+   A: Absolutely alone.
 4. How deeply do you feel you understand the material it covers (0%-100%)? 
+   A: 90%
 5. Any other comments?
 
 This section is intended to help us calibrate the homework assignments. 
