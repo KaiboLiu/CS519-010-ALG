@@ -13,7 +13,7 @@ def merge(a,b):
 		else: 
 			c.append(b[j])
 			j += 1
-	c[len(c):len(c)] = a[i:] if i < len(a) else b[j:]
+	c[len(c):len(c)] = a[i:] if i < len(a) else b[j:]	# c.extend(a[i:]) or c.extend(b[j:]) after if
 	return c
 
 

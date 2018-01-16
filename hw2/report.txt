@@ -54,7 +54,16 @@ Debriefing (required!): --------------------------
 4. How deeply do you feel you understand the material it covers (0%-100%)? 
    > A: 90%
 5. Any other comments?
-   > A: No
+   > A: For the operation of adding two lists a and b to a+b, appending elements in b to a by for loop is the least efficient method.
+        I test the time for different operations:
+         >> test for list addition a + b:
+         >> gengerating size for a, b: 10000000
+         >> time: 0.756197929382324, generating lists.
+         >> time: 1.733625888824463, append in for loop, (for x in b: a.append(x)).
+         >> time: 0.236155986785889, with list add, (a + b).
+         >> time: 0.114253997802734, with extend, (a.extend(b)).
+         >> time: 0.105237007141113, slice append, (a[len(a):len(a)] = b).
+
 
 This section is intended to help us calibrate the homework assignments. 
 Your answers to this section will *not* affect your grade; however, skipping it
