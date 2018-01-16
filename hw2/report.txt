@@ -13,53 +13,48 @@ Textbooks for References:
 [1] CLRS 
 
 0. Which of the following sorting algorithms are (or can be made) stable? 
-   A: (a),(b),(e)
-   (a) mergesort
-   (b) quicksort with the first element as pivot
+   > A: (a),(b),(e)
+   (a) mergesort (v)
+   (b) quicksort with the first element as pivot (v)
    (c) quicksort with randomized pivot (x)
    (d) selection sort (x)
-   (e) insertion sort 
+   (e) insertion sort (v)
    (f) heap sort --- not covered yet (see CLRS Ch. 6) (x)
 
 1. Implement mergesort.
    
-   >>> mergesort([4, 2, 5, 1, 6, 3])
-   [1, 2, 3, 4, 5, 6]   
-   
    Filename: msort.py
+   > Submitted.
    
 2. Calculate the number of inversions in a list.
 
-   >>> num_inversions([4, 1, 3, 2])
-   4
-   >>> num_inversions([2, 4, 1, 3])
-   3
-
    Filename: inversions.py
    Must run in O(nlogn) time.
+   > Submitted.
 
 3. [WILL BE GRADED] 
 
    Filename: longest.py
    Must run in O(n) time.
-   Submitted.
+   > Submitted.
 
 
 Debriefing (required!): --------------------------
 
 0. What's your name?
-   A: Kaibo Liu
+   > A: Kaibo Liu
 1. Approximately how many hours did you spend on this assignment?
-   A: 
+   > A: 1.5 hours
 2. Would you rate it as easy, moderate, or difficult?
-   A: moderate
+   > A: easy
 3. Did you work on it mostly alone, or mostly with other people?
    Note you are encouraged to discuss with your classmates, 
    but each students should submit his/her own code.
-   A: Absolutely alone.
+   > A: Absolutely alone.
 4. How deeply do you feel you understand the material it covers (0%-100%)? 
-   A: 90%
+   > A: 90%
 5. Any other comments?
+   > A: No
 
 This section is intended to help us calibrate the homework assignments. 
 Your answers to this section will *not* affect your grade; however, skipping it
