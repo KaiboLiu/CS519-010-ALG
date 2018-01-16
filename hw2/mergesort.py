@@ -1,12 +1,11 @@
 def mergesort(a):
 	if len(a) <= 1: return a
-	mid = len(a) / 2
-	return merge(mergesort(a[:mid]),mergsort(a[mid:]))
+	mid = int(len(a) / 2)
+	return merge(mergesort(a[:mid]),mergesort(a[mid:]))
 
 
 def merge(a,b):
-	i, j = 0, 0
-	c = []
+	i, j, c = 0, 0, []
 	while i < len(a) and j < len(b):
 		if a[i] <= b[j]:
 			c.append(a[i])
