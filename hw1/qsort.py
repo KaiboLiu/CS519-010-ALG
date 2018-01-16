@@ -21,10 +21,10 @@ def search(t, x):
 def insert(t, x): 
     subtree = _search(t,x)
     if subtree == []: 
-        subtree.append([])
-        subtree.append(x)
-        subtree.append([])
-        #subtree = [[],x,[]]
+        subtree += [[], x, []]
+        #subtree.append([])
+        #subtree.append(x)
+        #subtree.append([])
     return t
 
 def qsort(a):
