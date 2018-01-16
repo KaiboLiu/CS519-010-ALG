@@ -14,12 +14,12 @@ Textbooks for References:
 
 0. Which of the following sorting algorithms are (or can be made) stable? 
    > A: (a),(b),(e)
-   (a) mergesort (v)
-   (b) quicksort with the first element as pivot (v)
-   (c) quicksort with randomized pivot (x)
-   (d) selection sort (x)
-   (e) insertion sort (v)
-   (f) heap sort --- not covered yet (see CLRS Ch. 6) (x)
+   (a) mergesort (Y)
+   (b) quicksort with the first element as pivot (Y)
+   (c) quicksort with randomized pivot (N)
+   (d) selection sort (N)
+   (e) insertion sort (Y)
+   (f) heap sort --- not covered yet (see CLRS Ch. 6) (N)
 
 1. Implement mergesort.
    
