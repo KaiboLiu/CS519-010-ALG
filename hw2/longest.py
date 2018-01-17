@@ -4,10 +4,8 @@ def Lpath(tree):
 
 	l_dep, l_path = Lpath(tree[0])
 	r_dep, r_path = Lpath(tree[2])
-	this_path  = l_dep + 1 if l_dep >= 0 else 0
-	this_path += r_dep + 1 if r_dep >= 0 else 0
 	
-	return max(l_dep,r_dep)+1, max(this_path,l_path,r_path)  #return no_this_node, pass_this_node
+	return max(l_dep,r_dep)+1, max(l_dep+r_dep+2, l_path, r_path)  #return no_this_node, pass_this_node
 	### return a,b is equivalent to return (a,b), it's a tuple, not list
 
 def longest(tree):
