@@ -1,0 +1,47 @@
+CS 519-010, Algorithms (MS/MEng-level), Winter 2018
+HW3 - K closest numbers; Two Pointers
+
+Due Monday Jan 29, 11:59pm. (same submission instructions as HW1-2).
+No late submission will be accepted.
+
+Need to submit: report.txt, closest_unsorted.py, closest_sorted.py, xyz.py.
+
+closest_sorted.py will be graded for correctness (1%).
+
+Textbooks for References:
+[1] CLRS 
+
+1. Given an array A of n numbers, a query x, and a number k,
+   find the k numbers in A that are closest (in value) to x.
+   
+   Filename: closest_unsorted.py
+   Submitted
+
+2. [WILL BE GRADED]
+
+   Filename: closest_sorted.py
+   submitted
+  
+3. For a given array A of n *distinct* numbers, find all triples (x,y,z) 
+   s.t. x + y = z. (x, y, z are distinct numbers)
+
+   Filename: xyz.py
+   submitted
+
+   
+Debriefing (required!): --------------------------
+
+0. What's your name?
+1. Approximately how many hours did you spend on this assignment?
+2. Would you rate it as easy, moderate, or difficult?
+3. Did you work on it mostly alone, or mostly with other people?
+   Note you are encouraged to discuss with your classmates, 
+   but each students should submit his/her own code.
+4. How deeply do you feel you understand the material it covers (0%-100%)? 
+
+5. Which part(s) of the course you like the most so far?
+6. Which part(s) of the course you dislike the most so far?
+
+This section is intended to help us calibrate the homework assignments. 
+Your answers to this section will *not* affect your grade; however, skipping it
+will certainly do.
