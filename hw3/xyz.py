@@ -9,7 +9,7 @@ def find(a):
     a.sort()
     for z in a:
         i, j= 0, len(a)-1
-        while i < j:# and a[i]<mid and a[j]>mid:
+        while i < j:
             while i < j and a[i]+a[j] < z: i = i+1
             while i < j and a[i]+a[j] > z: j = j-1
             if a[i] == z: i = i + 1
