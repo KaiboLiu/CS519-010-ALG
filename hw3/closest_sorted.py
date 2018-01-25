@@ -21,7 +21,7 @@ def find(a, x, k):
         #    return a[-k:]
         #if (i < 0):
         #    return a[:k]
-        if (diff_l <= diff_r):
+        if j == l or (i >=0 and diff_l <= diff_r):
         #if (abs(a[i]-x) <= abs(a[j]-x)):
             i = i - 1
             diff_l = abs(a[i]-x)
