@@ -17,10 +17,10 @@ def find(a, x, k):
     i, count, l = j - 1, 0, len(a)
     diff_l, diff_r = abs(a[i]-x), abs(a[j]-x)
     while (count < k):
-        if (j >= l):
-            return a[-k:]
-        if (i < 0):
-            return a[:k]
+        #if (j >= l):
+        #    return a[-k:]
+        #if (i < 0):
+        #    return a[:k]
         if (diff_l <= diff_r):
         #if (abs(a[i]-x) <= abs(a[j]-x)):
             i = i - 1
