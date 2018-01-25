@@ -25,8 +25,6 @@ def qselect_sort(k,a):
 def find(a, x, k):
     b = [abs(v-x) for v in a]
     c = qselect_sort(k, b)
-       
-    
 
     res = [v for v in a if abs(v-x) <= c[-1]]  # c[-1] is the threshold
     pos = len(res) - 1
@@ -36,8 +34,6 @@ def find(a, x, k):
         res.pop(pos)
         pos = pos - 1
     return res
-
-
 
 #### add necessary entries from the beginning whose dif == c[-1]        
 def find2(a, x, k):
@@ -60,6 +56,13 @@ def find2(a, x, k):
 from time import time
 
 if __name__ == "__main__":
+    print(find([4,1,3,2,7,4], 5.2, 2))      # >>[4, 4]
+    print(find([4,1,3,2,7,4], 6.5, 3))      # >>[4, 7, 4]
+    print(find([4,4,4,4,4,1,3,2,7,4], 6.5, 3))  # >>[4, 4, 7]
+    print(find([5,3,4,1,6,3], 3.5, 2))      # >>[3, 4]
+    
+    #### test to compare find() and find2()
+    '''
     x_max = 10000
     step = 100000
     for n in range(step,step*10,step):
@@ -83,8 +86,5 @@ if __name__ == "__main__":
         if diff > 0:
             print(diff)
     '''
-    print(find([4,1,3,2,7,4], 5.2, 2))      # >>[4, 4]
-    print(find([4,1,3,2,7,4], 6.5, 3))      # >>[4, 7, 4]
-    print(find([4,4,4,4,4,1,3,2,7,4], 6.5, 3))  # >>[4, 4, 7]
-    print(find([5,3,4,1,6,3], 3.5, 2))      # >>[3, 4]
-    '''
+
+
