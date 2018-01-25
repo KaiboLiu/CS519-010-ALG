@@ -9,9 +9,9 @@ from bisect import bisect
 def find(a, x, k):
     if len(a) <= k: 
         return a
-    if k <= a[0]:
+    if x <= a[0]:
         return a[:k]
-    if k >= a[-1]:
+    if x >= a[-1]:
         return a[-k:]
     j = bisect(a, x)    # equals bisect_right()
     i, count, l = j - 1, 0, len(a)
