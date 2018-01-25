@@ -21,12 +21,14 @@ def find(a, x, k):
         #    return a[-k:]
         #if (i < 0):
         #    return a[:k]
-        if j == l or (i >=0 and diff_l <= diff_r):
+        if diff_l <= diff_r:
         #if (abs(a[i]-x) <= abs(a[j]-x)):
             i = i - 1
+            if (i < 0): return a[:k]
             diff_l = abs(a[i]-x)
         else:
             j = j + 1
+            if (j >= l): return a[-k:]
             diff_r = abs(a[j]-x)
         count = count + 1
     
