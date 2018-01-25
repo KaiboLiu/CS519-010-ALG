@@ -32,15 +32,53 @@ Textbooks for References:
 Debriefing (required!): --------------------------
 
 0. What's your name?
+   A: Kaibo Liu
 1. Approximately how many hours did you spend on this assignment?
+   A: 4 hours
 2. Would you rate it as easy, moderate, or difficult?
+   A: Easy except the time limit in closest_sorted.py, which needs tricks normally ignored.
 3. Did you work on it mostly alone, or mostly with other people?
-   Note you are encouraged to discuss with your classmates, 
-   but each students should submit his/her own code.
+   A: Completely alone.
 4. How deeply do you feel you understand the material it covers (0%-100%)? 
-
+   A: I believe I can say 100%.
 5. Which part(s) of the course you like the most so far?
+   A: BST, and all the corner cases I missed.
 6. Which part(s) of the course you dislike the most so far?
+   A: None.
+*7. For the implementation 'closest_unsorted.py', I came up with two solutions:
+After q_select getting the first k smallest diffs, denoted as c, we can get a threshold c[-1]. 
+All the detailed work focuses on the entries whose diff are exactly c[-1](denoted as THRESHOLD).
+we can deal with the THRESHOLD by removing some of them from those entries whose diff are <= c[-1] (Method1), or by adding some of them to those entries whose diff are < c[-1] (Method2). I compared them and get an interesting result below. In most cases, number of THRESHOLD ranging from 5 to 931, Method1 is always better than Method2. So I used Method1 as my solution in the implementation 'closest_unsorted.py'.
+
+	N=100000, k=4858, n_threshold=51
+	---Method1 (remove threshold), t=0.046877
+	---Method2 (add threshold ->), t=0.083828
+	N=200000, k=91930, n_threshold=5
+	---Method1 (remove threshold), t=0.167112
+	---Method2 (add threshold ->), t=0.278985
+	N=300000, k=280745, n_threshold=27
+	---Method1 (remove threshold), t=0.264132
+	---Method2 (add threshold ->), t=0.294234
+	N=400000, k=246709, n_threshold=31
+	---Method1 (remove threshold), t=0.357145
+	---Method2 (add threshold ->), t=0.489147
+	N=500000, k=492394, n_threshold=358
+	---Method1 (remove threshold), t=0.484506
+	---Method2 (add threshold ->), t=0.785671
+	N=600000, k=232176, n_threshold=497
+	---Method1 (remove threshold), t=0.528615
+	---Method2 (add threshold ->), t=0.743329
+	N=700000, k=156357, n_threshold=119
+	---Method1 (remove threshold), t=0.648759
+	---Method2 (add threshold ->), t=0.869650
+	N=800000, k=7485, n_threshold=435
+	---Method1 (remove threshold), t=0.372274
+	---Method2 (add threshold ->), t=0.753851
+	N=900000, k=538208, n_threshold=931
+	---Method1 (remove threshold), t=0.894730
+	---Method2 (add threshold ->), t=1.226548
+
+
 
 This section is intended to help us calibrate the homework assignments. 
 Your answers to this section will *not* affect your grade; however, skipping it
