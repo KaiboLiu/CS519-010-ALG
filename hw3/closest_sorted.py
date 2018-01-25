@@ -4,17 +4,17 @@ Created on Tue Jan 23 00:25:58 2018
 @author: Kaibo Liu
 """
 
-#from bisect import bisect
-import bisect
+from bisect import bisect
+
 
 def find(a, x, k):
     if len(a) <= k: 
         return a
-    if x <= a[0]:
-        return a[:k]
-    if x >= a[-1]:
-        return a[-k:]
-    j = bisect.bisect(a, x)    # equals bisect_right()
+    #if x <= a[0]:
+    #    return a[:k]
+    #if x >= a[-1]:
+    #    return a[-k:]
+    j = bisect(a, x)    # equals bisect_right()
     i, count, l = j - 1, 0, len(a)
     #diff_l, diff_r = abs(a[i]-x), abs(a[j]-x)
     while (count < k):
