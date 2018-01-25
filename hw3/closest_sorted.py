@@ -16,21 +16,21 @@ def find(a, x, k):
     #    return a[-k:]
     j = bisect(a, x)    # equals bisect_right()
     i, count, l = j - 1, 0, len(a)
-    #diff_l, diff_r = abs(a[i]-x), abs(a[j]-x)
+    diff_l, diff_r = abs(a[i]-x), abs(a[j]-x)
     while (count < k):
         #if (j >= l):
         #    return a[-k:]
         #if (i < 0):
         #    return a[:k]
-        #if diff_l <= diff_r:
-        if (abs(a[i]-x) <= abs(a[j]-x)):
+        if diff_l <= diff_r:
+        #if (abs(a[i]-x) <= abs(a[j]-x)):
             i = i - 1
             if (i < 0): return a[:k]
-        #    diff_l = abs(a[i]-x)
+            diff_l = abs(a[i]-x)
         else:
             j = j + 1
             if (j >= l): return a[-k:]
-        #    diff_r = abs(a[j]-x)
+            diff_r = abs(a[j]-x)
         count = count + 1
     
     return a[i+1:j]
