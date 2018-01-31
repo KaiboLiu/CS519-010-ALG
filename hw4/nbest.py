@@ -15,8 +15,6 @@ def nbestb(a,b):
     n = len(a)
     c = list(itertools.product(a,b))
     return [qselect(i+1,c) for i in range(n)]
-    ##res = [qselect(i+1,c) for i in range(n)]
-    ##return qselect(len(a),c)
 
 
 def nbestc(a,b):
@@ -30,7 +28,7 @@ def nbestc(a,b):
     h, p_set = [], set()
     res = []
 
-    heapq.heappush(h, (p_key((A[0],B[0])), (0,0)))   # element in h is a pair (element[0], element[1]), compatiable with mult-key comparison 
+    heapq.heappush(h, (p_key((A[0],B[0])), (0,0)))  # element in h is a pair (element[0], element[1]), compatiable with mult-key comparison 
                                                     # element[0] is the primary key, used to sort in h, element[1]/(i,j) is the index of pair
     while len(res) < n:
         i, j = heapq.heappop(h)[1]
@@ -43,7 +41,13 @@ def nbestc(a,b):
             p_set.add((i,j+1))
     return res
 
+def nbestd(a,b):
 
+    #c = list(itertools.product(a,b)). # 'tuple' object does not support item assignment
+    c = [(x+y,y) for x in a for y in b]
+    heapq.heapify(c)
+    d = heapq.nsmallest(len(a),c)
+    return [(X-y,y) for X,y in d]
 
 
 def qselect(k,a):
@@ -75,12 +79,11 @@ if __name__ == "__main__":
 
     # large list test for time
     from time import time
-    N = 4
-    vMax = 10
+    N = 100
+    vMax = 100000
     a = [randint(0,vMax) for i in range(N)]
     b = [randint(0,vMax) for i in range(N)]
-    print(a)
-    print(b)
+
     time1 = time()
     resa = nbesta(a, b)   # algorithm (a), slowest
     print('nbest (a), with n=%d, time=%f' %(N, time()-time1))
@@ -93,14 +96,21 @@ if __name__ == "__main__":
     resc = nbestc(a, b)   # algorithm (c), fast
     print('nbest (c), with n=%d, time=%f' %(N, time()-time1))
 
+    time1 = time()
+    resd = nbestd(a, b)   # algorithm (c), fast
+    print('nbest (d), with n=%d, time=%f' %(N, time()-time1))
+
     diffb = [i for i in range(N) if resa[i] != resb[i]]
     diffc = [i for i in range(N) if resa[i] != resc[i]]
-    print(resa)
-    print(resb)
-    print(resc)
-    if diffb == [] and diffc == []:
+    diffd = [i for i in range(N) if resa[i] != resd[i]]
+    #print(resa)
+    #print(resb)
+    #print(resc)
+    if diffb == [] and diffc == [] and diffd == []:
         print('same result')
-    elif diffb != []:
+    if diffb != []:
         print('a,b: ',diffb)
-    elif diffc != []:
+    if diffc != []:
         print('a,c: ',diffc)
+    if diffd != []:
+        print('a,d: ',diffd)
