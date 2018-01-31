@@ -84,9 +84,12 @@ Textbooks for References:
        Hint: you can use Python's heapq module for priority queue.
 
    Q: What are the time complexities of these algorithms? 
-   A: (a) O(n^2+nlogn) = O(n^2)
-      (b) O(n^2+n) = O(n^2)
-      (c)
+   A: (a) O(n^2+n^2log(n^2)+n) = O(n^2logn)
+          product+sort+slice
+      (b) O(n^2+n^2*n) = O(n^3)
+          product+qselect*n
+      (c) (nlogn*2+n*(logn*3)) = O(nlogn)
+          sort*2+n times of (queue pop+push+push)
 
    Filename: nbest.py
    Submitted

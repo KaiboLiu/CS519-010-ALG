@@ -1,25 +1,20 @@
 from random import randint
 
-def qselect_sort(k,a):
+def qselect(k,a):
     if len(a) < k: return a
     pidx = randint(0,len(a)-1)
     a[0], a[pidx] = a[pidx], a[0]
     pivot = a[0]
-    left = [x for x in a if x<pivot] + [pivot]
+    left = [x for x in a if x < pivot]
     llen = len(left)
-    if llen == k:
-        return left
-    if llen > k:
+    if llen == k-1:
+        return pivot
+    if llen > k-1:
         return qselect_sort(k,left)
     else:
-        right = [x for x in a[1:] if x>=pivot]
-        return left + qselect_sort(k-llen,right)
+        right = [x for x in a[1:] if x >= pivot]
+        return qselect_sort(k-llen-1,right)
 
-def qselect(k,a):
-    if k > len(a): k = len(a)
-    if k < 1: k = 1
-    b = qselect_sort(k,a)
-    return b[-1]
 '''
 
 a = [11,8,5,1,5,2,7,5]
