@@ -5,7 +5,6 @@ def kmergesort(a,k):
     if l <= 1: return a
     step = (l-1)//k + 1
     lists = [kmergesort(a[i:i+step],k) for i in range(0,l,step)]
-    print(lists)
     return list(heapq.merge(*lists))
 
 
