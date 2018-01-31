@@ -7,8 +7,7 @@ def ksmallest(k,a):
     for i in range(k,l):
         if -a[i] <= h[0]:
             continue
-        heapq.heappush(h,-a[i])
-        heapq.heappop(h)
+        heapq.heapreplace(h,-a[i])
     return [-i for i in heapq.nlargest(k,h)]
     # O(k+(n-k)logk*2+klogk)=O(2nlogk-klogk+k)
 

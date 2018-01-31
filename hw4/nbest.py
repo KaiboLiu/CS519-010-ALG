@@ -1,35 +1,41 @@
 import itertools
 from random import randint
 
+
+key1 = lambda p: (p[0]+p[1], p[1])
+
 def nbesta(a,b):
-    n = len(a)
     c = list(itertools.product(a,b))
-    c.sort(key=lambda p: (p[0]+p[1], p[1]))         # cmp no longer exists in python3
-    #c.sort(cmp=lambda (x1,y1),(x2,y2):y1-y2 if x1+y1==x2+y2 else x1+y1-x2-y2)   # in python2
-    return c[:n]
+    c.sort(key = key1)         # cmp no longer exists in python3
+    return c[:len(a)]
+
 
 def nbestb(a,b):
     n = len(a)
     c = list(itertools.product(a,b))
-    return qselect(n,c)
+    return qselect_list(len(a),c)
 
 
 def nbestc(a,b):
 
-def qselect(k,a):
+heapq.heappush(h, (mykey((sa[0],sb[0])), (0,0)))
+
+
+
+def qselect_list(k,a):
     n = len(a)
     if n < k: return a
     pidx = randint(0,n-1)
     a[0], a[pidx] = a[pidx], a[0]
-    #pivot = a[0]
+    pivot = a[0]
 
-    left = [p for p in a if p[0]+p[1] < a[0][0]+a[0][1] or (p[0]+p[1] == a[0][0]+a[0][1] and p[1] < a[0][1])]
+    left = [p for p in a if key1(p) < key1(pivot)]
     llen = len(left)
     if llen == k-1:
         return left + [a[0]]
     if llen > k-1:
         return qselect(k,left)
-    right = [p for p in a[1:] if p[0]+p[1] > a[0][0]+a[0][1] or (p[0]+p[1] == a[0][0]+a[0][1] and p[1] >= a[0][1])]
+    right = [p for p in a[1:] if key1(p) >= key1(pivot)]
     return left + [a[0]] + qselect(k-llen-1,right)
 
 if __name__ == "__main__":
