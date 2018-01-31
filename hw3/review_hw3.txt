@@ -1,0 +1,2 @@
+in closest_sorted.py
+we can append [float("inf")] to the list, to set a boundray, make it faster.

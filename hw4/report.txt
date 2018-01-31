@@ -1,0 +1,160 @@
+CS 519-005, Algorithms (MS/MEng-level), Winter 2018
+HW4 - Priority Queue and Heaps
+
+Due via submit program on Monday Feb 5, 11:59pm.
+No late submission will be accepted.
+
+Need to submit: report.txt, nbest.py, kmergesort.py, datastream.py.
+DO _NOT_ ZIP YOUR SUBMISSION.
+datastream.py will be graded for correctness (1%).
+
+Textbooks for References:
+[1] CLRS Ch. 6
+[2] Python heapq module 
+
+0. There are two methods for building a heap from an unsorted array:
+   (1) insert each element into the heap  --- O(nlogn)
+   (2) heapify (top-down)                 --- O(n)
+
+   (a) Derive these time complexities.
+   A: Thinking about worst case:
+   (1) Insert each element into the heap. We need to bubble up after each insertion, with distance of log(n) for the nth node. At the bottom level, there are n/2 nodes who needs to bubble up, the second bottom level has n/4 nodes to bubble up,... So we have T(n) = n/2*logn + n/4*(logn-1) + n/8*(logn-2).
+     T(n) = n(logn(1/2+1/4+1/8+...) - (1/4+2/8+3/16+4/32+...)), denoted as n(logn*1-f)
+     f = 1/4+2/8+3/16+4/32+... (I)
+     f/2 =   1/8+2/16+3/32+... (II)
+     making (I)-(II) we have f/2 = 1/4+1/8+1/16+... = 1/2, so f = 1
+     Finally, T(n) = n(logn-1), the time complexities is O(nlogn), even though we count in the visit time O(n).
+   (2) heapify, we need to divide and conquer. After both subtrees of node i being hepified, we need to make i bubble down if it is bigger than either element within subtrees. The worst cast is every father node needs to bubble down to the bottom, with height of h. So from buttom to up, wo can count the times of bubble top-down, we have T(n) = n/2*1 + n/4*2 + n/8*3 + .. + 1*logn =Sigma(n/(2^h)*h), h=logn..1
+     T(n) = Sigma(n/(2^h)*h)    (I)
+     T(n)/2 = Sigma(n/(2^h)/2*h = Sigma(n/(2^h)*(h-1)), h=logn+1..2  (II)
+     making (I)-(II) we have T(n)/2=Sigma(n/(2^h))-logn/2
+     Finally, T(n) = n-logn/2, the time complexities is O(n), even though we count in the visit time O(n).
+
+   (b) Use a long list of random numbers to show the difference in time. (Hint: random.shuffle)
+   A: (1)insert: 918ms(In 10) VS (2)heapify:755ms(In 11)
+      (1)insert:  72ms(In 16) VS (2)heapify: 54ms(In 17)
+      Commands are listed below:
+        In [7]: a = list(range(1000000))
+        In [8]: b = []
+        In [9]: random.shuffle(a)
+        In [10]: timeit for i in a: heapq.heappush(b,i)
+                1 loop, best of 3: 918 ms per loop
+        In [11]: timeit heapq.heapify(a)
+                1 loop, best of 3: 755 ms per loop        
+
+        In [13]: a = list(range(100000))
+        In [14]: b = []
+        In [15]: random.shuffle(a)
+        In [16]: timeit for i in a: heapq.heappush(b,i)
+                10 loops, best of 3: 72 ms per loop
+        In [17]: timeit heapq.heapify(a)
+                10 loops, best of 3: 54 ms per loop
+
+
+
+   (c) What about sorted or reversely-sorted numbers?
+   A: (1)insert each element into the heap:
+        - sorted numbers: O(n)
+          - since each insertion is in a good place, no need to bubble up.
+        - reversely-sorted numbers: O(nlogn)
+          - which is the worst case described in (a)(1)
+      (2)heapify (top-down):
+        - sorted numbers: O(n)
+          - since dividing to two subtrees and visit them needs O(n) time, even though no need to bubble down.
+        - reversely-sorted numbers: O(n)
+          - which is the worst case described in (a)(2)
+
+
+1. (taken from my first paper: see "Algorithm 1" in Huang and Chiang (2005).)
+
+   Given two lists A and B, each with n integers, return
+   a sorted list C that contains the smallest n elements from AxB:
+
+     AxB = { (x, y) | x in A, y in B }
+
+   i.e., AxB is the Cartesian Product of A and B.
+
+   ordering:  (x,y) < (x',y') iff. x+y < x'+y' or (x+y==x'+y' and y<y')
+
+   You need to implement three algorithms and compare:
+
+   (a) enumerate all n^2 pairs, sort, and take top n.
+   (b) enumerate all n^2 pairs, but use qselect from hw1.
+   (c) Dijkstra-style best-first, only enumerate O(n) (at most 2n) pairs.
+       Hint: you can use Python's heapq module for priority queue.
+
+   Q: What are the time complexities of these algorithms? 
+   A: (a) O(n^2+nlogn) = O(n^2)
+      (b) O(n^2+n) = O(n^2)
+      (c)
+
+   Filename: nbest.py
+   Submitted
+
+2. k-way mergesort (the classical mergesort is a special case where k=2).
+
+   >>> kmergesort([4,1,5,2,6,3,7,0], 3) 
+   [0,1,2,3,4,5,6,7]
+
+   Q: What is the complexity? Write down the detailed analysis in report.txt.
+
+   Filename: kmergesort.py
+
+3. [WILL BE GRADED]
+   
+   Find the k smallest numbers in a data stream of length n (k<<n),
+   using only O(k) space (the stream itself might be too big to fit in memory).
+
+   Q: What is your complexity? Write down the detailed analysis in report.txt.
+   A: decomposite my algorithm into several parts:
+      - heapify with size k: T=k
+      - in for loop, push and pop the heap: T=(n-k)*logk*2
+      - k largest in heap with heapq.nlargest(k,heap): T=k*logk
+      So the finall T(n) = O(k+(n-k)logk*2+klogk)=O(2nlogk-klogk+k) = O(nlogk)
+   
+   Filename: datastream.py
+   Submitted
+
+4. (optional) Analyze the time complexities of the two "slow" solutions in HW3
+   we provided for the closest_sorted problem.
+
+
+
+5. (optional) Summarize the time complexities of the basic operations (push, pop-min, peak, heapify)
+   for these implementations of priority queue:
+   A: 
+                                             | push    | pop-min | peak | heapify
+      -----------------------------------------------------------------------------
+      unsorted array,                        | O(1)    | O(n)    | O(n) | O(1)
+      sorted array (highest priority first), | O(n)    | O(1)    | O(1) | O(nlogn)
+      sorted array (lowest priority first),  | O(n)    | O(n)    | O(1) | O(nlogn)
+      linked list(sorted)                    | O(n)    | O(1)    | O(1) | O(nlogn)
+      linked list(unsorted)                  | O(1)    | O(n)    | O(n) | O(1)
+      binary heap                            | O(logn) | O(logn) | O(1) | O(n)
+
+
+      
+
+Debriefing (required!): --------------------------
+
+0. What's your name?
+  A: Kaibo Liu.
+1. Approximately how many hours did you spend on this assignment?
+  A: 4 hours.
+2. Would you rate it as easy, moderate, or difficult?
+  A: moderate.
+3. Did you work on it mostly alone, or mostly with other people?
+   Note you are encouraged to discuss with your classmates, 
+   but each students should submit his/her own code.
+  A: Definitely alone.
+4. How deeply do you feel you understand the material it covers (0%-100%)? 
+  A: 99%.
+5. Which part(s) of the course you like the most so far?
+  A: All the demos with convient functions.
+
+6. Which part(s) of the course you dislike the most so far?
+  A: None.
+This section is intended to help us calibrate the homework assignments. 
+Your answers to this section will *not* affect your grade; however, skipping it
+will certainly do.
+

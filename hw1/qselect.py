@@ -5,7 +5,7 @@ def qselect_sort(k,a):
     pidx = randint(0,len(a)-1)
     a[0], a[pidx] = a[pidx], a[0]
     pivot = a[0]
-    left = [x for x in a[1:] if x<pivot] + [pivot]
+    left = [x for x in a if x<pivot] + [pivot]
     llen = len(left)
     if llen == k:
         return left
