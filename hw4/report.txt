@@ -103,10 +103,11 @@ Textbooks for References:
    Q: What is the complexity? Write down the detailed analysis in report.txt.
    A: decomposite my algorithm into several parts:
       - divide into k lists: if this level has m lists, each has the length of n/m, dividing them takes T=n/m*m = n
-      - heapq.merge: there are m groups, in each group we need to merge k sublists, takes n/m/k * k * m = n
-      - There are logk levels
-      - Time in each level is n+n, and we have logk levels
-      So the finall T(n) = O(2*n*logk) = O(nlogk)
+      - heapq.merge: there are m groups, in each group we need to merge k sublists, from heads of which.
+                     It takes n/m/k * k * m * log2(k) = nlog2(k)
+      - There are logk(n) levels
+      - Time in each level is n+nlog2(k), and we have logk(n) levels
+      So the finall T(n) = O(nlog2(k)*logk(n)) = O(nlog2(n)) = O(nlogn)
 
    Filename: kmergesort.py
    Submitted
