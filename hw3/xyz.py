@@ -20,8 +20,31 @@ def find(a):
                 j = j - 1
     return res
     
+def find2(a,t): # find pair (x,y) if x+y==v
+    res = []
+    half = t/2
+    a.sort()
+    x = {i:1 for i in a}
+    for i in a:
+        if i > half : continue
+        if t-i in x:
+            res.append((i,t-i))
+    return res
+
+
+
+from random import randint
+
 if __name__ == "__main__":
+    '''
     a = [1,4,2,3,5]
     print(find([1,4,2,3,5]))
     print(find([1,-4,0,-3,-1]))
     print(find([1,-4,0,-3,-1,-2,3,4,5]))
+    print(find2([1,-4,0,-3,-1,-2,3,4,5],0))
+    '''
+    a = [randint(-10,20) for i in range(50)]
+    print(sorted(a))    
+    print(find3(a))
+
+
