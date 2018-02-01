@@ -14,7 +14,10 @@ def nbesta(a,b):
 def nbestb(a,b):
     n = len(a)
     c = list(itertools.product(a,b))
-    return [qselect(i+1,c) for i in range(n)]
+    threshold = qselect(n,c)
+    res = [p for p in c if p_key(p) <= p_key(threshold)]
+    res.sort(key = p_key)
+    return res[:n]
 
 
 def nbestc(a,b):
@@ -79,8 +82,8 @@ if __name__ == "__main__":
 
     # large list test for time
     from time import time
-    N = 100
-    vMax = 100000
+    N = 1000
+    vMax = 10000
     a = [randint(0,vMax) for i in range(N)]
     b = [randint(0,vMax) for i in range(N)]
 

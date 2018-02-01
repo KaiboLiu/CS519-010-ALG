@@ -85,15 +85,15 @@ Textbooks for References:
 
    Q: What are the time complexities of these algorithms? 
    A: (a) O(n^2+n^2log(n^2)+n) = O(n^2logn)       (product+sort+slice)
-      (b) O(n^2+n^2*n) = O(n^3)                   (product+qselect*n)
+      (b) O(n^2+n^2+n+nlogn+n) = O(n^2)           (product+qselect+filter+sort+slice)
       (c) (nlogn*2+n*(logn*3)) = O(nlogn)         (sort*2+n times of (queue pop+push+push))
       (d) O(n^2+n^2+nlogn+n) = O(n^2)             (product+heapify+n smallest+resume the pair)
 
       time:
-      nbest (a), with n=200, time=0.040508
-      nbest (b), with n=200, time=7.464016
-      nbest (c), with n=200, time=0.000451
-      nbest (d), with n=200, time=0.010091
+        nbest (a), with n=1000, time=2.499257
+        nbest (b), with n=1000, time=1.020847
+        nbest (c), with n=1000, time=0.002344
+        nbest (d), with n=1000, time=0.399482
 
    Filename: nbest.py
    Submitted
