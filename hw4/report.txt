@@ -106,7 +106,7 @@ Textbooks for References:
       - heapq.merge: there are m groups, in each group we need to merge k sublists, takes n/m/k * k * m = n
       - There are logk levels
       - Time in each level is n+n, and we have logk levels
-      So the finall T(n) = O(2*n*logk) = O(nlogK)
+      So the finall T(n) = O(2*n*logk) = O(nlogk)
 
    Filename: kmergesort.py
    Submitted
