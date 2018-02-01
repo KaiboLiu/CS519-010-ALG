@@ -107,7 +107,7 @@ if __name__ == "__main__":
     #print(resb)
     #print(resc)
     if diffb == [] and diffc == [] and diffd == []:
-        print('same result')
+        print('same results')
     if diffb != []:
         print('a,b: ',diffb)
     if diffc != []:

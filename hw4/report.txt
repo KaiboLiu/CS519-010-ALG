@@ -51,7 +51,6 @@ Textbooks for References:
                 10 loops, best of 3: 54 ms per loop
 
 
-
    (c) What about sorted or reversely-sorted numbers?
    A: (1)insert each element into the heap:
         - sorted numbers: O(n)
@@ -103,9 +102,11 @@ Textbooks for References:
 
    Q: What is the complexity? Write down the detailed analysis in report.txt.
    A: decomposite my algorithm into several parts:
-      - divide into k lists: T=n
-      - heapq.merge: nlogk
-      So the finall T(n) = O(n + nlogk) = O(nlogK)
+      - divide into k lists: if this level has m lists, each has the length of n/m, dividing them takes T=n/m*m = n
+      - heapq.merge: there are m groups, in each group we need to merge k sublists, takes n/m/k * k * m = n
+      - There are logk levels
+      - Time in each level is n+n, and we have logk levels
+      So the finall T(n) = O(2*n*logk) = O(nlogK)
 
    Filename: kmergesort.py
    Submitted
@@ -132,7 +133,7 @@ Textbooks for References:
 
 5. (optional) Summarize the time complexities of the basic operations (push, pop-min, peak, heapify)
    for these implementations of priority queue:
-   A: 
+   A: I detailed the linked list to sorted and unsorted.
                                              | push    | pop-min | peak | heapify
       -----------------------------------------------------------------------------
       unsorted array,                        | O(1)    | O(n)    | O(n) | O(1)
@@ -150,7 +151,7 @@ Debriefing (required!): --------------------------
 0. What's your name?
   A: Kaibo Liu.
 1. Approximately how many hours did you spend on this assignment?
-  A: 4 hours.
+  A: 6 hours.
 2. Would you rate it as easy, moderate, or difficult?
   A: moderate.
 3. Did you work on it mostly alone, or mostly with other people?
@@ -161,10 +162,8 @@ Debriefing (required!): --------------------------
   A: 99%.
 5. Which part(s) of the course you like the most so far?
   A: All the demos with convient functions.
-
 6. Which part(s) of the course you dislike the most so far?
   A: None.
 This section is intended to help us calibrate the homework assignments. 
 Your answers to this section will *not* affect your grade; however, skipping it
 will certainly do.
-
