@@ -29,7 +29,7 @@ Textbooks for References:
       see also https://en.wikipedia.org/wiki/Independent_set_(graph_theory)
 
    What's the complexity?
-   A: top-down takes
+   A: top-down takes O(n) complexity, but a little slower than bottom-up, because its recursions need to create spaces for stacks, 
       bottom-up takes O(n) complexity.
       
 
@@ -64,7 +64,7 @@ Debriefing (required!): --------------------------
 0. What's your name?
   A: Kaibo Liu
 1. Approximately how many hours did you spend on this assignment?
-  A: 3 hours.
+  A: 4 hours.
 2. Would you rate it as easy, moderate, or difficult?
   A: easy
 3. Did you work on it mostly alone, or mostly with other people?
