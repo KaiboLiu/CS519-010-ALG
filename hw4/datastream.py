@@ -15,15 +15,16 @@ def ksmallest(k,a):
 
 def ksmallest(k,a):
     h = []
-    l, i = len(a), 0
+    i = 0
 
     for x in a:
-        if i < l: 
-            heapq.heappush(h,-x)
-            i = i + 1
-        else: 
+        if i >= k: 
             if -x <= h[0]: continue
             heapq.heapreplace(h,-x)
+        else: 
+            heapq.heappush(h,-x)
+            i = i + 1
+            
     return [-i for i in heapq.nlargest(k,h)]
 
 
