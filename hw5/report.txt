@@ -31,7 +31,11 @@ Textbooks for References:
    What's the complexity?
    A: top-down takes O(n) complexity, but a little slower than bottom-up, because its recursions need to create spaces for stacks, 
       bottom-up takes O(n) complexity.
-      
+      My best runtime is based on the bottom-up algorithm only, at which time I haven't finished the top-dowon version.
+      It seems no way to make top-down faster than bottom-up, so no matter how many times I submit both versions, I got slightly slower runtime, which would not be updated as my final submission. 
+      Just clearify that I tested both version, 
+      - my max_wis2 takes 0.008 s
+      - my max_wis takes 0.006 s
 
    Filename: mis.py
    Submitted
