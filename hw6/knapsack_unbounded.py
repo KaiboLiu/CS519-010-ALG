@@ -7,8 +7,7 @@ def best(weight, a): # a[i] is in the form of (w_i, v_i)
     fac, weight, b = resize(weight,a)   # Pruning 2: Resize the capacity W, divided by gcd
 
     #f = {0: 0}
-    f = [0]*(weight+1)
-    max_v, l = 0, [0]*len(a)
+    f, l = [0]*(weight+1), [0]*len(a)
     for w_i, v_i in b:
         for w in range(w_i,weight+1):
             #if w >= w_i:
@@ -35,6 +34,7 @@ def remove_redun(a):
         while j < length and s[i][1] >= s[j][1]: j += 1
         i, j = j, j+1
     return b
+    
 
 # Pruning 2: Resize the capacity W, divided by gcd
 # use gcd(Greatest Common Divisor) in w to trim the size of weight to weight/gcd

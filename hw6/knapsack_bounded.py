@@ -1,24 +1,31 @@
 from fractions import gcd
 from functools import reduce
+from copy import deepcopy
 
-
-def best(weight, a): # a[i] is in the form of (w_i, v_i)
+# O(nWlogc), binary presentation for each c[i]
+def best(weight, a): # a[i] is in the form of (w_i, v_i, c_i)
     #b = remove_redun(a)
     fac, weight, b = resize(weight,a)   # Pruning 2: Resize the capacity W, divided by gcd
-
     #f = {0: 0}
-    f = [0]*(weight+1)
-    max_v, l = 0, [0]*len(a)
-    for w_i, v_i in b:
-        for w in range(w_i,weight+1):
-            #if w >= w_i:
-            f[w] = max( f[w], f[w-w_i]+v_i )
-    W = weight
+    f, l = [0]*(weight+1), [[0]*len(a) for _ in range(weight+1)]  # cannot use [[0]*len(a)]*(weight+1)
     for i, item in enumerate(b):
-        while W >= item[0] and f[W]-f[W-item[0]] == item[1]:
-            l[i] += 1
-            W -= item[0]
-    return f[weight],l
+        w_i, v_i, c_i = item
+        k, rest = 1, c_i-1
+        while k <= c_i:
+            mul = k if rest >= 0 else rest+k
+            #print((w_i, v_i, c_i),mul,k,rest)
+            # now we have a new item (mul*w_i, mul*v_i, 1)
+            new_w = mul * w_i
+            for w in range(weight,new_w-1,-1):
+                if f[w - new_w] + mul*v_i > f[w]:
+                    f[w] = f[w - new_w] + mul*v_i
+                    l[w] = deepcopy(l[w - new_w])
+                    l[w][i] += mul
+            #print((w_i, v_i, c_i),mul,f[weight])
+            k <<= 1
+            rest -= k
+            
+    return f[weight],l[weight]
 
 
 
@@ -41,25 +48,21 @@ def remove_redun(a):
 def resize(weight, a):
     fac = reduce(gcd,[x[0] for x in a]+[weight])
     if fac > 1:
-        b = [(x[0]//fac, x[1]) for x in a]
+        b = [(x[0]//fac, x[1], x[2]) for x in a]
         weight = weight // fac
     else: b = a
-    return fac,weight, b
+    return fac, weight, b
 
 
 if __name__ == "__main__":
     
-    print(best(3, [(2, 4), (3, 5)]))
-    ## (5, [0, 1])
-    print(best(6, [(4, 4), (6, 5)]))
-    print(best(3, [(1, 5), (1, 5)]))
-    ## (15, [3, 0])
-    print(best(3, [(1, 2), (1, 5)]))
-    ## (15, [0, 3])
-    print(best(3, [(1, 2), (2, 5)]))
-    ## (7, [1, 1])
-    print(best(58, [(5, 9), (9, 18), (6, 12)]))
-    ## (114, [2, 4, 2])
-    print(best(92, [(8, 9), (9, 10), (10, 12), (5, 6)]))
-    ## (109, [1, 1, 7, 1])
-    
+    print(best(3, [(2, 4, 2), (3, 5, 3)]))
+    ##(5, [0, 1])
+    print(best(3, [(1, 5, 2), (1, 5, 3)]))
+    ##(15, [2, 1])
+    print(best(3, [(1, 5, 1), (1, 5, 3)]))
+    ##(15, [1, 2])
+    print(best(20, [(1, 10, 6), (3, 15, 4), (2, 10, 3)]))
+    ##(130, [6, 4, 1])
+    print(best(92, [(1, 6, 6), (6, 15, 7), (8, 9, 8), (2, 4, 7), (2, 20, 2)]))
+    ##(236, [6, 7, 3, 7, 2])
