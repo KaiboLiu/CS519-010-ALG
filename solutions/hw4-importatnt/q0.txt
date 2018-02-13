@@ -1,0 +1,22 @@
+Q0.
+useful fact 1: the max number of elements in height h is n/2^{h+1}
+useful fact 2: 1/2 + 2/4 + 3/8 + ... = (1/2 + 1/4 + 1/8 + ...) + (0 + 1/4 + 2/8 + 3/16 + ...) 
+= 1 + (1/4 + 1/8 + 1/16 + ...) + (1/8 + 2/16 + 3/32 + ...) = 1 + 1/2 + ... = 2.
+
+insert one-by-one:
+each element will do bubble-up operation
+so we have the number of bubble-up operation is:
+  sum O(logn - h) n/(2^{h+1}) 
+= O(nlogn) \times sum 1/2^h - O(n) sum h/2^h    
+= O(nlogn) - O(n)=O(nlogn)  
+
+compare with top-down heapify:
+we only have sum O(h) n/(2^{h+1}) = O(n) sum h/2^h = O(n x 2) = O(n)
+
+h is from 0 to logn
+
+more detailed of analysis is on page 135 (chapter 6.3) of CLRS (2nd edition)
+
+high-level intuitions: 
+top-down heapify is faster because the majority (lowest levels) requires very little work (bubble-down to the leaves), 
+while insert one-by-one is slow because the majority requires the most work (bubble-up to the root)
