@@ -23,7 +23,7 @@ def lis1(s):
     return res[::-1]
 
 
-# lis: O(nlogn) time and (n) space (although I used a list of lists)
+# lis: O(nlogn) time and O(n) space (although I used a list of lists)
 import bisect
 def lis(s):     # pos is the index in s, idx is the index in f[i], f[i] is the the min ending value for a i-length Lis
     if len(s) < 2: return s

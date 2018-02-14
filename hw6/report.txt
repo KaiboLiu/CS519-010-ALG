@@ -20,7 +20,7 @@ Please answer time/space complexities for each problem in report.txt.
    (a) Describe an exhaustive solution, and analyze compleixty (might be exponential).
    (b) Describe a greedy solution, and analyze complexity.
    (c) Show a counterexample to the greedy solution.
-   (d) Theoretically, is the top-down solution faster, or the bottom-one one faster?
+   (d) Theoretically, is the top-down solution faster, or the bottom-up one faster?
    (e) Empirically, which one is faster? (Try some long random lists) 
 
 1. Unbounded Knapsack
@@ -38,24 +38,33 @@ Please answer time/space complexities for each problem in report.txt.
    tie-breaking: *reverse* lexicographical: i.e., [1, 0] is better than [0, 1]:
    (i.e., take as much from item 1 as possible, etc.)
 
-   >>> best(3, [(1, 5), (1, 5)])
-   (15, [3, 0])
+   Answers for problem 0:
+   (a) Describe an exhaustive solution, and analyze compleixty (might be exponential).
+     A: In a recurrence R(i,w_left), which means for item i, we can get better answer by adding 1 copy of item i, or just skip to item i+1, and before we make choice, there is w_left space left. We can not make further decision if w_left <=0, or i==n. Then we can return max{ R(i,w_left-w[i])+v[i], and R(i+1, w_left)}.
+        O(2^(W/v))
+   (b) Describe a greedy solution, and analyze complexity.
+   (c) Show a counterexample to the greedy solution.
+   (d) Theoretically, is the top-down solution faster, or the bottom-up one faster?
+     A: bottom-up is faster because top-down needs push and pop operations on stack for recursions.
+   (e) Empirically, which one is faster? (Try some long random lists) 
+     A: bottom-up is faster.
+          W=7491 n=840
+            bottom-up: 1.28276801109s
+            top-down: 1.69787406921s
+          W=2715 n=164
+            bottom-up: 0.0919718742371s
+            top-down: 0.121115207672s
+          W=7861 n=334
+            bottom-up: 0.550665140152s
+            top-down: 0.72564291954s  
 
-   >>> best(3, [(1, 2), (1, 5)])
-   (15, [0, 3])
-
-   >>> best(3, [(1, 2), (2, 5)])
-   (7, [1, 1])
-
-   >>> best(58, [(5, 9), (9, 18), (6, 12)])
-   (114, [2, 4, 2])
-
-   >>> best(92, [(8, 9), (9, 10), (10, 12), (5, 6)])
-   (109, [1, 1, 7, 1])
 
    Q: What are the time and space complexities?
+   A: O(nW) time.
+      O(W) space.
 
    filename: knapsack_unbounded.py
+   Submitted
 
 2. [WILL BE GRADED] 
    Bounded Knapsack
@@ -64,44 +73,43 @@ Please answer time/space complexities for each problem in report.txt.
    **All numbers are positive integers.**
    What's the best value for a bag of W?
 
-   >>> best(3, [(2, 4, 2), (3, 5, 3)])
-   (5, [0, 1])
+   Answers for problem 0:
+   (a) Describe an exhaustive solution, and analyze compleixty (might be exponential).
+   (b) Describe a greedy solution, and analyze complexity.
+   (c) Show a counterexample to the greedy solution.
+   (d) Theoretically, is the top-down solution faster, or the bottom-up one faster?
+   (e) Empirically, which one is faster? (Try some long random lists) 
 
-   the input to the best() function is W and a list of triples (w_i, v_i, c_i).
-
-   tie-breaking: same as in p1:
-
-   >>> best(3, [(1, 5, 2), (1, 5, 3)])
-   (15, [2, 1])
-
-   >>> best(3, [(1, 5, 1), (1, 5, 3)])
-   (15, [1, 2])
-
-   >>> best(20, [(1, 10, 6), (3, 15, 4), (2, 10, 3)])
-   (130, [6, 4, 1])
-
-   >>> best(92, [(1, 6, 6), (6, 15, 7), (8, 9, 8), (2, 4, 7), (2, 20, 2)])
-   (236, [6, 7, 3, 7, 2])
 
    Q: What are the time and space complexities?
-
+   A: O(nWlogc) time, with binary presentation for each c[i],
+      O(nW) space.
    filename: knapsack_bounded.py
+   Submitted
 
 3. Longest (Strictly) Increasing Subsequence
    
    input/output are lower-case strings:
-
-   >>> lis("aebbcg")
-   "abcg"
-
-   >>> lis("zyx")
-   "z"
-
    tiebreaking: arbitrary. any optimal solution is ok.
 
-   Q: What are the time and space complexities?
+   Answers for problem 0:
+   (a) Describe an exhaustive solution, and analyze compleixty (might be exponential).
+     A: In a recurrence (l,i), we have a current index i and a local optimal length l for subsequence ending with s[i]. Then we search for j=i+1~n-1, if s[i]<s[j], then we pass (l+1,j) into recurrence for a larger length.
+   (b) Describe a greedy solution, and analyze complexity.
+     A: Scan i=0~n-2, then a nested loop starting from j=i+1, pick the fisrt one(let's say j) that s[j] > s[i], then update i,j <- j,j+1 and continue.
+        O(n^2).
+   (c) Show a counterexample to the greedy solution.
+     A: 'azbcd'
+   (d) Theoretically, is the top-down solution faster, or the bottom-up one faster?
+     A: bottom-up is faster because top-down needs push and pop operations on stack for recursions.
+   (e) Empirically, which one is faster? (Try some long random lists) 
+     A: bottom-up, because my bottom-up is O(nlogn), while top-down is O(n^2).
 
+
+   Q: What are the time and space complexities?
+   A: O(nlogn) time and O(n) space.
    filename: lis.py 
+   Submitted
 
 
 PLEASE COME UP WITH MORE TESTCASES FOR EACH PROBLEM! 
@@ -111,13 +119,19 @@ THESE EXISTING CASES ARE WAY TOO TRIVIAL.
 Debriefing (required!): --------------------------
 
 0. What's your name?
+  A: Kaibo Liu
 1. Approximately how many hours did you spend on this assignment?
+  A: 3 hours
 2. Would you rate it as easy, moderate, or difficult?
+  A: moderate, or hard when I was thinkging about a O(nW) algorithm for bounded knapsack.
 3. Did you work on it mostly alone, or mostly with other people?
+  A: Totally alone.
 4. How deeply do you feel you understand the material it covers (0%-100%)? 
+  A: 95%
 5. Which part(s) of the course you like the most so far?
+  A: implementation in python3, and the guide of exploring problems in a brain storm way.
 6. Which part(s) of the course you dislike the most so far?
-
+  A: None.
 This section is intended to help us calibrate the homework assignments. 
 Your answers to this section will *not* affect your grade; however, skipping it
 will certainly do.
