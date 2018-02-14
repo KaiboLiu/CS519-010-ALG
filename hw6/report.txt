@@ -22,6 +22,7 @@ Please answer time/space complexities for each problem in report.txt.
    (c) Show a counterexample to the greedy solution.
    (d) Theoretically, is the top-down solution faster, or the bottom-up one faster?
    (e) Empirically, which one is faster? (Try some long random lists) 
+   see below
 
 1. Unbounded Knapsack
 
@@ -41,9 +42,14 @@ Please answer time/space complexities for each problem in report.txt.
    Answers for problem 0:
    (a) Describe an exhaustive solution, and analyze compleixty (might be exponential).
      A: In a recurrence R(i,w_left), which means for item i, we can get better answer by adding 1 copy of item i, or just skip to item i+1, and before we make choice, there is w_left space left. We can not make further decision if w_left <=0, or i==n. Then we can return max{ R(i,w_left-w[i])+v[i], and R(i+1, w_left)}.
-        O(2^(W/v))
+        O(2^n) time
+        O(2^n) space
    (b) Describe a greedy solution, and analyze complexity.
+     A: sort the items by decreasing v[i]/w[i], then put items as many as possible in order.
    (c) Show a counterexample to the greedy solution.
+     A: W=11, item=(2,6),(3,8),(5,10)
+        greedy is 30,[5,0,0]
+        however, the solution is 32,[4,1,0]
    (d) Theoretically, is the top-down solution faster, or the bottom-up one faster?
      A: bottom-up is faster because top-down needs push and pop operations on stack for recursions.
    (e) Empirically, which one is faster? (Try some long random lists) 
@@ -75,11 +81,31 @@ Please answer time/space complexities for each problem in report.txt.
 
    Answers for problem 0:
    (a) Describe an exhaustive solution, and analyze compleixty (might be exponential).
+     A: In a recurrence R(i,w_left), which means for item i, we can get better answer by adding 0~c_i copy/copies of item i, and before we make choice, there is w_left space left. We can not make further decision if w_left <=0, or i==n. Then we can return max{ R(i,w_left-w[i]*c)+c*v[i]} for any possible c
+        O(min(W/w,c)^n) time
+        O(min(W/w,c)^n) space
    (b) Describe a greedy solution, and analyze complexity.
+     A: sort the items by decreasing v[i]/w[i], then put items as many as possible in order.   
    (c) Show a counterexample to the greedy solution.
+     A: W=11, item=(2,6,5),(3,8,2),(5,10,2)
+        greedy is 30,[5,0,0]
+        however, the solution is 32,[4,1,0]
    (d) Theoretically, is the top-down solution faster, or the bottom-up one faster?
+     A: bottom-up is faster because top-down needs push and pop operations on stack for recursions.
    (e) Empirically, which one is faster? (Try some long random lists) 
-
+     A: bottom-up is faster.
+          W=725 n=11 ∑c=383 ave(c)=34
+            bottom-up: 0.012783050537109375s
+            top-down: 0.02905106544494629s
+          W=978 n=201 ∑c=10819 ave(c)=53
+            bottom-up: 0.5034129619598389s
+            top-down: 1.4904987812042236s
+          W=3892 n=46 ∑c=2462 ave(c)=53
+            bottom-up: 0.6230928897857666s
+            top-down: 3.4062273502349854s
+          W=2034 n=449 ∑c=23371 ave(c)=52
+            bottom-up: 2.9577548503875732s
+            top-down: 12.284964084625244s
 
    Q: What are the time and space complexities?
    A: O(nWlogc) time, with binary presentation for each c[i],
@@ -104,7 +130,15 @@ Please answer time/space complexities for each problem in report.txt.
      A: bottom-up is faster because top-down needs push and pop operations on stack for recursions.
    (e) Empirically, which one is faster? (Try some long random lists) 
      A: bottom-up, because my bottom-up is O(nlogn), while top-down is O(n^2).
-
+          len=9371 len_res=26
+            bottom-up: 0.00552s
+            top-down: 6.14864s
+          len=6049 len_res=26
+            bottom-up: 0.00253s
+            top-down: 2.65076s
+          len=7031 len_res=26
+            bottom-up: 0.00293s
+            top-down: 3.26433s
 
    Q: What are the time and space complexities?
    A: O(nlogn) time and O(n) space.
@@ -121,7 +155,7 @@ Debriefing (required!): --------------------------
 0. What's your name?
   A: Kaibo Liu
 1. Approximately how many hours did you spend on this assignment?
-  A: 3 hours
+  A: 5 hours
 2. Would you rate it as easy, moderate, or difficult?
   A: moderate, or hard when I was thinkging about a O(nW) algorithm for bounded knapsack.
 3. Did you work on it mostly alone, or mostly with other people?

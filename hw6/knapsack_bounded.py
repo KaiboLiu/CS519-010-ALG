@@ -68,7 +68,7 @@ def resize(weight, a):
 # top-down, O(Wn') time where n'=sum_i c_i; O(Wn) space
 def best2(W, items):
     import sys
-    sys.setrecursionlimit(10000)
+    sys.setrecursionlimit(10000000)
     n = len(items)
     back = defaultdict(int)
 
@@ -178,14 +178,15 @@ if __name__ == "__main__":
     
     import time
     from random import randint,seed
-    seed(100)   #random.seed
+    seed(10)   #random.seed
     cases = 5
     for i in range(cases):
         weight = randint(10,1000)
-        n = randint(10,1000)
+        n = randint(10,100)
         item = [(randint(10,100), randint(1,100), randint(1,100)) for _ in range(n)]
         if i == 0:
-            n, weight, item = 5, 92, [(1, 6, 6), (6, 15, 7), (8, 9, 8), (2, 4, 7), (2, 20, 2)]
+            #n, weight, item = 5, 92, [(1, 6, 6), (6, 15, 7), (8, 9, 8), (2, 4, 7), (2, 20, 2)]
+            weight = 2034
         time0 = time.time()
         res = best(weight, item)
         time1 = time.time()
@@ -200,5 +201,7 @@ if __name__ == "__main__":
                 print(res)
                 print(res2)
                 break
-        print('W={} n={}\nbottom-up: {}s\ntop-down: {}s'.format(weight,n,time1-time0, time2-time1))
+        c = 0
+        for x in item: c += x[2]
+        print('W={} n={} ∑c={} ave(c)={}\nbottom-up: {}s\ntop-down: {}s'.format(weight,n,c,c//n,time1-time0, time2-time1))
    
