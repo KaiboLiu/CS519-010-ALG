@@ -6,13 +6,42 @@ if __name__ == "__main__":
     
     s = "ACAGU"
     print(s)
-    print(best(s))
-    # (2, '((.))')
-    print(lis("aebabdgc"))
-    ##"abdg"
-    print(lis("zyx"))
-    ##"z"
-    
+    s = "UUCAGGA"
+    print(best(s))  #(3, '(((.)))')
+    s = "GUUAGAGUCU"
+    print(best(s))  #(4, '(.()((.)))')
+    s = "GCACG"
+    print(best(s))  #(2, '().()')
+    s = "AUAACCUUAUAGGGCUCUG"
+    print(best(s))  #(8, '.(((..)()()((()))))')
+    s = "UUGGACUUGAGAAAAG"
+    print(best(s))  #(5, '((...((()))...))')
+    s = "UCAAUGGGUAGUAAAU"
+    print(best(s))  #(6, '(((.)))((..(.)))')
+    s = "UUUGGCACUUUCAGA"
+    print(best(s))  #(6, '(((((.(..))))))')
+    s = "ACACACCUUGUCCGUGAA"
+    print(best(s))  #(6, '.((.(..)))(.()(.))')   
+    s = "GAUGCCGUGUAGUCCAAAGACUUCACCGUUGG"
+    print(best(s))  #(14, '.()()(()(()())(((.((.)(.))()))))')
+    s = "CGCGAAUAAAAAGGCACUGUU"
+    print(best(s))  #(8, '()()((((....(().)))))')
+    s = "ACGGCCAGUAAAGGUCAUAUACGCGGAAUGACAGGUCUAUCUAC"
+    print(best(s))  #(19, '.()(((.)(..))(((.()()(())))(((.)((())))))())')
+    s = "UGGGUGAGUCGCACACUCUGCGUACUCUUUCCGUAAUU"
+    print(best(s))  #(15, '.((()((((.()).(.)))(()())).((...()))))')
+    s = "AUACGUCGGGGACAAGAAUUACGG"
+    print(best(s))  #(8, '.(.(((()((..(..)..))))))')
+    s = "AGGCAUCAAACCCUGCAUGGGAGCACCGCCACUGGCGAUUUUGGUA"
+    print(best(s))  #(20, '.(()())...((((()()))((()(.()(((.)))()())))))()')
+    s = "CGAGGUGGCACUGACCAAACACCACCGAAAC"
+    print(best(s))  #(9, '.(.((((().)((.)..))).)...()...)')
+    s = "CGCCGUCCGGGCGCGCCUUUUACGUAGAUUU"
+    print(best(s))  #(12, '.(..(...((((())))(((.(())))))))')
+    s = "CAUCGGGGUCUGAGAUGGCCAUGAAGGGCACGUACUGUUU"
+    print(best(s))  #(18, '(()())(((((.)))()(((())(.(.().()()))))))')
+    s = "AACCGCUGUGUCAAGCCCAUCCUGCCUUGUU"
+    print(best(s))  #(11, '(((.(..(.((.)((...().))()))))))')
 
     import time
     from random import randint,seed

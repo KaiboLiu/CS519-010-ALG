@@ -108,8 +108,9 @@ Please answer time/space complexities for each problem in report.txt.
             top-down: 12.284964084625244s
 
    Q: What are the time and space complexities?
-   A: O(nWlogc) time, with binary presentation for each c[i],
-      O(nW) space.
+   A: O(W*∑{logci'}) time, with binary presentation for each c[i],
+      O(W*∑{ci'}) space.
+      where ci'=min(ci,lower[w/wi]).
    filename: knapsack_bounded.py
    Submitted
 
