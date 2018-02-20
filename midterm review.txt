@@ -1,0 +1,63 @@
+CS 519  Algorithms  Winter 2018
+MIDTERM REVIEW PROBLEMS
+
+The Midterm will cover HWs 1-6 and Quizzes 1-2.
+
+0. Give real-life examples of queue, stack, priority queue, hash-table, and binary search.
+bank line, a pile of books, emergency room, index of a book, ?
+
+1. How do you use a priority queue to simulate (a) a queue and (b) a stack?
+time stamp
+
+2. What is the best complexity of internal sorting? 
+   Why that complexity can _not_ be surpassed? (i.e., lowerbound)
+   Name four (4) algorithms that achieve this complexity.
+
+3. Rank the growth functions from slowest to fastest:
+   1, logn, n, nlogn, n^2, 2^n, n!, n^n
+
+4. Analyze the complexity for each of the following (use recursion tree method), and name an instance:
+   (a) T(n) = 2T(n/2) + O(n)
+   (b) T(n) = 2T(n/2) + O(1)
+   (c) T(n) =  T(n/2) + O(n)
+   (d) T(n) =  T(n/2) + O(1)
+   (e) T(n) = 2T(n/2) + O(logn)
+
+5. There are various implementations of priority queue:
+   (a) binary heap
+   (b) sorted array
+   (c) unsorted array
+   (d) sorted linkedlist
+   (e) unsorted linkedlist
+
+   Write the time complexities for the following operations for each of the above:
+   (1) push
+   (2) pop-min
+   (3) peek-min (just output the min, without deleting it)
+   (4) heapify   
+
+6. You have n matrices, each with nxn entries (so you have n^3 numbers in total).
+   For each matrix A, the entries are sorted:
+   A_ij < A_ik for each row i and all columns j<k.
+   A_ij < A_kj for each column j and all rows i<k.
+   
+   Design the fastest algorithm to select the n smallest numbers from these n^3 numbers.
+   Analyze time complexity.
+
+7. Give (at least) two reasons why bubble-up is faster than bubble-down.
+
+8. Fibonacci. There are three implementations:
+   (a) the naive recursive solution without memoization runs in time closest to:
+       n, nlogn, n^2, a^n, n^a, 2^n, n!, n^n  (where 1<a<2)
+   (b) implement the memoized recursive solution.
+       What's the space and time complexities?
+   (c) implement the O(1)-space solution (bottom-up).
+
+9. The DP question will be very similar to unbounded and bounded knapsack.
+   It will include:
+   (a) greedy solution
+   (b) counter-example
+   (c) subproblem
+   (d) recurrence
+   (e) time and space complexity
+   (f)(not covered) is there an alternative solution with smaller space complexity?
