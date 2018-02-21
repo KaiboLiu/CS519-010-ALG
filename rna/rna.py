@@ -10,9 +10,10 @@ def best(s):
     for d in range(1,l):  # r=delta range
         for i in range(l-d):    # j=i+d
             j = i+d
+            opt[i,j] = max(opt[i,j],max(opt[i+1,j], opt[i,j-1]))
             for k in range(i+1,i+d-1):
                 opt[i,j] = max(opt[i,k]+opt[k+1,j],opt[i,j])
-            opt[i,j] = max(opt[i,j],max(opt[i+1,j], opt[i,j-1]))
+
             if opt[i+1,j-1] >= opt[i,j]:
                 opt[i,j] = opt[i+1,j-1]
                 if s[i]+s[j] in p:
