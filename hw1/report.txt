@@ -10,7 +10,7 @@ Due electronically on flip on Sunday Jan 14, 11:59pm.
 0. Q: What's the best-case, worst-case, and average-case time complexities of quicksort.
    Briefly explain each case.
 
-   A: For quicksort, the time complexities for each casee are:
+   A: For quicksort, the time complexities for each cases are:
       best-case: O(nlogn). 
          In the most balanced case, we can divide the array into two nearly equal pieces after each partition . So we can make only logn nested recursions before we reach a array of size 1. This means that the depth of the recursion tree is logn, and it's almost an balanced tree. Each level of calls needs only O(n) time to generate subarrays. The result is that the algorithm uses only O(nlogn) time. 
       worst-case: O(n^2). 
