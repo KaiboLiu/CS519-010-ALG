@@ -10,28 +10,28 @@ def best(s):
     for d in range(1,l):  # r=delta range
         for i in range(l-d):    # j=i+d
             j = i+d
-            opt[i,j] = max(opt[i,j],max(opt[i+1,j], opt[i,j-1]))
-            for k in range(i+1,i+d-1):
-                opt[i,j] = max(opt[i,k]+opt[k+1,j],opt[i,j])
-
-            if opt[i+1,j-1] >= opt[i,j]:
-                opt[i,j] = opt[i+1,j-1]
-                if s[i]+s[j] in p:
-                    opt[i,j] += 1
-                    pair[i] = j
             
-
-    def solution(a,b):
+            for k in range(i,i+d):
+                opt[i,j] = max(opt[i,k]+opt[k+1,j],opt[i,j])
+            #opt[i,j] = max(opt[i,j],max(opt[i+1,j], opt[i,j-1]))
+            if opt[i+1,j-1] >= opt[i,j] and s[i]+s[j] in p:
+                opt[i,j] = opt[i+1,j-1] + 1
+                pair[i] = j
+            
+    def solution(a,b,n):
         if a >= b: return 
         for i in range(a,b):
-            if i in pair and pair[i] <= b:
+            if i in pair and pair[i] <= b and opt[i,pair[i]]+opt[pair[i]+1,b] == n:
+                print(i,pair[i],b,opt[i,pair[i]],opt[pair[i]+1,b])
+                #print(i,pair[i])
                 strc[i], strc[pair[i]] = '(', ')' 
-                solution(a,i-1)
-                solution(i+1,pair[i]-1)
-                solution(pair[i]+1,b)
+                #solution(a,i-1)
+                solution(i+1,pair[i]-1,opt[i,pair[i]]-1)
+                solution(pair[i]+1,b,opt[pair[i]+1,b])
                 return
 
-    solution(0,l-1)
+    solution(0,l-1,opt[0,l-1])
+    print(pair)
     
     return opt[0,l-1], ''.join(strc)
 
@@ -39,7 +39,9 @@ def best(s):
 
 
 if __name__ == "__main__":
-    
+    s = "GAUGCCGUGUAGUCCAAAGACUUCACCGUUGG"
+    print(best(s))  #(14, '.()()(()(()())(((.((.)(.))()))))')
+    ''' 
     s = "ACAGU"
     print(best(s))  #(2, '((.))')
     s = "UUCAGGA"
@@ -78,7 +80,7 @@ if __name__ == "__main__":
     print(best(s))  #(18, '(()())(((((.)))()(((())(.(.().()()))))))')
     s = "AACCGCUGUGUCAAGCCCAUCCUGCCUUGUU"
     print(best(s))  #(11, '(((.(..(.((.)((...().))()))))))')
-    '''
+
     import time
     from random import randint,seed
     seed(10)   #random.seed
