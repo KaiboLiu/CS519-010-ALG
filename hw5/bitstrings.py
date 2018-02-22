@@ -22,6 +22,18 @@ def num_yes2(n):
 
     return f[3]
 
+## two consecutive 0s. for s[1..n], either add 0 to s[1..n-1] or add 00. to s[1..n-2]
+## f(n)=f(n-1)+f(n-2)+2^(n-2), f(0)=f(1)=0
+def num_yes3(n):
+    #return (1<<n) - num_no(n)
+    a, b, ex = 0, 0, 1
+    if n < 2: return b
+    for i in range(n-1):
+        a,b=b,a+b+ex
+        ex <<= 1
+    return b
+
+
 ## or, num_yes(n) = (1<<n)-num_no(n),
 ## because num_yes(n) + num_no(n) == 2^n
 def num_yes(n):
