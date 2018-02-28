@@ -1,47 +1,50 @@
 from collections import defaultdict
+import pdb
 
 p = {'AU','UA','CG','GC','UG','GU'}
 
 def best(s):
-    opt=defaultdict(int)
+    opt = defaultdict(int)
     pair, l = {}, len(s)
     strc = ['.' for _ in range(l)]
     if l <= 1: return 0
-    for d in range(1,l):  # r=delta range
-        for i in range(l-d):    # j=i+d
-            j = i+d
-            
-            for k in range(i,i+d):
-                opt[i,j] = max(opt[i,k]+opt[k+1,j],opt[i,j])
-            #opt[i,j] = max(opt[i,j],max(opt[i+1,j], opt[i,j-1]))
-            if opt[i+1,j-1] >= opt[i,j] and s[i]+s[j] in p:
+    for d in range(2,l+1):  # d=delta range, length of range[i,j]:s[i]..s[j-1]
+        for i in range(l-d+1):    # j=i+d
+            j = i+d            
+            for k in range(i+1,j):  #k = i+1..j-1
+                opt[i,j] = max(opt[i,k]+opt[k,j],opt[i,j])
+            if opt[i+1,j-1] >= opt[i,j] and s[i]+s[j-1] in p:
                 opt[i,j] = opt[i+1,j-1] + 1
-                pair[i] = j
+                pair[i] = j-1
+                print(i,j-1, opt[i,j], s[i], s[j-1])
             
     def solution(a,b,n):
-        if a >= b: return 
-        for i in range(a,b):
-            if i in pair and pair[i] <= b and opt[i,pair[i]]+opt[pair[i]+1,b] == n:
-                print(i,pair[i],b,opt[i,pair[i]],opt[pair[i]+1,b])
+        if a+2 > b: return 
+        for i in range(a,b-1):
+            if i in pair and pair[i] < b and opt[i,pair[i]+1]+opt[pair[i]+1,b] == n:
+                #print(i,pair[i],b,opt[i,pair[i]],opt[pair[i]+1,b])
                 #print(i,pair[i])
                 strc[i], strc[pair[i]] = '(', ')' 
                 #solution(a,i-1)
-                solution(i+1,pair[i]-1,opt[i,pair[i]]-1)
+                solution(i+1,pair[i],opt[i,pair[i]+1]-1)
                 solution(pair[i]+1,b,opt[pair[i]+1,b])
                 return
 
-    solution(0,l-1,opt[0,l-1])
-    print(pair)
+    solution(0,l,opt[0,l])
+    pdb.set_trace()
+    #print(pair)
     
-    return opt[0,l-1], ''.join(strc)
+    return opt[0,l], ''.join(strc)
 
 
 
 
 if __name__ == "__main__":
-    s = "GAUGCCGUGUAGUCCAAAGACUUCACCGUUGG"
+    #s = "GAUGCCGUGUAGUCCAAAGACUUCACCGUUGG"
+    #print(best(s))  #(14, '.()()(()(()())(((.((.)(.))()))))')
+    s = "GUGUAGUCCAAAGACUUC"
     print(best(s))  #(14, '.()()(()(()())(((.((.)(.))()))))')
-    ''' 
+    '''
     s = "ACAGU"
     print(best(s))  #(2, '((.))')
     s = "UUCAGGA"
@@ -80,7 +83,7 @@ if __name__ == "__main__":
     print(best(s))  #(18, '(()())(((((.)))()(((())(.(.().()()))))))')
     s = "AACCGCUGUGUCAAGCCCAUCCUGCCUUGUU"
     print(best(s))  #(11, '(((.(..(.((.)((...().))()))))))')
-
+    
     import time
     from random import randint,seed
     seed(10)   #random.seed
