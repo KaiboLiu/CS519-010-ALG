@@ -3,11 +3,40 @@ import pdb
 
 p = {'AU','UA','CG','GC','UG','GU'}
 
+
+
+## trace back with recurrsion + middle point
 def best(s):
+    def solution(a,b):
+        if a >= b: return ""
+        if a == b-1: return "."
+        if mid[a,b] == -1:
+            return "("+solution(a+1,b-1)+")"
+        elif mid[a,b] > 0:
+            return solution(a, mid[a,b]) + solution(mid[a,b], b)
+        return ""
+
+    opt, mid = defaultdict(int), defaultdict(int)#(lambda:-1)
+    if s == '': return 0,''
+    for d in range(2,l+1):  # d=delta range, length of range[i,j]:s[i]..s[j-1]
+        for i in range(l-d+1):    # j=i+d
+            j = i+d            
+            if s[i]+s[j-1] in p:
+                opt[i,j], mid[i,j] = opt[i+1,j-1] + 1, -1
+
+            for k in range(i+1,j):  #k = i+1..j-1
+                if opt[i,k]+opt[k,j] > opt[i,j]:
+                    opt[i,j], mid[i,j] = opt[i,k]+opt[k,j], k
+            
+    return opt[0,l], solution(0,l)
+
+
+## store all the local optimal strucrure strc[i,j] besides opt[i,j], no trace back
+def best1(s):
     opt, strc = defaultdict(int), defaultdict(lambda:'.')
     l = len(s)
 
-    if l <= 1: return 0
+    if l < 1: return 0,''
     for d in range(2,l+1):  # d=delta range, length of range[i,j]:s[i]..s[j-1]
         for i in range(l-d+1):    # j=i+d
             j = i+d            
@@ -20,31 +49,29 @@ def best(s):
                     strc[i,j] = strc[i,k] + strc[k,j]
             if opt[i,j] == 0:
                 strc[i,j] = '.' * (j-i)
-    '''        
-    def solution(a,b,n):
-        if a+2 > b: return 
-        for i in range(a,b-1):
-            if i in pair and pair[i] < b and opt[i,pair[i]+1]+opt[pair[i]+1,b] == n:
-                #print(i,pair[i],b,opt[i,pair[i]],opt[pair[i]+1,b])
-                #print(i,pair[i])
-                strc[i], strc[pair[i]] = '(', ')' 
-                #solution(a,i-1)
-                solution(i+1,pair[i],opt[i,pair[i]+1]-1)
-                solution(pair[i]+1,b,opt[pair[i]+1,b])
-                return
-    
-    solution(0,l,opt[0,l])
-    '''
-    #pdb.set_trace()
-    #print(pair)
-    
     return opt[0,l], strc[0,l]
 
 
+def total(s):
 
+
+    
+def cntPairs(s):
+    stack, n = [],0
+    for i, item in enumerate(s):
+        if item == '(':
+            stack.append(i)
+        elif item == ')':
+            j = stack.pop()
+            n += 1
+    return n
 
 if __name__ == "__main__":
-
+    '''
+    s = ""
+    print(best(s))  #(0, '')
+    s = "A"
+    print(best(s))  #(0, '.')
     s = "ACAGU"
     print(best(s))  #(2, '((.))')
     s = "UUCAGGA"
@@ -88,18 +115,21 @@ if __name__ == "__main__":
     from random import randint,seed
     seed(10)   #random.seed
     cases = 5
+    node = ['A','U','C','G']
     for i in range(cases):
-        l = randint(10,10000)
-        s = [chr(randint(0,25)+ord('a')) for _ in range(l)]
+        l = randint(10,200)
+        s = [node[randint(0,3)] for _ in range(l)]
         s = ''.join(s)
         time0 = time.time()
-        res = lis(s)
+        n1, res1 = best(s)
         time1 = time.time()
-        res2 = lis2(s)
+        n2, res2 = best1(s)
         time2 = time.time()
          
-        if len(res) != len(res2): print('not same value\n%s\n%s' %(res, res2))
+        if n1 != n2: print('not same value: {} {}'.format(n1, n2))
+        else: print('same value: {}'.format(n1))
+        print('1 has {} pairs'.format(cntPairs(res1)))
+        print('2 has {} pairs'.format(cntPairs(res2)))
         
-        print('len=%d len_res=%s \nbottom-up: %0.5fs\ntop-down: %0.5fs'%(l,len(res),time1-time0, time2-time1))
-   
-    '''
+        print('length: {}  pairs: {}\ntime1:{}\ntime2:{}'.format(l,n1,time1-time0, time2-time1))
+
