@@ -68,7 +68,8 @@ def total(s):
                     opt[i,j] += opt[i+1,k-1] * opt[k,j] # case 2
     return opt[0,l]
 
-
+def kbest(s, m):
+    
 
 def cntPairs(s):
     stack, n = [],0

@@ -24,36 +24,31 @@ Please answer time/space complexities for each problem in report.txt.
 (LIS is not discussed in class)
 
 0. (a) Describe a greedy algorithm for LIS and show a counter example.
+     A: Scan i=0~n-2, then a nested loop starting from j=i+1, pick the fisrt one(let's say j) that s[j] > s[i], then update i,j <- j,j+1 and continue.
+        O(n^2).
+        counter example: 'azbcd'
    (b) Describe an exhaustive algorithm for TSP and analyze complexity.
+     A: A brute-force algorithm can solve the TSP for sure.
+        Examine all possible permutations of cities, and keep the one that is shortest.
+        It turns out that there are exactly n! different permutations of the numbers from 0 to n-1. Since we only care about permutations that start with 0, to solve an n-city TSP instance with brute force requires that we look at exactly (n-1)! different permutations.
+        O((n-1)!)
 
 1. Longest (Strictly) Increasing Subsequence
    
-   input/output are lower-case strings:
-
-   >>> lis("aebbcg")
-   "abcg"
-
-   >>> lis("zyx")
-   "z"
-
-   tiebreaking: arbitrary. any optimal solution is ok.
-
    Q: What are the time and space complexities?
    A: O(nlogn) time and O(n) space.
    filename: lis.py 
    Submitted
 
 2. Topological Sort
-   
-   For a given directed graph, output a topological order if it exists.
-   
+
    filename: topol.py 
    submitted
 
    questions: 
    (a) did you realize that bottom-up implementations of DP use (implicit) topological orderings?
        e.g., what is the topological ordering in your (or my) bottom-up bounded knapsack code?
-    A: for loop of weight, then a nested for loop of items and copies. If we have a matrix h*w=items*weight, then the topological order is scan by line and within each line scan from left to right.
+    A: For loop of weight, then a nested for loop of items and copies. If we have a matrix h*w=items*weight, then the topological order is scan by line and within each line scan from left to right.
 
    (b) what about top-down implementations? what order do they use to traverse the graph?
     A: In the matrix of items*weight, the top-down implementation traverse the grapgh from bottom-right back to upper-left, not vertical or horizontal, but an oblique arrow back to subproblem.
@@ -64,37 +59,27 @@ Please answer time/space complexities for each problem in report.txt.
 3. [WILL BE GRADED]
    Viterbi Algorithm For Longest Path in DAG (see DPV 4.7, [2], CLRS problem 15-1)
    
-   Recall that the Viterbi algorithm has just two steps:
-   a) get a topological order (use problem 1 above)
-   b) follow that order, and do either forward or backward updates
-
-   This algorithm captures all DP problems on DAGs, for example,
-   longest path, shortest path, number of paths, etc.
-
-   In this problem, given a DAG (guaranteed acyclic!), output a pair (l, p) 
-   where l is the length of the longest path (number of edges), and p is the path. (you can think of each edge being unit cost)
-
-   e.g., for the above example:
-
-   >>> longest(8, [(0,2), (1,2), (2,3), (2,4), (3,4), (3,5), (4,5), (5,6), (5,7)])
-   (5, [0, 2, 3, 4, 5, 6])
-
-   Tie-breaking: arbitrary. any longest path is fine.   
-
    Filename: viterbi.py
-
-   Note: you can use this program to solve LIS, TSP, knapsacks, MIS, etc.
+   submitted.
 
 
 Debriefing (required!): --------------------------
 
 0. What's your name?
+  A: Kaibo Liu
 1. Approximately how many hours did you spend on this assignment?
+  A: 2 hours
 2. Would you rate it as easy, moderate, or difficult?
+  A: Easy.
 3. Did you work on it mostly alone, or mostly with other people?
+  A: Absolutely alone.
 4. How deeply do you feel you understand the material it covers (0%–100%)? 
+  A: 95% I guess
 5. Which part(s) of the course you like the most so far?
+  A: python implementation with new functions I may not be familiar with.
+     Corner cases in every interesting problems.
 6. Which part(s) of the course you dislike the most so far?
+  A: None
 
 This section is intended to help us calibrate the homework assignments. 
 Your answers to this section will *not* affect your grade; however, skipping it
