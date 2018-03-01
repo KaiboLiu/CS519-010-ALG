@@ -18,7 +18,7 @@ def best(s):
 
     opt, mid = defaultdict(int), defaultdict(int)#(lambda:-1)
     if s == '': return 0,''
-    for d in range(2,l+1):  # d=delta range, length of range[i,j]:s[i]..s[j-1]
+    for d in range(2,l+1):  # d=delta range, length of range[i,j], s[i]..s[j-1]
         for i in range(l-d+1):    # j=i+d
             j = i+d            
             if s[i]+s[j-1] in p:
@@ -37,7 +37,7 @@ def best1(s):
     l = len(s)
 
     if l < 1: return 0,''
-    for d in range(2,l+1):  # d=delta range, length of range[i,j]:s[i]..s[j-1]
+    for d in range(2,l+1):  # d=delta range, length of range[i,j], s[i]..s[j-1]
         for i in range(l-d+1):    # j=i+d
             j = i+d            
             if s[i]+s[j-1] in p:
@@ -53,9 +53,23 @@ def best1(s):
 
 
 def total(s):
+# 2 cases: .*******, (***)*** or (******)
+    opt, l = defaultdict(int), len(s)
+    for i in range(l+1):
+        opt[i,i], opt[i,i+1] = 1, 1 # single and empty
+
+    for d in range(2,l+1):  # d=delta range, length of range[i,j], s[i]..s[j-1]
+        for i in range(l-d+1):    # j=i+d
+            j = i+d 
+            opt[i,j] += opt[i+1,j]  # case 1
+
+            for k in range(i+2,j+1):  #k = i+2..j, to pair s[i] with s[k-1]
+                if s[i]+s[k-1] in p:
+                    opt[i,j] += opt[i+1,k-1] * opt[k,j] # case 2
+    return opt[0,l]
 
 
-    
+
 def cntPairs(s):
     stack, n = [],0
     for i, item in enumerate(s):
@@ -67,6 +81,7 @@ def cntPairs(s):
     return n
 
 if __name__ == "__main__":
+
     '''
     s = ""
     print(best(s))  #(0, '')
@@ -111,6 +126,10 @@ if __name__ == "__main__":
     s = "AACCGCUGUGUCAAGCCCAUCCUGCCUUGUU"
     print(best(s))  #(11, '(((.(..(.((.)((...().))()))))))')
     '''
+
+    
+    print(total("ACAGU"))
+    '''
     import time
     from random import randint,seed
     seed(10)   #random.seed
@@ -133,3 +152,4 @@ if __name__ == "__main__":
         
         print('length: {}  pairs: {}\ntime1:{}\ntime2:{}'.format(l,n1,time1-time0, time2-time1))
 
+    '''
