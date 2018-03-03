@@ -149,16 +149,6 @@ def kbest(s, m):
 ## 1. O(n^3k+n^2klogk)
 ## 2. O(n^3 +n^2klogk)
 ## 3. O(n^3 +nklogk)
-
-
-def check_kbest(res, m):
-    check, wrong = set(), 0
-    for n,s in res: 
-        check.add(s)
-        if cntPairs(s) != n: wrong += 1
-    return len(check), wrong
-
-    
 ## customized funtion to count pairs in a structure
 def cntPairs(s):
     stack, n = [],0
@@ -229,14 +219,16 @@ if __name__ == "__main__":
     print("{} best: {}".format(m,kbest(s,m)))
     '''
     s = "GCUGGCGGGCCCCUUCGCAUGGUUCGGCGGUGAAUCUGGUCAGGUCGGGAACGAAGCAGCCAUAGUCGUUCAGAACCAGUGCCGGAGUAAGGCUCGCCUACCGGUAUCCCU"
-    #t = total(s)
-    #print("seq: {}\nbest: {}, total {}".format(s,best(s),t))  
+    t = total(s)
+    print("seq: {}\nbest: {}, total {}".format(s,best(s),t))  
     m = 20
     res = kbest(s,m)
-    print("{} best:\n{}".format(m,res))
-    #distinct, wrong = check_kbest(res,m)
-    #print("check distinct: {}, wrong: {}".format(distinct, wrong))
-
+    check = set()
+    for i in res: check.add(i)
+   
+    print("{} best: {}".format(m,res))
+    print("check: {}".format(len(check)))
+    #print("{} best: {}".format(m,kbest(s,m)))
     #for m in range(t):
     #    print("{} best: {}".format(m+1,kbest(s,m+1)))
     
