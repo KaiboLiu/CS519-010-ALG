@@ -7,6 +7,7 @@ Process Time: Feb 28, 2018
 from collections import defaultdict
 from heapq import heapify, heapreplace, heappush
 
+import sys
 import pdb
 
 p = {'AU','UA','CG','GC','UG','GU'}
@@ -231,9 +232,12 @@ if __name__ == "__main__":
     s = "GCUGGCGGGCCCCUUCGCAUGGUUCGGCGGUGAAUCUGGUCAGGUCGGGAACGAAGCAGCCAUAGUCGUUCAGAACCAGUGCCGGAGUAAGGCUCGCCUACCGGUAUCCCU"
     #t = total(s)
     #print("seq: {}\nbest: {}, total {}".format(s,best(s),t))  
-    m = 20
-    res = kbest(s,m)
-    print("{} best:\n{}".format(m,res))
+    m = 10
+    if len(sys.argv) > 1: m = int(sys.argv[1])
+    #res = kbest(s,m)
+    #print("{} best:\n{}".format(m,res))
+    if m == 1: print("{} best:\n{}".format(m,best(s)))
+    else: print("{} best:\n{}".format(m,kbest(s,m)))
     #distinct, wrong = check_kbest(res,m)
     #print("check distinct: {}, wrong: {}".format(distinct, wrong))
 
@@ -264,5 +268,4 @@ if __name__ == "__main__":
         print('2 has {} pairs'.format(cntPairs(res2)))
         
         print('length: {}  pairs: {}\ntime1:{}\ntime2:{}'.format(l,n1,time1-time0, time2-time1))
-
     '''
