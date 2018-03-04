@@ -7,6 +7,7 @@ Process Time: Feb 28, 2018
 from collections import defaultdict
 from heapq import heapify, heapreplace, heappush
 
+import sys
 import pdb
 
 p = {'AU','UA','CG','GC','UG','GU'}
@@ -18,12 +19,11 @@ p = {'AU','UA','CG','GC','UG','GU'}
 def best(s):
     def solution(a,b):
         if a >= b: return ""
-        if a == b-1: return "."
         if mid[a,b] == -1:
             return "("+solution(a+1,b-1)+")"
         elif mid[a,b] > 0:
             return solution(a, mid[a,b]) + solution(mid[a,b], b)
-        return ""
+        return "."*(b-a)
 
     opt, mid = defaultdict(int), defaultdict(int)#(lambda:-1)
     if s == '': return 0,''
@@ -149,6 +149,16 @@ def kbest(s, m):
 ## 1. O(n^3k+n^2klogk)
 ## 2. O(n^3 +n^2klogk)
 ## 3. O(n^3 +nklogk)
+
+
+def check_kbest(res, m):
+    check, wrong = set(), 0
+    for n,s in res: 
+        check.add(s)
+        if cntPairs(s) != n: wrong += 1
+    return len(check), wrong
+
+    
 ## customized funtion to count pairs in a structure
 def cntPairs(s):
     stack, n = [],0
@@ -219,16 +229,16 @@ if __name__ == "__main__":
     print("{} best: {}".format(m,kbest(s,m)))
     '''
     s = "GCUGGCGGGCCCCUUCGCAUGGUUCGGCGGUGAAUCUGGUCAGGUCGGGAACGAAGCAGCCAUAGUCGUUCAGAACCAGUGCCGGAGUAAGGCUCGCCUACCGGUAUCCCU"
-    t = total(s)
-    print("seq: {}\nbest: {}, total {}".format(s,best(s),t))  
-    m = 20
-    res = kbest(s,m)
-    check = set()
-    for i in res: check.add(i)
-   
-    print("{} best: {}".format(m,res))
-    print("check: {}".format(len(check)))
-    #print("{} best: {}".format(m,kbest(s,m)))
+    m = 10
+    if len(sys.argv) > 1: 
+        s = sys.argv[1]
+    if len(sys.argv) > 2:
+        m = int(sys.argv[2])
+    print("seq: {}\nbest: {}, total {}".format(s,best(s),total(s)))  
+    print("{} best:\n{}".format(m,kbest(s,m)))
+    #distinct, wrong = check_kbest(res,m)
+    #print("check distinct: {}, wrong: {}".format(distinct, wrong))
+
     #for m in range(t):
     #    print("{} best: {}".format(m+1,kbest(s,m+1)))
     
@@ -256,5 +266,4 @@ if __name__ == "__main__":
         print('2 has {} pairs'.format(cntPairs(res2)))
         
         print('length: {}  pairs: {}\ntime1:{}\ntime2:{}'.format(l,n1,time1-time0, time2-time1))
-
     '''

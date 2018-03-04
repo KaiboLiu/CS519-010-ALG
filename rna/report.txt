@@ -1,7 +1,8 @@
 CS 519-005, Algorithms (MS/MEng-level), Winter 2018
-Challenge Problem - RNA Structure Prediction (6%)
+HW10 - Challenge Problem - RNA Structure Prediction (6%)
+This problem combines dynamic programming and priority queues.
 
-
+Due Monday March 19, 11:59pm.
 No late submission will be accepted.
 
 Include in your submission: report.txt, rna.py.
@@ -23,7 +24,6 @@ Textbooks for References:
    by tagging each nucleotide as (, ., or ). Each matching pair of () must be 
    AU, GC, or GU (or their mirror symmetries: UA, GC, UG). 
    We also assume pairs can _not_ cross each other. 
-   The following are valid structures for ACAGU:
 
    >>> best("ACAGU")
    (2, '((.))')
@@ -43,12 +43,13 @@ Textbooks for References:
 
    >>> kbest("ACAGU", 3)
    [(2, '((.))'), (1, '(...)'), (1, '.(.).')]
-
+   
      A: time complexity O(klogk*n^3)
         space complexity O(k*n^2)
 
 All three functions should be in one file: rna.py.
 
+See testcases at the end (also in test.txt on canvas).
    
 Debriefing (required!): --------------------------
 
@@ -69,7 +70,3 @@ Debriefing (required!): --------------------------
 6. Which part(s) of the course you dislike the most so far?
   A: None
 
-  
-This section is intended to help us calibrate the homework assignments. 
-Your answers to this section will *not* affect your grade; however, skipping it
-will certainly do.

@@ -19,12 +19,11 @@ p = {'AU','UA','CG','GC','UG','GU'}
 def best(s):
     def solution(a,b):
         if a >= b: return ""
-        if a == b-1: return "."
         if mid[a,b] == -1:
             return "("+solution(a+1,b-1)+")"
         elif mid[a,b] > 0:
             return solution(a, mid[a,b]) + solution(mid[a,b], b)
-        return ""
+        return "."*(b-a)
 
     opt, mid = defaultdict(int), defaultdict(int)#(lambda:-1)
     if s == '': return 0,''
@@ -230,14 +229,11 @@ if __name__ == "__main__":
     print("{} best: {}".format(m,kbest(s,m)))
     '''
     s = "GCUGGCGGGCCCCUUCGCAUGGUUCGGCGGUGAAUCUGGUCAGGUCGGGAACGAAGCAGCCAUAGUCGUUCAGAACCAGUGCCGGAGUAAGGCUCGCCUACCGGUAUCCCU"
-    #t = total(s)
-    #print("seq: {}\nbest: {}, total {}".format(s,best(s),t))  
     m = 10
-    if len(sys.argv) > 1: m = int(sys.argv[1])
-    #res = kbest(s,m)
-    #print("{} best:\n{}".format(m,res))
-    if m == 1: print("{} best:\n{}".format(m,best(s)))
-    else: print("{} best:\n{}".format(m,kbest(s,m)))
+    if len(sys.argv) > 1:
+        m = int(sys.argv[1])
+    print("seq: {}\nbest: {}, total {}".format(s,best(s),total(s)))  
+    print("{} best:\n{}".format(m,kbest(s,m)))
     #distinct, wrong = check_kbest(res,m)
     #print("check distinct: {}, wrong: {}".format(distinct, wrong))
 
