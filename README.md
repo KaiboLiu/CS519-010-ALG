@@ -1,7 +1,5 @@
-# CS519-010-ALG 
-![](https://img.shields.io/badge/language-python-orange.svg) 
-
- homeworks on CS519-010 Algorithm 
+# CS519-010-ALG  
+homeworks on CS519-010 Algorithm ![](https://img.shields.io/badge/language-python-orange.svg)  
 ## HW1: Python 3, qsort, BST, and qselect 
 [code and description](./hw1) 
 ## HW2: Divide-n-conquer: mergesort, number of inversions, longest path 
