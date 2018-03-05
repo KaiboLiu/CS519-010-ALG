@@ -86,7 +86,6 @@ def total(s):
 def kbest(s, m):
     def solution(i,j,a):
         if i >= j: return ""
-        
         mid = opt[i,j][a][1]
         if mid == -1:
             return "("+solution(i+1,j-1,opt[i,j][a][2])+")"
@@ -107,7 +106,7 @@ def kbest(s, m):
         else: return 0
 
     l, res = len(s), []
-    opt = defaultdict(lambda:[(0,-2,0,0)]) #list of tuple (n_pair, mid)
+    opt = defaultdict(lambda:[(0,-2,0,0)]) #list of tuple (n_pair, mid, l_idx, r_idx)
     if s == '': return []
     for d in range(2,l+1):  # d=delta range, length of range[i,j], s[i]..s[j-1]
         for i in range(l-d+1):    # j=i+d
@@ -122,7 +121,7 @@ def kbest(s, m):
             for k in range(i+2,j):  #k = i+2..j-1
                 if s[i]+s[k-1] in p:  # case 3: (***)***
                     a, b = 0, 0
-                    while a < len(opt[i,k]) and opt[i,k][a][1] != -1: a += 1
+                    while a < len(opt[i,k]) and opt[i,k][a][1] != -1: a += 1 # find a candidate a, st opt[i,j][a] has an outter pair
                     while a < len(opt[i,k]) and b < len(opt[k,j]):
 
                         if put(i,j,opt[i,k][a][0]+opt[k,j][b][0],k,a,b,m) == 0: break 
