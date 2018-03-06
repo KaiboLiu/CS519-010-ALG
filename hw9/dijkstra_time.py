@@ -5,7 +5,7 @@ Process Time: Mar 1, 2018
 '''
 
 from collections import defaultdict
-import time
+import pdb
 
 class keyPQ():  # decrease-key priority queue
     def __init__(self, h=[]):
@@ -17,7 +17,7 @@ class keyPQ():  # decrease-key priority queue
         self.heapify()
 
     def heapify(self):
-        i0 = self.len >> 1
+        i0 = self.len // 2
         for i in range(i0,-1,-1): 
             self.sink(i)
 
@@ -50,7 +50,7 @@ class keyPQ():  # decrease-key priority queue
 
     def rise(self, i):
         if i == 0: return 
-        parent = (i-1)>>1
+        parent = (i-1)//2
         if self.heap[i][0] < self.heap[parent][0]:
             self.switch(i, parent)
             self.rise(parent)
@@ -64,6 +64,7 @@ class keyPQ():  # decrease-key priority queue
         self.rise(i)
 
 
+import time
 ## O((V+E)logV)
 def shortest(n, edges):
 
@@ -77,30 +78,33 @@ def shortest(n, edges):
         weight[u,v] = weight[v,u] = w #  = min(weight[u,v],w)
         edge[u].add(v)
         edge[v].add(u)  
+#    tpush, tpop, tdec = 0,0,0
+#    npush, npop, ndec = 0,0,0
     start, end = 0, n-1
-    # init 1: put all the start's neighbors to the heap, and heapify, O(n1)
-    h = []
-    for v in edge[start]:
-        h.append([weight[start, v], v])
-        dist[v], back[v] = weight[start,v], start 
-    q = keyPQ(h)
-    # init 2: put start to the heap, O(1), but push its neighbors later one by one, O(n1logn1)
-    #q = keyPQ([[0,start]])
+    q = keyPQ([[0,start]])
     while q.len:
+#        t0 = time.time()
         w0, u = q.pop()
         if u == end: break
+#        tpop += (time.time() - t0); npop += 1
         for v in edge[u]:  
             if v in q.idx:          # v in the queue and not popped yet
                 if v in q.popped: continue
                 w, w1 = q.heap[q.idx[v]][0], weight[u,v]+w0   
                 if w1 < w:
+#                    t0 = time.time()
                     q.decreaseKey(q.idx[v],w1)
+#                    tdec += (time.time() - t0); ndec += 1
                     dist[v], back[v] = w1, u
             else:                   # the rest nodes linked to u, which are not in the queue,  q.idx[v] == -1   
+#                t0 = time.time()
                 q.push([w0+weight[u,v], v])
+#                tpush += (time.time() - t0); npush += 1
                 dist[v], back[v] = w0+weight[u,v], u
-               
     if dist[end] == -1: return None
+#    print("{} pushes, time {}".format(npush, tpush))
+#    print("{} pops, time {}".format(npop, tpop))
+#    print("{} deces, time {}".format(ndec, tdec))
     return dist[end], solution(end,back)
 
 if __name__ == "__main__":
@@ -131,7 +135,7 @@ if __name__ == "__main__":
     print(shortest(V, dense_tuples[:E]))
     print("V={}, E={}, total time {}".format(V, E,time.time()-t1))
 
-    V,E = 1000, 10000
+    V,E = 1000, 50000
     t1 = time.time()
     print(shortest(V, dense_tuples[:E]))
     print("V={}, E={}, total time {}".format(V, E,time.time()-t1))
