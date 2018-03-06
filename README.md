@@ -32,7 +32,7 @@ time complexity | O(V+E) | O((V+E)logV)
 common| coin problem | coin problem 
 
 
-### implememtations for Dijkstra
+### priority queue(PQ) implememtations for Dijkstra
 -| PQ(heap)| PQ(hash)
 ---|---|---
 implementation| binary heap<br>(heapdict)|hash
