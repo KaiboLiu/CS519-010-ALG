@@ -26,7 +26,7 @@ code finished but not uploaded
 
 ### sort
 #### 01/11/2018 Thu
-+ | qsort | qselect | bsearch |msort
++| qsort | qselect | bsearch |msort
 ---|---|---|---|---
 1. divide | `$O(n)$` | `$O(n)$` |  `$O(1)$` |`$O(1)$` 
 2. conquer | `$2x$` | `$x$` |  `$x$` | `$2x$` 
@@ -41,7 +41,7 @@ list in `python` is more like vectore in `C++`, the combination `list+list` cost
 
 ### heap
 #### 01/25/2018 Thu
-+ | sorted<br>array | unsorted<br>array | (binary)<br>heaps* | sorted<br>linked list | unsorted<br>linked list | reverse-<br>sorted array
++| sorted<br>array | unsorted<br>array | (binary)<br>heaps* | sorted<br>linked list | unsorted<br>linked list | reverse-<br>sorted array
 ---|---|---|---|---|---|---
 insert | `$O(n)$` | `$O(1)$` | `$O(logn)$` |  `$O(n)$` |`$O(1)$` | `$O(n)$`
 pop-min | `$O(n)$` | `$O(n)$` | `$O(logn)$` |  `$O(1)$`|`$O(n)$` | `$O(1)$`
@@ -53,7 +53,7 @@ heapify |`$O(nlogn)$`|`$O(1)$`|`$O(n)$`|`$O(nlogn)$`|`$O(1)$`|`$O(nlogn)$`
 
 
 ### DP and graph
-+ | optimization | summary
++| optimization | summary
 ---|---|---
 graph | MIS<br> max,min<br>maxmin<br>Unbunded | (sum, expectation)<br>Fib<br>bitstrings 
 hyperGraph | matrix-chain | # of BSTs
@@ -149,7 +149,7 @@ end
 
 ### BFS and DFS
 #### 03/01/2018 Thu
-+ | BFS | DFS
++| BFS | DFS
 ---|---|---
 structure| queue | stack
 topological order| bottom-up| top-down
