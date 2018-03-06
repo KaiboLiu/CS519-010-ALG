@@ -28,9 +28,9 @@ code finished but not uploaded
 #### 01/11/2018 Thu
 +| qsort | qselect | bsearch |msort
 ---|---|---|---|---
-1. divide | O(n) | O(n) |  O(1) |O(1) 
-2. conquer | 2x | x |  x | 2x 
-3. combine | O(n) | O(1) | O(1) | O(n) 
+1.divide | O(n) | O(n) |  O(1) |O(1) 
+2.conquer | 2x | x |  x | 2x 
+3.combine | O(n) | O(1) | O(1) | O(n) 
 worst | O(n^2)  | O(n^2) |  O(logn) | O(nlogn)
 best | O(nlogn) | O(n)| O(logn) | O(nlogn)
 ave | O(nlogn) | O(n) | O(logn) | O(nlogn)
@@ -59,7 +59,22 @@ graph | MIS<br> max,min<br>maxmin<br>Unbunded | (sum, expectation)<br>Fib<br>bit
 hyperGraph | matrix-chain | # of BSTs
 
 - Number of n-node BSTs problem is a hyperpraph problem
-![ddd](https://mermaidjs.github.io/mermaid-live-editor/#/view/CmdyYXBoIFRECkMxKChpLTEpKS0tPlAoKG4pKQpDMigobi1pKSktLT5QKChuKSkKQSgodSkpLS0-QigodikpCnN1YmdyYXBoIGdyYXBoIHByb2JsZW0KQQpCCmVuZApzdWJncmFwaCBoeXBlckdyYXBoIHByb2JsZW0KQzEKQzIKUAplbmQ)
+
+```
+graph TD
+C1((i-1))-->P((n))
+C2((n-i))-->P((n))
+A((u))-->B((v))
+subgraph graph problem
+A
+B
+end
+subgraph hyperGraph problem
+C1
+C2
+P
+end
+```
 
 [***Back*** to Contents ***CS 519-010***](#cs-519-010-algorithms) 
 
