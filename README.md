@@ -37,7 +37,7 @@ ave | O(nlogn) | O(n) | O(logn) | O(nlogn)
 
 list in `python` is more like vectore in `C++`, the combination `list+list` costs O(n)
 
-[***Back*** to Contents ***CS 519-010***](#cs-519-010-algorithms)
+[***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)
 
 ### heap
 #### 01/25/2018 Thu
@@ -49,7 +49,7 @@ peak | O(1) | O(n) | O(1) | O(1) | O(n) | O(1)
 decrease-key | O(n) | O(n) | O(logn) |
 heapify |O(nlogn)|O(1)|O(n)|O(nlogn)|O(1)|O(nlogn)
 
-[***Back*** to Contents ***CS 519-010***](#cs-519-010-algorithms)
+[***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)
 
 
 ### DP and graph
@@ -76,7 +76,7 @@ P
 end
 ```
 
-[***Back*** to Contents ***CS 519-010***](#cs-519-010-algorithms) 
+[***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms) 
 
 ### knapsack
 #### 02/13/2018 Tue
@@ -143,7 +143,7 @@ end
 ```
 
 
-[***Back*** to Contents ***CS 519-010***](#cs-519-010-algorithms)
+[***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)
 
 
 ### BFS and DFS
@@ -154,7 +154,7 @@ structure| queue | stack
 topological order| bottom-up| top-down
 start from| source| sink
 
-[***Back*** to Contents ***CS 519-010***](#cs-519-010-algorithms)
+[***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)
 
 
 ### graph algorithm comparison
@@ -168,7 +168,7 @@ implementation| topological sort+<br>BFS<br>(**queue**) | best-first<br>(**prior
 time complexity | O(V+E) | O((V+E)logV)
 common| coin problem | coin problem 
 
-[***Back*** to Contents ***CS 519-010***](#cs-519-010-algorithms)
+[***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)
 
 
 ### priority queue(PQ) implememtations for Dijkstra
@@ -185,4 +185,4 @@ dense<br>E~V^2|V^2logV|V^2 (★)
 sparse<br>E~V|VlogV (★)|V^2
 sparse<br>E~VlogV|Vlog^2(V) (★)|V^2
 
-[***Back*** to Contents ***CS 519-010***](#cs-519-010-algorithms)
+[***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)
