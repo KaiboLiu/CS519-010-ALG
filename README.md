@@ -59,21 +59,7 @@ graph | MIS<br> max,min<br>maxmin<br>Unbunded | (sum, expectation)<br>Fib<br>bit
 hyperGraph | matrix-chain | # of BSTs
 
 - Number of n-node BSTs problem is a hyperpraph problem
-```
-graph TD
-C1((i-1))-->P((n))
-C2((n-i))-->P((n))
-A((u))-->B((v))
-subgraph graph problem
-A
-B
-end
-subgraph hyperGraph problem
-C1
-C2
-P
-end
-```
+![](https://mermaidjs.github.io/mermaid-live-editor/#/view/CmdyYXBoIFRECkMxKChpLTEpKS0tPlAoKG4pKQpDMigobi1pKSktLT5QKChuKSkKQSgodSkpLS0-QigodikpCnN1YmdyYXBoIGdyYXBoIHByb2JsZW0KQQpCCmVuZApzdWJncmFwaCBoeXBlckdyYXBoIHByb2JsZW0KQzEKQzIKUAplbmQ)
 
 [***Back*** to Contents ***CS 519-010***](#cs-519-010-algorithms) 
 
@@ -99,8 +85,6 @@ All the weights are intergers
     - space = V(node) = O(W)
 - topological order in graph
 - recursive method(top-down) can automaticly avoid useless value x's without gcd
-
-[***Back*** to Contents ***CS 519-010***](#cs-519-010-algorithms) 
 
 ##### 2. 0-1 knapsack
 - approach:
