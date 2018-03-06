@@ -21,7 +21,7 @@ homeworks on CS519-010 Algorithm
 ## HW10: Challenge Problem - RNA Structure Prediction (6%). 
 [code and description](./rna)
 
-- | Viterbi | Dijkstra
+-| Viterbi | Dijkstra
 ---|---|---|
 restriction| DAG<br>(**BIG restriction**) | non-gegative weights
 advantage| fast | works in undirected graph<br>works in acyclic/cylic gragh<br>could have early termination
@@ -31,7 +31,7 @@ time complexity | O(V+E) | O((V+E)logV)
 common| coin problem | coin problem 
 
 
-- | PQ(heap)| PQ(hash)
+-| PQ(heap)| PQ(hash)
 ---|---|---
 implementation| binary heap<br>(heapdict)|hash
 operatrions|pop-min: logV<br>push: logV <br> decrease-key: logV | pop-min: V<br> push: O(1) <br> decrease-key: O(1))
