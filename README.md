@@ -39,7 +39,7 @@ common| coin problem | coin problem
 ---|---|---
 implementation| binary heap<br>(heapdict)|hash
 operatrions|pop-min: logV<br>push: logV <br> decrease-key: logV | pop-min: V<br> push: O(1) <br> decrease-key: O(1)
-time complexity ↓ |O((V+E)logV)| O(V^2+E)
+time complexity ↓ |O((V+E)logV) ↘| O(V^2+E) ↓
 while PQ not empty<br> 1. u = pop()<br> 2. for each u->v<br>2.1 decrease-key|V -----------→ **VlogV**<br>logV --------↗ **+**<br>e---→ elogV → **ElogV**<br>logV↗|V ---→ **V^2**<br>V ---↗ **+**<br>e→ e → **E**<br>1 ↗
 usage|sparse map<br>E~V|dense map<br>E~V^2
 dense<br>E~V^2|V^2logV|V^2 (★)
