@@ -18,9 +18,10 @@ homeworks on CS519-010 Algorithm
 [code and description](./hw8)
 ## HW9: Graph Algorithms (part 2), DP (part 4)  
 [code and description](./hw9)
-## HW10: Challenge Problem - RNA Structure Prediction (6%). 
+## HW10: Challenge Problem - RNA Structure Prediction (6%)  
 [code and description](./rna)
 
+### graph algorithm comparison
 -| Viterbi | Dijkstra
 ---|---|---|
 restriction| DAG<br>(**BIG restriction**) | non-gegative weights
