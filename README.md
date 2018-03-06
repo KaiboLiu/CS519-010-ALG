@@ -27,16 +27,17 @@ homeworks on CS519-010 Algorithm
 restriction| DAG<br>(**BIG restriction**) | non-gegative weights
 advantage| fast | works in undirected graph<br>works in acyclic/cylic gragh<br>could have early termination
 usage| longest/shortest/<br>number/minmax | shortest path <br>single source (***s*** to any)|
-implementation| topological sort+<br>BFS(**queue**) | best-first<br>(**priority** queue) <br>with **decrease key**
+implementation| topological sort+<br>BFS<br>(**queue**) | best-first<br>(**priority** queue) <br>with **decrease key**
 time complexity | O(V+E) | O((V+E)logV)
 common| coin problem | coin problem 
 
 
+### implememtations for Dijkstra
 -| PQ(heap)| PQ(hash)
 ---|---|---
 implementation| binary heap<br>(heapdict)|hash
-operatrions|pop-min: logV<br>push: logV <br> decrease-key: logV | pop-min: V<br> push: O(1) <br> decrease-key: O(1))
-time complexity |O((V+E)logV)| O(V^2+E)
+operatrions|pop-min: logV<br>push: logV <br> decrease-key: logV | pop-min: V<br> push: O(1) <br> decrease-key: O(1)
+time complexity ↓ |O((V+E)logV)| O(V^2+E)
 while PQ not empty<br> 1. u = pop()<br> 2. for each u->v<br>2.1 decrease-key|V -----------→ **VlogV**<br>logV --------↗ **+**<br>e---→ elogV → **ElogV**<br>logV↗|V ---→ **V^2**<br>V ---↗ **+**<br>e→ e → **E**<br>1 ↗
 usage|sparse map<br>E~V|dense map<br>E~V^2
 dense<br>E~V^2|V^2logV|V^2 (★)
