@@ -28,26 +28,26 @@ code finished but not uploaded
 #### 01/11/2018 Thu
 +| qsort | qselect | bsearch |msort
 ---|---|---|---|---
-1. divide | `$O(n)$` | `$O(n)$` |  `$O(1)$` |`$O(1)$` 
-2. conquer | `$2x$` | `$x$` |  `$x$` | `$2x$` 
-3. combine | `$O(n)$` | `$O(1)$` | `$O(1)$` | `$O(n)$` 
-worst | `$O(n^2)$`  | `$O(n^2)$` |  `$O(logn)$` | `$O(nlogn)$`
-best | `$O(nlogn)$` | `$O(n)$`| `$O(logn)$` | `$O(nlogn)$`
-ave | `$O(nlogn)$` | `$O(n)$` | `$O(logn)$` | `$O(nlogn)$`
+1. divide | O(n) | O(n) |  O(1) |O(1) 
+2. conquer | 2x | x |  x | 2x 
+3. combine | O(n) | O(1) | O(1) | O(n) 
+worst | O(n^2)  | O(n^2) |  O(logn) | O(nlogn)
+best | O(nlogn) | O(n)| O(logn) | O(nlogn)
+ave | O(nlogn) | O(n) | O(logn) | O(nlogn)
 
-list in `python` is more like vectore in `C++`, the combination `list+list` costs `$O(n)$`
+list in `python` is more like vectore in `C++`, the combination `list+list` costs O(n)
 
 [***Back*** to Contents ***CS 519-010***](#cs-519-010-algorithms)
 
 ### heap
 #### 01/25/2018 Thu
-+| sorted<br>array | unsorted<br>array | (binary)<br>heaps* | sorted<br>linked list | unsorted<br>linked list | reverse-<br>sorted array
++| sorted<br>array | unsorted<br>array | (binary)<br>heap | sorted<br>linked list | unsorted<br>linked list | reverse-<br>sorted array
 ---|---|---|---|---|---|---
-insert | `$O(n)$` | `$O(1)$` | `$O(logn)$` |  `$O(n)$` |`$O(1)$` | `$O(n)$`
-pop-min | `$O(n)$` | `$O(n)$` | `$O(logn)$` |  `$O(1)$`|`$O(n)$` | `$O(1)$`
-peak | `$O(1)$` | `$O(n)$` | `$O(1)$` | `$O(1)$` | `$O(n)$` | `$O(1)$`
-decrease-key | `$O(n)$` | `$O(n)$` | `$O(logn)$` |
-heapify |`$O(nlogn)$`|`$O(1)$`|`$O(n)$`|`$O(nlogn)$`|`$O(1)$`|`$O(nlogn)$`
+insert | O(n) | O(1) | O(logn) |  O(n) |O(1) | O(n)
+pop-min | O(n) | O(n) | O(logn) |  O(1)|O(n) | O(1)
+peak | O(1) | O(n) | O(1) | O(1) | O(n) | O(1)
+decrease-key | O(n) | O(n) | O(logn) |
+heapify |O(nlogn)|O(1)|O(n)|O(nlogn)|O(1)|O(nlogn)
 
 [***Back*** to Contents ***CS 519-010***](#cs-519-010-algorithms)
 
