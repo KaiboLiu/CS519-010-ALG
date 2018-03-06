@@ -59,7 +59,7 @@ graph | MIS<br> max,min<br>maxmin<br>Unbunded | (sum, expectation)<br>Fib<br>bit
 hyperGraph | matrix-chain | # of BSTs
 
 - Number of n-node BSTs problem is a hyperpraph problem
-![](https://mermaidjs.github.io/mermaid-live-editor/#/view/CmdyYXBoIFRECkMxKChpLTEpKS0tPlAoKG4pKQpDMigobi1pKSktLT5QKChuKSkKQSgodSkpLS0-QigodikpCnN1YmdyYXBoIGdyYXBoIHByb2JsZW0KQQpCCmVuZApzdWJncmFwaCBoeXBlckdyYXBoIHByb2JsZW0KQzEKQzIKUAplbmQ)
+![ddd](https://mermaidjs.github.io/mermaid-live-editor/#/view/CmdyYXBoIFRECkMxKChpLTEpKS0tPlAoKG4pKQpDMigobi1pKSktLT5QKChuKSkKQSgodSkpLS0-QigodikpCnN1YmdyYXBoIGdyYXBoIHByb2JsZW0KQQpCCmVuZApzdWJncmFwaCBoeXBlckdyYXBoIHByb2JsZW0KQzEKQzIKUAplbmQ)
 
 [***Back*** to Contents ***CS 519-010***](#cs-519-010-algorithms) 
 
