@@ -60,21 +60,7 @@ hyperGraph | matrix-chain | # of BSTs
 
 - Number of n-node BSTs problem is a hyperpraph problem
 
-```
-graph TD
-C1((i-1))-->P((n))
-C2((n-i))-->P((n))
-A((u))-->B((v))
-subgraph graph problem
-A
-B
-end
-subgraph hyperGraph problem
-C1
-C2
-P
-end
-```
+![](./img/graph.png)
 
 [***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms) 
 
@@ -117,31 +103,7 @@ All the weights are intergers
 - 2 nested for loops(i,x), no matter the order of i/x
 - in top-down method, order doesn't matter
 
-```
-graph TD
-I1(opt <b>x-w1</b>)-->|+v1|x2(opt <b>x</b>)
-I2(opt <b>x-w2</b>)-->|+v2|x2
-I3(...)-->x2
-I4(opt <b>x-wn</b>)-->|+vn|x2
-
-A(opt <b>i-1, x-wi</b>)-->|+vi|x1(opt <b>i, x</b>)
-C(opt <b>i-1, x</b>)-->x1
-
-subgraph  Unbunded knapsack
-x2
-I1
-I2
-I3
-I4
-end
-subgraph 0-1 knapsack
-x1
-A
-C
-end
-
-```
-
+![](./img/knapsack.png)
 
 [***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)
 
