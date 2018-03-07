@@ -64,6 +64,7 @@ heapify |O(nlogn)|O(1)|O(n)|O(nlogn)|O(1)|O(nlogn)
   
   
 ### DP and graph  
+#### 02/08/2018 Thu
 +| optimization | summary  
 ---|---|---  
 graph | MIS<br> max,min<br>maxmin<br>Unbunded | (sum, expectation)<br>Fib<br>bitstrings   
