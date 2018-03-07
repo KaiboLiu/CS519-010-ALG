@@ -47,7 +47,7 @@ def backtrack(w, prev, a):
     l[prev[w]] += 1
     return l
 
-
+'''
 
 # Pruning 1: delete redundent items
 # no way to delete redundent item with larger w and smaller v, because we need the list of copies chosen with original index
@@ -72,7 +72,7 @@ def resize(weight, a):
         weight = weight // fac
     else: b = a
     return fac,weight, b
-
+'''
 
 if __name__ == "__main__":
     print(best(6, [(4, 4), (6, 5)]))
