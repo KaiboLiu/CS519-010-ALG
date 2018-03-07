@@ -106,8 +106,8 @@ All the weights are intergers
     opt[i][x]=max{ **opt[i-1][x-w[i]]+v[i], opt[i-1][x]** }, i=0~n-1 and x>=w[i]    
     max { choose i, not choose i }  
 1. base case  
-    1. opt[i][0] = 0, i=0~n-1  
-    1. opt[-1][x] = 0, x=0~W    
+    - opt[i][0] = 0, i=0~n-1  
+    - opt[-1][x] = 0, x=0~W    
 - Bounded is a graph problem    
     - time  = E(edges) = O(nW)    
     - space = V(node) = O(nW)  
@@ -139,7 +139,7 @@ advantage| fast | works in undirected graph<br>works in acyclic/cylic gragh<br>c
 usage| longest/shortest/<br>number/minmax | shortest path <br>single source (***s*** to any)|  
 implementation| topological sort+<br>BFS<br>(**queue**) | best-first<br>(**priority** queue) <br>with **decrease key**  
 time complexity | O(V+E) | O((V+E)logV)  
-common| coin problem | coin problem   
+common| coin problem, TSP | coin problem, TSP   
   
 [***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)  
   
