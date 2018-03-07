@@ -20,8 +20,9 @@ def best(weight, a): # a[i] is in the form of (w_i, v_i)
             W -= item[0]
     return f[weight],l
 
-
+'''
 # top-down
+# codebeat.co graded it as 'Block nesting too deep'
 def best2(weight, a):   
     sys.setrecursionlimit(100000)
     prev = defaultdict(lambda:-1)
@@ -46,6 +47,7 @@ def backtrack(w, prev, a):
     l = backtrack(w-w1, prev, a)
     l[prev[w]] += 1
     return l
+'''
 
 '''
 
