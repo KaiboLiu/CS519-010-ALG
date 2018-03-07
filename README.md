@@ -1,7 +1,7 @@
 # CS519-010-Algorithms  
 ![](https://img.shields.io/badge/language-python-orange.svg)  
 
-- [homeworks](#hw1-ython-3-qsort-bst-and-qselect)
+- [homeworks](#hw1-python-3-qsort-bst-and-qselect)
 - [sort](#sort)
 - [heap](#heap)
 - [DP and Graph](#dp-and-graph)
