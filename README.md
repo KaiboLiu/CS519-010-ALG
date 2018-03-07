@@ -1,5 +1,5 @@
 # CS519-010-Algorithms    
-![](https://img.shields.io/badge/language-python-orange.svg)    
+![](https://img.shields.io/badge/language-python-orange.svg) ![](http://progressed.io/bar/100?title=completed)   
   
 - [homeworks](#hw1-python-3-qsort-bst-and-qselect)  
 - [sort](#sort)  
