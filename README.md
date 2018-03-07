@@ -90,7 +90,7 @@ All the weights are intergers
     opt[x]: the subsolution for a bag of x  
 1.  Recurrence    
     opt[x]=max{ **opt[x-w[i]]+v[i]** }, i=0..n-1 and x>=w[i]  
-1. base caser  
+1. base case  
     opt[0] = 0  
 - Unbunded is a graph problem  
     - time  = E(edges) = O(nW)  
@@ -101,13 +101,13 @@ All the weights are intergers
 ##### 2. 0-1 knapsack  
 - approach:  
 1. Subproblem    
-    opt[i][x]: opt value for a bag of x, **using** items **0..i**  
+    opt[i][x]: opt value for a bag of x, **using** items **0~i**  
 1.  Recurrence    
-    opt[i][x]=max{ **opt[i-1][x-w[i]]+v[i], opt[i-1][x]** }, i=0..n-1 and x>=w[i]    
+    opt[i][x]=max{ **opt[i-1][x-w[i]]+v[i], opt[i-1][x]** }, i=0~n-1 and x>=w[i]    
     max { choose i, not choose i }  
 1. base case  
-    opt[i][0] = 0, i=0~n-1    
-    opt[-1][x] = 0, x=0~W    
+    1. opt[i][0] = 0, i=0~n-1  
+    1. opt[-1][x] = 0, x=0~W    
 - Bounded is a graph problem    
     - time  = E(edges) = O(nW)    
     - space = V(node) = O(nW)  
