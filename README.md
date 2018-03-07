@@ -1,5 +1,5 @@
 # CS519-010-Algorithms    
-![](https://img.shields.io/badge/language-python-orange.svg) ![](http://progressed.io/bar/100?title=completed)   
+![](https://img.shields.io/badge/language-python-orange.svg) ![](http://progressed.io/bar/100?title=completed) [![codebeat badge](https://codebeat.co/badges/32258840-1453-4d3b-93fd-cd87c7dc8f8a)](https://codebeat.co/projects/github-com-kaiboliu-cs519-010-alg-master)   
   
 - [homeworks](#hw1-python-3-qsort-bst-and-qselect)  
 - [sort](#sort)  
