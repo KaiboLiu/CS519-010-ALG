@@ -148,7 +148,7 @@ common| coin problem, TSP | coin problem, TSP
 ### priority queue(PQ) implememtations for Dijkstra  
 #### 03/06/2018 Tue  
   
-- make your window of browser as **wide** as you can
+- make your window of browser ![](https://img.shields.io/badge/as-wide-brightgreen.svg) as you can
 
 +| PQ(heapdict)| PQ(hash) | PQ(heap) |PQ<br>(unsorted list)
 ---|---|---|---|---
