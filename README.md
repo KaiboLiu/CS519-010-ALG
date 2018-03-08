@@ -148,15 +148,17 @@ common| coin problem, TSP | coin problem, TSP
 ### priority queue(PQ) implememtations for Dijkstra  
 #### 03/06/2018 Tue  
   
-+| PQ(heap)| PQ(hash)  
----|---|---  
-implementation| binary heap<br>(heapdict)|hash  
-operatrions|pop-min: logV<br>push: logV <br> decrease-key: logV | pop-min: V<br> push: O(1) <br> decrease-key: O(1)  
-time complexity ↓ |O((V+E)logV) ↘| O(V^2+E) ↓  
-while PQ not empty<br> 1. u = pop()<br> 2. for each u->v<br>2.1 decrease-key|V -----------→ **VlogV**<br>logV --------↗ **+**<br>e---→ elogV → **ElogV**<br>logV↗|V ---→ **V^2**<br>V ---↗ **+**<br>e→ e → **E**<br>1 ↗  
-usage|sparse map<br>E~V|dense map<br>E~V^2  
-dense<br>E~V^2|V^2logV|V^2 (★)  
-sparse<br>E~V|VlogV (★)|V^2  
-sparse<br>E~VlogV|Vlog^2(V) (★)|V^2  
+- make your window of browser as **wide** as you can
+
++| PQ(heapdict)| PQ(hash) | PQ(heap) |PQ<br>(unsorted list)
+---|---|---|---|---
+implementation| binary heap<br>(heapdict)|hash | binary heap| unsorted list
+operatrions|pop-min: logV<br>push: logV <br> decrease-key: logV | pop-min: V<br> push: O(1) <br> decrease-key: O(1) | pop-min: logE<br>push: logE <br> decrease-key: logE | pop-min: V<br> push: O(1) <br> decrease-key: V
+time complexity |O((V+E)logV)  ↘| O(V^2+E) ↓ | O((V+E)logE)  ↘ | V^2+EV ↓
+while PQ not empty:<br> 1. u = pop()<br> 2. for each u->v in E:<br>2.1 decrease-key|V -----------→ **VlogV**<br>logV --------↗ **+**<br>e---→ elogV → **ElogV**<br>logV↗|V ---→ **V^2**<br>V ---↗ **+**<br>e→ e → **E**<br>1 ↗ | V -----------→ **VlogE**<br>logE --------↗ **+**<br>e---→ elogV → **ElogE**<br>logE↗ | V ---→ **V^2**<br>V ---↗ **+**<br>e→eV→**EV**<br>V ↗ 
+usage|sparse map<br>E~V|dense map<br>E~Theta(V^2)
+dense<br>E~Theta(V^2)|V^2logV|V^2 (★)| V^2logV | V^3
+sparse<br>E~V|VlogV (★)|V^2 | VlogV |V^2
+sparse<br>E~VlogV|Vlog^2(V) (★)|V^2
   
 [***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)  
