@@ -148,9 +148,9 @@ common| coin problem, TSP | coin problem, TSP
 ### priority queue(PQ) implememtations for Dijkstra  
 #### 03/06/2018 Tue  
   
-- make your window of browser ![](https://img.shields.io/badge/as-wide-brightgreen.svg) as you can
+- make your window of browser ![](https://img.shields.io/badge/as-wide-brightgreen.svg) ![](https://img.shields.io/badge/as-you_can-grey.svg)
 
-+| PQ(heapdict)| PQ(hash) | PQ(heap) |PQ<br>(unsorted list)
++| PQ<br>(heapdict)| PQ<br>(hash) | PQ<br>(heap) |PQ<br>(unsorted list)
 ---|---|---|---|---
 implementation| binary heap<br>(heapdict)|hash | binary heap| unsorted list
 operatrions|pop-min: logV<br>push: logV <br> decrease-key: logV | pop-min: V<br> push: O(1) <br> decrease-key: O(1) | pop-min: logE<br>push: logE <br> decrease-key: logE | pop-min: V<br> push: O(1) <br> decrease-key: V
