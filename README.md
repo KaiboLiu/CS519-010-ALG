@@ -154,11 +154,12 @@ common| coin problem, TSP | coin problem, TSP
 ---|---|---|---|---
 implementation| binary heap<br>(heapdict)|hash | binary heap| unsorted list
 operatrions|pop-min: logV<br>push: logV <br> decrease-key: logV | pop-min: V<br> push: O(1) <br> decrease-key: O(1) | pop-min: logE<br>push: logE <br> decrease-key: logE | pop-min: V<br> push: O(1) <br> decrease-key: V
-time complexity |![](https://img.shields.io/badge/O-(V+E)logV-orange.svg)  ↘| ![](https://img.shields.io/badge/O-V^2+E-orange.svg) ↓ | ![](https://img.shields.io/badge/O-(V+E)logE-orange.svg)  ↘ | ![](https://img.shields.io/badge/O-V^2+EV-orange.svg) ↓
+time complexity |![O((V+E)logV)](https://img.shields.io/badge/O-(V+E)logV-orange.svg)  ↘| ![O(V^2+E)](https://img.shields.io/badge/O-V^2+E-orange.svg) ↓ | ![O((V+E)logE)](https://img.shields.io/badge/O-(V+E)logE-orange.svg)  ↘ | ![V^2+EV](https://img.shields.io/badge/O-V^2+EV-orange.svg) ↓
 while PQ not empty:<br> 1. u = pop()<br> 2. for each u->v in E:<br>2.1 decrease-key|V -----------→ **VlogV**<br>logV --------↗ **+**<br>e---→ elogV → **ElogV**<br>logV↗|V ---→ **V^2**<br>V ---↗ **+**<br>e→ e → **E**<br>1 ↗ | V -----------→ **VlogE**<br>logE --------↗ **+**<br>e---→ elogV → **ElogE**<br>logE↗ | V ---→ **V^2**<br>V ---↗ **+**<br>e→eV→**EV**<br>V ↗ 
-usage|sparse map<br>E~V|dense map<br>E~Theta(V^2)
-dense<br>E~Theta(V^2)|V^2logV|V^2 (★)| V^2logV | V^3
+usage|sparse map<br>E~V|dense map<br>E~ ϴ(V^2)
+dense<br>E~ ϴ(V^2)|V^2logV|V^2 (★)| V^2logV | V^3
 sparse<br>E~V|VlogV (★)|V^2 | VlogV |V^2
 sparse<br>E~VlogV|Vlog^2(V) (★)|V^2
+
   
 [***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)  
