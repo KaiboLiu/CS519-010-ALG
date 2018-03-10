@@ -167,4 +167,4 @@ sparse<br>E~VlogV|Vlog^2(V) (★)|V^2
 
 ### RNA problem
 #### k-best
-![tree structure for k-best](https://raw.githubusercontent.com/KaiboLiu/PairingWebDemo/master/img/k-best%20tree.png)
+![tree structure for k-best](./img/k-best%20tree.png)
