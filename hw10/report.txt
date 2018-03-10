@@ -1,0 +1,72 @@
+CS 519-005, Algorithms (MS/MEng-level), Winter 2018
+HW10 - Challenge Problem - RNA Structure Prediction (6%)
+This problem combines dynamic programming and priority queues.
+
+Due Monday March 19, 11:59pm.
+No late submission will be accepted.
+
+Include in your submission: report.txt, rna.py.
+Grading: 
+* report.txt -- 1%
+* 1-best structure -- 2%
+* number of structures -- 1%
+* k-best structures -- 2%
+
+Textbooks for References:
+[1] KT Ch. 6.5 (DP over intervals -- RNA structure)    
+[2] KT slides: DP I (RNA section)
+    http://www.cs.princeton.edu/~wayne/kleinberg-tardos/
+
+***Please analyze time/space complexities for each problem in report.txt.
+   [UPDATE] Also explain the algorithm of each question you solved.
+
+1. Given an RNA sequence, such as ACAGU, we can predict its secondary structure 
+   by tagging each nucleotide as (, ., or ). Each matching pair of () must be 
+   AU, GC, or GU (or their mirror symmetries: UA, GC, UG). 
+   We also assume pairs can _not_ cross each other. 
+
+   >>> best("ACAGU")
+   (2, '((.))')
+
+     A: time complexity O(n^3)
+        space complexity O(n^2)
+
+2. Total number of all possible structures
+
+   >>> total("ACAGU")
+   6
+
+     A: time complexity O(n^3)
+        space complexity O(n^2)
+
+3. k-best structures: output the 1-best, 2nd-best, ... kth-best structures.
+
+   >>> kbest("ACAGU", 3)
+   [(2, '((.))'), (1, '(...)'), (1, '.(.).')]
+   
+     A: time complexity O(n^3 +nklogk)
+        space complexity O(n^3)
+
+All three functions should be in one file: rna.py.
+
+See testcases at the end (also in test.txt on canvas).
+   
+Debriefing (required!): --------------------------
+
+0. What's your name?
+  A: Kaibo Liu
+1. Approximately how many hours did you spend on this assignment?
+  A: 12 hours
+2. Would you rate it as easy, moderate, or difficult?
+  A: difficult
+3. Did you work on it mostly alone, or mostly with other people?
+  A: Alone but I referred to Liang's paper
+4. How deeply do you feel you understand the material it covers (0%–100%)? 
+  A: 95%
+5. Which part(s) of the course you like the most so far?
+  A: Very inspiring. 
+      I like the python implementations with new functions I may not be familiar with.
+      And corner cases in every interesting problems.
+6. Which part(s) of the course you dislike the most so far?
+  A: None
+
