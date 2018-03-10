@@ -163,3 +163,8 @@ sparse<br>E~VlogV|Vlog^2(V) (★)|V^2
 
   
 [***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)  
+
+
+### RNA problem
+#### k-best
+![tree structure for k-best](https://raw.githubusercontent.com/KaiboLiu/PairingWebDemo/master/img/k-best%20tree.png)
