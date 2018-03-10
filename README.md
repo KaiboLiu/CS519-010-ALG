@@ -31,7 +31,7 @@
 code passed but not uploaded  [10/10 cases] Total Time: 0.769 s
 ### HW10: Challenge Problem - RNA Structure Prediction (6%)    
 <!--[code and description](./rna)-->  
-code passed but not uploaded  [25/25 cases] Total Time: 0.592 s
+code passed but not uploaded  [25/25 cases] Total Time: 0.582 s
   
 [***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)  
   
