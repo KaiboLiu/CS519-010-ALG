@@ -44,8 +44,8 @@ Textbooks for References:
    >>> kbest("ACAGU", 3)
    [(2, '((.))'), (1, '(...)'), (1, '.(.).')]
    
-     A: time complexity O(klogk*n^3)
-        space complexity O(k*n^2)
+     A: time complexity O(n^3 +nklogk)
+        space complexity O(n^3)
 
 All three functions should be in one file: rna.py.
 
@@ -56,7 +56,7 @@ Debriefing (required!): --------------------------
 0. What's your name?
   A: Kaibo Liu
 1. Approximately how many hours did you spend on this assignment?
-  A: 6 hours
+  A: 12 hours
 2. Would you rate it as easy, moderate, or difficult?
   A: difficult
 3. Did you work on it mostly alone, or mostly with other people?
@@ -64,7 +64,7 @@ Debriefing (required!): --------------------------
 4. How deeply do you feel you understand the material it covers (0%–100%)? 
   A: 95%
 5. Which part(s) of the course you like the most so far?
-  A: Very inspired. 
+  A: Very inspiring. 
       I like the python implementations with new functions I may not be familiar with.
       And corner cases in every interesting problems.
 6. Which part(s) of the course you dislike the most so far?

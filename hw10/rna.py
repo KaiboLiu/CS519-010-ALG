@@ -5,9 +5,8 @@ Process Time: Feb 28, 2018
 '''
 
 from collections import defaultdict
-from heapq import heapify, heapreplace, heappush, heappop, nlargest
+from heapq import heapify, heapreplace, heappush, heappop
 
-import sys
 import pdb
 
 p = {'AU','UA','CG','GC','UG','GU'}
@@ -276,6 +275,7 @@ def cntPairs(s):
 
 if __name__ == "__main__":
     import time
+    import sys
     '''
     s = ""
     print(best(s))  #(0, '')
