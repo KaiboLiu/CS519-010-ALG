@@ -46,7 +46,7 @@ worst | O(n^2)  | O(n^2) |  O(logn) | O(nlogn)
 best | O(nlogn) | O(n)| O(logn) | O(nlogn)  
 ave | O(nlogn) | O(n) | O(logn) | O(nlogn)  
   
-list in `python` is more like vectore in `C++`, the combination `list+list` costs O(n)  
+list in `python` is more like vector in `C++`, the combination `list+list` costs O(n)  
   
 [***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)  
   
