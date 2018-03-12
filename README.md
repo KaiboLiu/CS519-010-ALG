@@ -160,7 +160,7 @@ usage|sparse map<br>E~V|dense map<br>E~ ϴ(V^2)
 dense<br>E~ ϴ(V^2)|V^2logV|V^2 (★)| V^2logV | V^3
 sparse<br>E~V|VlogV (★)|V^2 | VlogV |V^2
 sparse<br>E~VlogV|Vlog^2(V) (★)|V^2
-test time on `flip`| 0.769 s| - | 0.316 s|-
+test time on `flip`| 0.769 s (DIY version)| - | 0.316 s|-
 
   
 [***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)  
