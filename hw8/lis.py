@@ -9,7 +9,7 @@ def lis2(s):
             if s[i] < s[j] and f[i] > f[j]:
                 f[j] = f[i]
         f[j] += 1
-    j = f.index(max(f))
+    j = f.index(max(f)) # better to add an inf at the end to avoid searching for the max
     res = s[j]
     while j > 0 and f[j] > 1:
         i = j - 1
