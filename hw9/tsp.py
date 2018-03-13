@@ -43,8 +43,8 @@ def tsp(n, edges):
         dist[u,0] = weight[u, start]
         arrow[u, 0] = start
     
-    V = (1<<n)-2    # all nodes except start (0)
-    res_dist = _dist(0, V)
+    V = (1<<n)-2            # all nodes except start (0)
+    res_dist = _dist(0, V)  # Let's roll
     Next, V, res = start, V+1, []
     while Next != -1:
         res.append(Next)
