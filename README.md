@@ -27,8 +27,7 @@
 ### HW8: DP (part 3), Graph Algorithms (part 1)   
 [code and description](./hw8)  [10/10 cases] Total Time: 0.269 s  
 ### HW9: Graph Algorithms (part 2), DP (part 4)    
-<!--[code and description](./hw9)-->  
-code passed but not uploaded  [10/10 cases] Total Time: 0.769 s
+[code and description](./hw9)  [10/10 cases] Total Time: 0.314 s
 ### HW10: Challenge Problem - RNA Structure Prediction (6%)    
 <!--[code and description](./rna)-->  
 code passed but not uploaded  [25/25 cases] Total Time: 0.582 s
