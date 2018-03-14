@@ -4,9 +4,10 @@ Email: liukaib@oregonstate.edu
 Process Time: Mar 6, 2018
 '''
 from collections import defaultdict
+import time
 
 # top-down, bit, int2set
-def tsp10(n, edges):      
+def tsp_topdown0(n, edges):      
     def init_setV(i, V, n):
         if i == n: return
         v1 = V | (1 << i)   # V + 2^i
@@ -25,7 +26,7 @@ def tsp10(n, edges):
                 arrow[i, V] = k
                 dist[i,V] = dist1
         return dist[i,V]
-
+    t0 = time.time()
     start, end = 0, n-1
     weight = defaultdict(lambda: 1 << 32)
     for (u,v,w) in edges:
@@ -43,6 +44,7 @@ def tsp10(n, edges):
     
     V = (1<<n)-2            # all nodes except start (0)
     res_dist = _dist(0, V)  # Let's roll
+    print('topdown, bit2set, time: {0:.3f}'.format(time.time()-t0))
     Next, V, res = start, V+1, []
     while Next != -1:
         res.append(Next)
@@ -52,21 +54,24 @@ def tsp10(n, edges):
     
 
 # top-down, bit
-def tsp11(n, edges):
+def tsp_topdown1(n, edges):
     def _dist(i, V):
         # dist[i,V] = min { weight[i,k] + dist[k, V-<k>] }, k in V, 'V-<k>' means the set V without k
         # I used bit presentation for V, so V-<k> is V-(1<<k)
-        if (i, V) in dist: return dist[i,V]
+        if (i, V) in dist: return dist[i,V], 0
+        npush = 0
         for k in edge[i]:
             if (1<<k & V):
-                dist1 = weight[i,k]+_dist(k, V-(1<<k))
+                lastDist = _dist(k, V-(1<<k))
+                dist1 = weight[i,k] + lastDist[0]
+                npush += lastDist[1]
                 if dist1 < dist[i,V]:
                     arrow[i, V] = k
                     dist[i,V] = dist1
                     npush += 1
-        return dist[i,V]
-
-    start, end, npush = 0, n-1, 0
+        return dist[i,V], npush
+    t0 = time.time()
+    start, end = 0, n-1
     weight, edge = defaultdict(lambda: 1 << 32), defaultdict(set)
     for (u,v,w) in edges:
         weight[u,v] = weight[v,u] = min(w,weight[u,v]) 
@@ -79,11 +84,10 @@ def tsp11(n, edges):
     for u in range(1,n): 
         dist[u,0] = weight[u, start]
         arrow[u, 0] = start
-        npush += 1
     
     V = (1<<n)-2            # all nodes except start (0)
-    res_dist = _dist(0, V)  # Let's roll
-    print('NoName, bit, time: {0:.3f}, push: {1}'.format(time.time()-t0,npush))
+    res_dist, npush = _dist(0, V)  # Let's roll
+    print('topdown, bit, time: {0:.3f}, push: {1}'.format(time.time()-t0,npush+n-1))
     Next, V, res = start, V+1, []
     while Next != -1:
         res.append(Next)
@@ -91,10 +95,10 @@ def tsp11(n, edges):
         Next = arrow[Next, V]
     return res_dist, res
 
-def tsp(n, edges):     # viterbi, bit
+def tsp_viterbi(n, edges):     # viterbi, bit
     #opt is a list for topological order of a induced graph, opt[i] is a dict for node i, (nodeset, last):(dist, back)
     #dist is the distance from 0 to last, and visit all the nodes in nodeset, 0-->nodeset(include 0)-->last-->i
-    def backtrace(i,nodeset,j):
+    def solution(i,nodeset,j):
         if j == 0: return [0]
         _, last = opt[i][nodeset,j]
         return solution(i-1, nodeset-(1<<j),last)+[j%n]
@@ -123,23 +127,23 @@ def tsp(n, edges):     # viterbi, bit
     return opt[n+1][fullsetplus, n][0], solution(n+1,fullsetplus, n)
 
 
+def tsp_dij_heapq(n, edges):    # dijkstra, bit, heapq
+    # h is a heap, h[nodeset,last]=(dist,back), means the best dist for 0->nodeset->last is dist, and we have the back of last
+    t0 = time.time()
+    h = [()]
 
 if __name__ == "__main__":
 
-    import time
-    t0 = time.time()
-    print(tsp(4, [(0,1,1), (0,2,5), (1,2,1), (2,3,2), (1,3,6)]))
-    print('{} cities, time: {}\n'.format(4,time.time()-t0))
-    # (14, [0,1,3,2,0])
-
-
-    t0 = time.time()
-    print(tsp(4, [(0,1,1), (0,2,5), (1,2,1), (2,3,2), (1,3,6), (3,0,1)]))
-    print('{} cities, time: {}\n'.format(4,time.time()-t0))
-    # (5, [0,1,2,3,0])
-
-    t0 = time.time()
-    print(tsp(11, [(0,1,29),(0,2,20),(0,3,21),(0,4,16),(0,5,31),(0,6,100),(0,7,12),(0,8,4),(0,9,31),(0,10,18),
+    import random
+    random.seed(2)
+    n, m = 16, 100
+    randedges = [(random.randint(0,n-1), random.randint(0,n-1), random.randint(0,5)) for _ in range(m)] + \
+            [(random.randint(0,n-1), random.randint(0,n-1), random.randint(6,10)) for _ in range(m)] 
+    cases = [(4, [(0,1,1), (0,2,5), (1,2,1), (2,3,2), (1,3,6)]),
+             # (14, [0,1,3,2,0])
+             (4, [(0,1,1), (0,2,5), (1,2,1), (2,3,2), (1,3,6), (3,0,1)]),
+             # (5, [0,1,2,3,0])
+             (11, [(0,1,29),(0,2,20),(0,3,21),(0,4,16),(0,5,31),(0,6,100),(0,7,12),(0,8,4),(0,9,31),(0,10,18),
                 (1,2,15),(1,3,29),(1,4,28),(1,5,40),(1,6,72),(1,7,21),(1,8,29),(1,9,41),(1,10,12),
                 (2,3,15),(2,4,14),(2,5,25),(2,6,81),(2,7,9),(2,8,23),(2,9,27),(2,10,13),
                 (3,4,4),(3,5,12),(3,6,92),(3,7,12),(3,8,25),(3,9,13),(3,10,25),
@@ -148,20 +152,19 @@ if __name__ == "__main__":
                 (6,7,90),(6,8,101),(6,9,99),(6,10,84),
                 (7,8,15),(7,9,25),(7,10,13),
                 (8,9,35),(8,10,18),
-                (9,10,38)]))
-    print('{} cities, time: {}\n'.format(11,time.time()-t0))
-    # (253, [0, 8, 10, 1, 6, 2, 5, 9, 3, 4, 7, 0])
-    # (Viterbi: 0.0s; Dijkstra: 0.3s)
+                (9,10,38)]),
+                # (253, [0, 8, 10, 1, 6, 2, 5, 9, 3, 4, 7, 0])
+                # (Viterbi: 0.0s; Dijkstra: 0.3s)
+                (n,randedges)
+                #(6, [0, 4, 8, 14, 7, 5, 10, 3, 13, 12, 9, 11, 15, 6, 2, 1, 0])
+                #(Viterbi: 2.1s, Dijkstra: 0.9s)
+            ]
 
-    import random
-    random.seed(2)
-    n, m = 16, 100
-    edges = [(random.randint(0,n-1), random.randint(0,n-1), random.randint(0,5)) for _ in range(m)] + \
-            [(random.randint(0,n-1), random.randint(0,n-1), random.randint(6,10)) for _ in range(m)] 
-    print('{} cities'.format(n))
-    #t0 = time.time()
-    print(tsp11(n,edges))
-    print(tsp(n,edges))
+    for n, edges in cases:
+        print('\n{} cities'.format(n))
+        print(tsp_viterbi(n,edges))
+        print(tsp_topdown1(n,edges))
+        print(tsp_topdown0(n,edges))
+
     
-    #(6, [0, 4, 8, 14, 7, 5, 10, 3, 13, 12, 9, 11, 15, 6, 2, 1, 0])
-    #(Viterbi: 2.1s, Dijkstra: 0.9s)
+    
