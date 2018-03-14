@@ -63,9 +63,10 @@ def tsp11(n, edges):
                 if dist1 < dist[i,V]:
                     arrow[i, V] = k
                     dist[i,V] = dist1
+                    npush += 1
         return dist[i,V]
 
-    start, end = 0, n-1
+    start, end, npush = 0, n-1, 0
     weight, edge = defaultdict(lambda: 1 << 32), defaultdict(set)
     for (u,v,w) in edges:
         weight[u,v] = weight[v,u] = min(w,weight[u,v]) 
@@ -78,9 +79,11 @@ def tsp11(n, edges):
     for u in range(1,n): 
         dist[u,0] = weight[u, start]
         arrow[u, 0] = start
+        npush += 1
     
     V = (1<<n)-2            # all nodes except start (0)
     res_dist = _dist(0, V)  # Let's roll
+    print('NoName, bit, time: {0:.3f}, push: {1}'.format(time.time()-t0,npush))
     Next, V, res = start, V+1, []
     while Next != -1:
         res.append(Next)
@@ -88,16 +91,37 @@ def tsp11(n, edges):
         Next = arrow[Next, V]
     return res_dist, res
 
-def tsp1(n, edges):     # viterbi, bit
-    #opt is a list, opt[i] is a dict for node i, (Vset, last):(dist, back)
+def tsp(n, edges):     # viterbi, bit
+    #opt is a list for topological order of a induced graph, opt[i] is a dict for node i, (nodeset, last):(dist, back)
+    #dist is the distance from 0 to last, and visit all the nodes in nodeset, 0-->nodeset(include 0)-->last-->i
+    def backtrace(i,nodeset,j):
+        if j == 0: return [0]
+        _, last = opt[i][nodeset,j]
+        return solution(i-1, nodeset-(1<<j),last)+[j%n]
 
+    t0 = time.time()
     edge = defaultdict(lambda: defaultdict(lambda: float('inf')))
     for u,v,w in edges:
         edge[u][v] = min(edge[u][v], w) # possible duplicate edges
         edge[v][u] = min(edge[v][u], w) # undirected
     for u in range(1,n): edge[u][n] = edge[u][0]    # clone a dummy sink n, which is 0
 
-    opt = [for _ in range(n+1)]
+    opt = [defaultdict(lambda:( float('inf'), None) )for _ in range(n+2)]   # best dist and back together, opt[0] is a dummy source , opt[1] is real node 0
+    opt[1][1,0] = (0,None)  # 1: 0000001, node 0 visited
+    npush = 0
+    for i in range(1,n+1):
+        for (nodeset, last),(dist,_) in opt[i].items():
+            for j in range(1,n) if i < n else [n]:
+                if j in edge[last] and not (1<<j & nodeset):
+                    newdis = dist + edge[last][j]
+                    newset = 1<<j | nodeset
+                    if newdis < opt[i+1][newset,j][0]:
+                        opt[i+1][newset,j] = (newdis, last)
+                        npush += 1
+    fullsetplus = (1<<(n+1)) - 1    # 111...1, n+1 in total
+    print('viterbi, bit, time: {0:.3f}, push: {1}'.format(time.time()-t0,npush))
+    return opt[n+1][fullsetplus, n][0], solution(n+1,fullsetplus, n)
+
 
 
 if __name__ == "__main__":
@@ -134,8 +158,10 @@ if __name__ == "__main__":
     n, m = 16, 100
     edges = [(random.randint(0,n-1), random.randint(0,n-1), random.randint(0,5)) for _ in range(m)] + \
             [(random.randint(0,n-1), random.randint(0,n-1), random.randint(6,10)) for _ in range(m)] 
-    t0 = time.time()
+    print('{} cities'.format(n))
+    #t0 = time.time()
+    print(tsp11(n,edges))
     print(tsp(n,edges))
-    print('{} cities, time: {}'.format(n,time.time()-t0))
+    
     #(6, [0, 4, 8, 14, 7, 5, 10, 3, 13, 12, 9, 11, 15, 6, 2, 1, 0])
     #(Viterbi: 2.1s, Dijkstra: 0.9s)
