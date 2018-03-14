@@ -87,3 +87,13 @@ if __name__ == "__main__":
     print('{} cities, time: {}'.format(16,time.time()-t0))
     #(6, [0, 4, 8, 14, 7, 5, 10, 3, 13, 12, 9, 11, 15, 6, 2, 1, 0])
     #(Viterbi: 2.1s, Dijkstra: 0.9s)
+
+
+    import random
+    random.seed(2)
+    n, m = 16, 100
+    edges = [(random.randint(0,n-1), random.randint(0,n-1), random.randint(0,5)) for _ in range(m)] + \
+            [(random.randint(0,n-1), random.randint(0,n-1), random.randint(6,10)) for _ in range(m)] 
+    t0 = time.time()
+    print(tsp(n,edges))
+    print('{} cities, time: {}'.format(n,time.time()-t0))

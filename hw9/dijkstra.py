@@ -13,7 +13,7 @@ class keyPQ():  # decrease-key priority queue
         self.len  = len(h)
         self.popped = set()
         self.idx  = defaultdict(lambda:-1)
-        for i,(_,v) in enumerate(h): self.idx[v] = i
+        for i,(_,v,_) in enumerate(h): self.idx[v] = i
         self.heapify()
 
     def heapify(self):
@@ -59,104 +59,88 @@ class keyPQ():  # decrease-key priority queue
         self.heap[i], self.heap[j] = self.heap[j], self.heap[i]
         self.idx[self.heap[i][1]], self.idx[self.heap[j][1]] = i, j 
 
-    def decreaseKey(self, i, w):
-        self.heap[i][0] = w
+    def decreaseKey(self, i, w, prev):
+        self.heap[i][0], self.heap[i][2] = w, prev
         self.rise(i)
 
 
 ## O((V+E)logV), decrease-key heap
 ## 0.769 s on flip test
 def shortest1(n, edges):
-
     def solution(v, back):
         if v == start: return [v]
         return solution(back[v],back)+[v]
 
-    weight, edge = defaultdict(lambda: 1<<30), defaultdict(set)
-    dist, back = defaultdict(lambda:-1), defaultdict(int)
+    edge = defaultdict(set)
+    back = {}
     for (u,v,w) in edges:
-        weight[u,v] = weight[v,u] = min(weight[u,v],w)
-        edge[u].add(v)
-        edge[v].add(u)  
+        #weight[u,v] = weight[v,u] = min(weight[u,v],w)
+        edge[u].add((v,w))
+        edge[v].add((u,w))  
     start, end = 0, n-1
     # init 1: put all the start's neighbors to the heap, and heapify, O(n1)
-    h = []
-    for v in edge[start]:
-        h.append([weight[start, v], v])
-        dist[v], back[v] = weight[start,v], start 
+    global npop, npush
+    npop, npush = 0, 1
+    h = [[0, start, -1]]    #[dist, node, prev]
+    for v,w in edge[start]:
+        h.append([w, v, start])
+        npush += 1
     q = keyPQ(h)
-    # init 2: put start to the heap, O(1), but push its neighbors later one by one, O(n1logn1)
-    #q = keyPQ([[0,start]])
     while q.len:
-        w0, u = q.pop()
-        if u == end: break
-        for v in edge[u]:  
+        w0, u, prev = q.pop()
+        npop += 1
+        back[u] = prev
+        if u == end: return w0, solution(end,back)
+        for v,w in edge[u]:  
+            w1 = w0 + w
             if v in q.idx:          # v in the queue and not popped yet
                 if v in q.popped: continue
-                w, w1 = q.heap[q.idx[v]][0], weight[u,v]+w0   
-                if w1 < w:
-                    q.decreaseKey(q.idx[v],w1)
-                    dist[v], back[v] = w1, u
+                if w1 < q.heap[q.idx[v]][0]:
+                    q.decreaseKey(q.idx[v],w1,u)
+                    npush += 1
             else:                   # the rest nodes linked to u, which are not in the queue,  q.idx[v] == -1   
-                q.push([w0+weight[u,v], v])
-                dist[v], back[v] = w0+weight[u,v], u
-               
-    if dist[end] == -1: return None
-    return dist[end], solution(end,back)
+                q.push([w1, v, u])
+                npush += 1
+    return None
 
 
 
 ## O((V+E)logV), decrease-key heap-dict from https://gist.github.com/matteodellamico/4451520
-## 0.769 s on flip test
+## a little faster than shortest1
 def shortest2(n, edges):
     import priority_dict
-    import sys
-    sys.setrecursionlimit(1500)
 
     def solution(v, back):
         if v == start: return [v]
         return solution(back[v],back)+[v]
 
-    weight, edge = defaultdict(lambda: 1<<30), defaultdict(set)
-    dist, back = defaultdict(lambda:-1), defaultdict(int)
+    edge = defaultdict(set)
     for (u,v,w) in edges:
-        weight[u,v] = weight[v,u] = min(weight[u,v],w)
-        edge[u].add(v)
-        edge[v].add(u)  
+        edge[u].add((v,w))
+        edge[v].add((u,w))  
     start, end = 0, n-1
-    # init 1: put all the start's neighbors to the heap, and heapify, O(n1)
-    h = {}
-    for v in edge[start]:
-        h[v] = weight[start,v]
-        #h.append([weight[start, v], v])
-        dist[v], back[v] = weight[start,v], start 
-    dic = priority_dict.priority_dict(h)
-    popped = set()
-    # init 2: put start to the heap, O(1), but push its neighbors later one by one, O(n1logn1)
-    #q = keyPQ([[0,start]])
-    while len(dic):
-        w0, u = dic.pop_smallest()
-        popped.add(u)
-        if u == end: break
-        for v in edge[u]:  
-            if v in popped: continue
-            w1 = weight[u,v]+w0
-            if v in dic:          # v in the queue and not popped yet
-                #if v in q.popped: continue
-                if w1 < dic[v]:
-                    dic.__setitem__(v,w1)
-                    #q.decreaseKey(q.idx[v],w1)
-                    dist[v], back[v] = w1, u
-            else:       # the rest nodes linked to u, which are not in the queue,  q.idx[v] == -1   
-                #q.push([w0+weight[u,v], v])
-                dic.__setitem__(v,w1)
-                dist[v], back[v] = w1, u
-               
-    if dist[end] == -1: return None
-    return dist[end], solution(end,back)
-    #return dist[end]
+    # init : put start to the heap, O(1), but push its neighbors later one by one, O(n1logn1)
+    dic = priority_dict.priority_dict()     # dic[u]:(dist,u,last), means the dist from start to u, and last of u is last
+    dic[start] = (0,start,-1)
+    back = {}
+    global npop, npush
+    npop,npush = 0,0
+    while dic:
+        w0, u, prev = dic.pop_smallest()
+        npop += 1
+        back[u] = prev
+        if u == end: return w0, solution(end,back)
+        for v, w in edge[u]:  
+            if v in back: continue  # v not popped yet
+            w1 = w+w0
+            if v in dic and w1 >= dic[v][0]: continue
+            dic[v] = (w1,v,u)#dic.__setitem__(v,w1) # v in the queue, or v not visitted
+            npush += 1
+    return None
 
-## O((V+E)logE), heap
+
+
+## O((E+E)logE), heap
 ## 0.316 s on flip test
 def shortest(n, edges):
     import heapq
@@ -166,30 +150,32 @@ def shortest(n, edges):
         return solution(back[v],back)+[v]
 
     edge = defaultdict(set)
-    back = defaultdict(int)
+    back = {}
     d    = defaultdict(lambda: 1<<30)
-    popped = set()
     for (u,v,w) in edges:
-        edge[u].add((w,v))
-        edge[v].add((w,u))  
+        edge[u].add((v,w))
+        edge[v].add((u,w))  
     start, end = 0, n-1
-    
+    global npop, npush
+    npop,npush = 0,0
     # init : put start to the heap, O(1), but push its neighbors later one by one, O(n1logn1)
-    h, dist = [(0,start,-1)], -1
+    h = [(0,start,-1)]  # (dist,node,prev)
     while len(h):
         dist, u, prev = heapq.heappop(h)
-        if u in popped: continue
-        popped.add(u)
+        npop += 1
+        if u in back: continue
         back[u] = prev
         if u == end: return dist, solution(end,back)
-        for w, v in edge[u]:
-            if v not in popped:          # v not popped yet   
+        for v, w in edge[u]:
+            if v not in back:          # v not popped yet   
                 if dist+w < d[v]:
                     heapq.heappush(h,(dist+w, v, u))
                     d[v] = dist+w
+                    npush += 1
     return None
-    
 
+
+npop,npush = 0, 0
 
 
 if __name__ == "__main__":
@@ -220,11 +206,14 @@ if __name__ == "__main__":
     for V, E in VEset:
         print("V={}, E={}".format(V, E))
         t1 = time.time()
-        print("decrease-key_DIY:{}, time {}".format(shortest1(V, dense_tuples[:E]),time.time()-t1))
+        res = shortest1(V, dense_tuples[:E])
+        print("decrease-key_DIY:{0}, time {1:.3f}, pop:{2}, push:{3}".format(res,time.time()-t1,npop,npush))
         t1 = time.time()
-        print("heappush-only:   {}, time {}".format(shortest(V, dense_tuples[:E]),time.time()-t1))
+        res = shortest(V, dense_tuples[:E])
+        print("heappush-only:   {0}, time {1:.3f}, pop:{2}, push:{3}".format(res,time.time()-t1,npop,npush))
         t1 = time.time()
-        print("heapdict_new:    {}, time {}\n".format(shortest2(V, dense_tuples[:E]),time.time()-t1))
+        res = shortest2(V, dense_tuples[:E])
+        print("heapdict_new:    {0}, time {1:.3f}, pop:{2}, push:{3}\n".format(res,time.time()-t1,npop,npush))
    
         #pdb.set_trace()
     '''
