@@ -106,6 +106,56 @@ def shortest1(n, edges):
 
 
 
+## O((V+E)logV), decrease-key heap-dict from https://gist.github.com/matteodellamico/4451520
+## 0.769 s on flip test
+def shortest2(n, edges):
+    import priority_dict
+    import sys
+    sys.setrecursionlimit(1500)
+
+    def solution(v, back):
+        if v == start: return [v]
+        return solution(back[v],back)+[v]
+
+    weight, edge = defaultdict(lambda: 1<<30), defaultdict(set)
+    dist, back = defaultdict(lambda:-1), defaultdict(int)
+    for (u,v,w) in edges:
+        weight[u,v] = weight[v,u] = min(weight[u,v],w)
+        edge[u].add(v)
+        edge[v].add(u)  
+    start, end = 0, n-1
+    # init 1: put all the start's neighbors to the heap, and heapify, O(n1)
+    h = {}
+    for v in edge[start]:
+        h[v] = weight[start,v]
+        #h.append([weight[start, v], v])
+        dist[v], back[v] = weight[start,v], start 
+    dic = priority_dict.priority_dict(h)
+    popped = set()
+    # init 2: put start to the heap, O(1), but push its neighbors later one by one, O(n1logn1)
+    #q = keyPQ([[0,start]])
+    while len(dic):
+        w0, u = dic.pop_smallest()
+        popped.add(u)
+        if u == end: break
+        for v in edge[u]:  
+            if v in popped: continue
+            w1 = weight[u,v]+w0
+            if v in dic:          # v in the queue and not popped yet
+                #if v in q.popped: continue
+                if w1 < dic[v]:
+                    dic.__setitem__(v,w1)
+                    #q.decreaseKey(q.idx[v],w1)
+                    dist[v], back[v] = w1, u
+            else:       # the rest nodes linked to u, which are not in the queue,  q.idx[v] == -1   
+                #q.push([w0+weight[u,v], v])
+                dic.__setitem__(v,w1)
+                dist[v], back[v] = w1, u
+               
+    if dist[end] == -1: return None
+    return dist[end], solution(end,back)
+    #return dist[end]
+
 ## O((V+E)logE), heap
 ## 0.316 s on flip test
 def shortest(n, edges):
@@ -137,7 +187,6 @@ def shortest(n, edges):
                 if dist+w < d[v]:
                     heapq.heappush(h,(dist+w, v, u))
                     d[v] = dist+w
-               
     return None
     
 
@@ -145,7 +194,7 @@ def shortest(n, edges):
 
 if __name__ == "__main__":
 
-    print(shortest(4, [(0,1,1), (0,2,5), (1,2,1), (2,3,2), (1,3,6)]))
+    print(shortest2(4, [(0,1,1), (0,2,5), (1,2,1), (2,3,2), (1,3,6)]))
     # (4, [0,1,2,3])
     print(shortest(5,[(0,2,24),(0,4,20),(3,0,3),(4,3,12)]))
     #(15, [0, 3, 4])
@@ -171,9 +220,11 @@ if __name__ == "__main__":
     for V, E in VEset:
         print("V={}, E={}".format(V, E))
         t1 = time.time()
-        print("heapdict:{}, time {}".format(shortest1(V, dense_tuples[:E]),time.time()-t1))
+        print("decrease-key_DIY:{}, time {}".format(shortest1(V, dense_tuples[:E]),time.time()-t1))
         t1 = time.time()
-        print("heappush:{}, time {}\n".format(shortest(V, dense_tuples[:E]),time.time()-t1))
+        print("heappush-only:   {}, time {}".format(shortest(V, dense_tuples[:E]),time.time()-t1))
+        t1 = time.time()
+        print("heapdict_new:    {}, time {}\n".format(shortest2(V, dense_tuples[:E]),time.time()-t1))
    
         #pdb.set_trace()
     '''
