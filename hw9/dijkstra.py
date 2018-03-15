@@ -7,6 +7,7 @@ Process Time: Mar 1, 2018
 from collections import defaultdict
 import time
 
+'''
 class keyPQ():  # decrease-key priority queue
     def __init__(self, h=[]):
         self.heap = h           # list of [weight, V] in heap
@@ -121,12 +122,12 @@ def shortest2(n, edges):
     start, end = 0, n-1
     # init : put start to the heap, O(1), but push its neighbors later one by one, O(n1logn1)
     dic = priority_dict.priority_dict()     # dic[u]:(dist,u,last), means the dist from start to u, and last of u is last
-    dic[start] = (0,start,-1)
+    dic[start] = (0,-1)
     back = {}
     global npop, npush
     npop,npush = 0,0
     while dic:
-        w0, u, prev = dic.pop_smallest()
+        u, (w0, prev) = dic.pop_smallest()
         npop += 1
         back[u] = prev
         if u == end: return w0, solution(end,back)
@@ -134,11 +135,11 @@ def shortest2(n, edges):
             if v in back: continue  # v not popped yet
             w1 = w+w0
             if v in dic and w1 >= dic[v][0]: continue
-            dic[v] = (w1,v,u)#dic.__setitem__(v,w1) # v in the queue, or v not visitted
+            dic[v] = (w1,u)#dic.__setitem__(v,w1) # v in the queue, or v not visitted
             npush += 1
     return None
 
-
+'''
 
 ## O((E+E)logE), heap
 ## 0.316 s on flip test
@@ -180,18 +181,10 @@ npop,npush = 0, 0
 
 if __name__ == "__main__":
 
-    print(shortest2(4, [(0,1,1), (0,2,5), (1,2,1), (2,3,2), (1,3,6)]))
+    print(shortest(4, [(0,1,1), (0,2,5), (1,2,1), (2,3,2), (1,3,6)]))
     # (4, [0,1,2,3])
     print(shortest(5,[(0,2,24),(0,4,20),(3,0,3),(4,3,12)]))
     #(15, [0, 3, 4])
-    '''
-    q = keyPQ([[6,2],[5,3],[3,4],[20,5],[12,6],[2,7]])
-    q.pop()
-    q.push([0,0])
-    print(q.heap)
-    '''
-    #pdb.set_trace()
-    
 
     import sys
     import pdb
@@ -204,16 +197,16 @@ if __name__ == "__main__":
     VEset = ((1000,5000),(1000,10000),(1000,50000),(1000,500000),(1000,1000000))
     print("see: {}, Weight_Range: {}~{}\n".format(SEED,MinDist,MaxDist))
     for V, E in VEset:
-        print("V={}, E={}".format(V, E))
-        t1 = time.time()
-        res = shortest1(V, dense_tuples[:E])
-        print("decrease-key_DIY:{0}, time {1:.3f}, pop:{2}, push:{3}".format(res,time.time()-t1,npop,npush))
+        #print("V={}, E={}".format(V, E))
+        #t1 = time.time()
+        #res = shortest1(V, dense_tuples[:E])
+        #print("decrease-key_DIY:{0}, time {1:.3f}, pop:{2}, push:{3}".format(res,time.time()-t1,npop,npush))
         t1 = time.time()
         res = shortest(V, dense_tuples[:E])
         print("heappush-only:   {0}, time {1:.3f}, pop:{2}, push:{3}".format(res,time.time()-t1,npop,npush))
-        t1 = time.time()
-        res = shortest2(V, dense_tuples[:E])
-        print("heapdict_new:    {0}, time {1:.3f}, pop:{2}, push:{3}\n".format(res,time.time()-t1,npop,npush))
+        #t1 = time.time()
+        #res = shortest2(V, dense_tuples[:E])
+        #print("heapdict_new:    {0}, time {1:.3f}, pop:{2}, push:{3}\n".format(res,time.time()-t1,npop,npush))
    
         #pdb.set_trace()
     '''

@@ -4,8 +4,10 @@ Email: liukaib@oregonstate.edu
 Process Time: Mar 6, 2018
 '''
 from collections import defaultdict
+import heapq
 import time
 
+'''
 # top-down, bit, int2set
 def tsp_topdown0(n, edges):      
     def init_setV(i, V, n):
@@ -127,10 +129,79 @@ def tsp_viterbi(n, edges):     # viterbi, bit
     return opt[n+1][fullsetplus, n][0], solution(n+1,fullsetplus, n)
 
 
-def tsp_dij_heapq(n, edges):    # dijkstra, bit, heapq
-    # h is a heap, h[nodeset,last]=(dist,back), means the best dist for 0->nodeset->last is dist, and we have the back of last
+def tsp_dijk_heapq(n, edges):    # Dijkstra, bit, heapq
+    def solution(nodeset, v):
+        if nodeset == 1: return [0]
+        u = back[nodeset, v]
+        return solution(nodeset-(1<<v), u) + [v%n]
+
     t0 = time.time()
-    h = [()]
+    edge = defaultdict(lambda: defaultdict(lambda: float('inf')))
+    for u,v,w in edges:
+        edge[u][v] = min(edge[u][v], w) # possible duplicate edges
+        edge[v][u] = min(edge[v][u], w) # undirected
+    for u in range(1,n): edge[u][n] = edge[u][0]    # clone a dummy sink n, which is 0
+    h = [(0, (1,0), None)]  # (dist,(nodeset,last),prev), the best dist for 0->nodeset->last is dist, and we have the prev of last
+    back = {}
+    npop = npush = 0
+    fullset, fullsetplus = (1<<n)-1, (1<<n+1)-1    # + has high priority than <<
+    while h:
+        dist, (nodeset, u), prev = heapq.heappop(h)
+        npop += 1
+        if (nodeset, u) in back: continue
+        back[nodeset, u] = prev
+        if nodeset == fullsetplus: 
+            print('Dijkstra, heapq, time: {0:.3f}, push: {1}, pop: {2}'.format(time.time()-t0,npush,npop))
+            return dist, solution(nodeset, u)
+
+        for v in range(1,n) if nodeset < fullset else [n]:
+            if v in edge[u] and not (1<<v & nodeset):
+                newdis = dist + edge[u][v]
+                newset = 1<<v | nodeset
+                if (newset, v) not in back:    # no need to check this new one is better
+                    heapq.heappush(h,(newdis, (newset, v), u))
+                    npush += 1
+
+
+'''
+#def tsp_dijk_heapdict(n, edges):    # Dijkstra, bit, heap-dict from from https://gist.github.com/matteodellamico/4451520
+def tsp(n, edges):    # Dijkstra, bit, heap-dict from from https://gist.github.com/matteodellamico/4451520
+    import priority_dict
+
+    def solution(nodeset, v):
+        if nodeset == 1: return [0]
+        u = back[nodeset, v]
+        return solution(nodeset-(1<<v), u) + [v%n]
+
+    t0 = time.time()
+    edge = defaultdict(lambda: defaultdict(lambda: float('inf')))
+    for u,v,w in edges:
+        edge[u][v] = min(edge[u][v], w) # possible duplicate edges
+        edge[v][u] = min(edge[v][u], w) # undirected
+    for u in range(1,n): edge[u][n] = edge[u][0]    # clone a dummy sink n, which is 0
+    d = priority_dict.priority_dict()
+    d[1,0] = (0, None)  # d[nodeset,last] = (dist,prev), the best dist for 0->nodeset->last is dist, and we have the prev of last
+    back = {}
+    npop = npush = 0
+    fullset, fullsetplus = (1<<n)-1, (1<<n+1)-1    # + has high priority than <<
+    while d:
+        (nodeset,u), (dist,prev) = d.pop_smallest()
+        npop += 1
+        if (nodeset, u) in back: continue
+        back[nodeset, u] = prev
+        if nodeset == fullsetplus: 
+            print('Dijkstra, heapdict, time: {0:.3f}, push: {1}, pop: {2}'.format(time.time()-t0,npush,npop))
+            return dist, solution(nodeset, u)
+
+        for v in range(1,n) if nodeset < fullset else [n]:
+            if v in edge[u] and not (1<<v & nodeset):
+                newset = 1<<v | nodeset
+                if (newset, v) in back: continue
+                newdis = dist + edge[u][v]
+                if (newset, v) in d and newdis >= d[newset, v][0]: continue
+                d[newset, v] = newdis, u
+                npush += 1
+
 
 if __name__ == "__main__":
 
@@ -162,9 +233,11 @@ if __name__ == "__main__":
 
     for n, edges in cases:
         print('\n{} cities'.format(n))
-        print(tsp_viterbi(n,edges))
         print(tsp_topdown1(n,edges))
         print(tsp_topdown0(n,edges))
+        print(tsp_viterbi(n,edges))
+        print(tsp_dijk_heapq(n,edges))
+        print(tsp_dijk_heapdict(n,edges))
 
     
     
