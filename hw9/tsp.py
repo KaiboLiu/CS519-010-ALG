@@ -162,8 +162,8 @@ def tsp_dijk_heapq(n, edges):    # Dijkstra, bit, heapq
                     heapq.heappush(h,(newdis, (newset, v), u))
                     npush += 1
 
-
 '''
+
 #def tsp_dijk_heapdict(n, edges):    # Dijkstra, bit, heap-dict from from https://gist.github.com/matteodellamico/4451520
 def tsp(n, edges):    # Dijkstra, bit, heap-dict from from https://gist.github.com/matteodellamico/4451520
     import priority_dict
@@ -237,7 +237,8 @@ if __name__ == "__main__":
         print(tsp_topdown0(n,edges))
         print(tsp_viterbi(n,edges))
         print(tsp_dijk_heapq(n,edges))
-        print(tsp_dijk_heapdict(n,edges))
+        #print(tsp_dijk_heapdict(n,edges))
+        print(tsp(n,edges))
 
     
     

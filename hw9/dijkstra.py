@@ -197,16 +197,18 @@ if __name__ == "__main__":
     VEset = ((1000,5000),(1000,10000),(1000,50000),(1000,500000),(1000,1000000))
     print("see: {}, Weight_Range: {}~{}\n".format(SEED,MinDist,MaxDist))
     for V, E in VEset:
-        #print("V={}, E={}".format(V, E))
-        #t1 = time.time()
-        #res = shortest1(V, dense_tuples[:E])
-        #print("decrease-key_DIY:{0}, time {1:.3f}, pop:{2}, push:{3}".format(res,time.time()-t1,npop,npush))
+        print("V={}, E={}".format(V, E))
+        t1 = time.time()
+        res = shortest1(V, dense_tuples[:E])
+        print("decrease-key_DIY:{0}, time {1:.3f}, pop:{2}, push:{3}".format(res,time.time()-t1,npop,npush))
+        
         t1 = time.time()
         res = shortest(V, dense_tuples[:E])
         print("heappush-only:   {0}, time {1:.3f}, pop:{2}, push:{3}".format(res,time.time()-t1,npop,npush))
-        #t1 = time.time()
-        #res = shortest2(V, dense_tuples[:E])
-        #print("heapdict_new:    {0}, time {1:.3f}, pop:{2}, push:{3}\n".format(res,time.time()-t1,npop,npush))
+        
+        t1 = time.time()
+        res = shortest2(V, dense_tuples[:E])
+        print("heapdict_new:    {0}, time {1:.3f}, pop:{2}, push:{3}\n".format(res,time.time()-t1,npop,npush))
    
         #pdb.set_trace()
     '''
