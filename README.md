@@ -178,8 +178,8 @@ test time on `flip`| 0.769 s (DIY version)| - | 0.314 s|-
     0.4n < k < n| O(2n^3 + 2n^2klog(2n) (★)| O(n^3 + 3kn^2 + 2n^2klog(2k))|:clap:
     k > n| O(2n^3 + 2n^2klog(2n) (★)| O(4n^3 + 2n^2klog(2n))|:clap:
 
-- table of running time for k-best  
-
+#### running time for k-best  
+- table for 4 implemenations
     length|k-best|alg2_1<br>logn|alg2_2<br>logk|alg3<br>pure lazy |benchmark
     ---:|---:|---:|---:|---:|---:  
     40 |10   | 0.023 s| 0.042 s |0.010 s |0.036 s
@@ -192,6 +192,7 @@ test time on `flip`| 0.769 s (DIY version)| - | 0.314 s|-
     210|100  | 6.022 s| 5.912 s |1.297 s |8.804 s
     210|1000 |46.544 s|48.438 s |2.634 s |81.134 s
 
+- figures for 4 implemenations  
 <img src="./img/t-l%20figure.png" alt="t-l figure" width="50%"><img src="./img/t-k%20figure.png" alg="t-k figure" width="50%">
 
 [***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)  
