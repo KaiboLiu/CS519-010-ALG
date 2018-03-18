@@ -169,6 +169,7 @@ test time on `flip`| 0.769 s (DIY version)| - | 0.314 s|-
 #### k-best
 ![tree structure for k-best](./img/k-best%20tree.png)  
 - I implemented several versions for q3:k-best:  
+
     +|alg2_1<br>log n |alg2_2<br>log k|alg3<br>pure lazy
     :--:|--|--|--
     implementaion|unlazy generate+lazy get<br>baby dijkstra, **one heap**|alg2_1+**qselect**<br>cut & maitain heap size of k|lazy generate<br>**dict{(i,j):heap**}
@@ -178,6 +179,7 @@ test time on `flip`| 0.769 s (DIY version)| - | 0.314 s|-
     k > n| O(2n^3 + 2n^2klog(2n) (☆)| O(4n^3 + 2n^2klog(2n))|(★)
 
 - table of running time for k-best  
+
     length|k-best|alg2_1<br>logn|alg2_2<br>logk|alg3<br>pure lazy |benchmark
     ---:|---:|---:|---:|---:|---:  
     40 |10   | 0.023 s| 0.042 s |0.010 s |0.036 s
