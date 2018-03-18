@@ -174,9 +174,9 @@ test time on `flip`| 0.769 s (DIY version)| - | 0.314 s|-
     :--:|--|--|--
     implementaion|unlazy generate+lazy get<br>baby dijkstra, **one heap**|alg2_1+**qselect**<br>cut & maitain heap size of k|lazy generate<br>**dict{(i,j):heap**}
     time complexity|O(2n^3 + 2n^2klog(2n))|O(n^3 + 3mn^2 + 2n^2klog(2m))<br> -- m=min(k, n)|O(n^3 + nklogn)
-    k < 0.4n| O(2n^3 + 2n^2klog(2n)) | O(n^3 + 3kn^2 + 2n^2klog(2k)) (☆)|(★)
-    0.4n < k < n| O(2n^3 + 2n^2klog(2n) (☆)| O(n^3 + 3kn^2 + 2n^2klog(2k))|(★)
-    k > n| O(2n^3 + 2n^2klog(2n) (☆)| O(4n^3 + 2n^2klog(2n))|(★)
+    k < 0.4n| O(2n^3 + 2n^2klog(2n)) | O(n^3 + 3kn^2 + 2n^2klog(2k)) (★)|:clap:
+    0.4n < k < n| O(2n^3 + 2n^2klog(2n) (★)| O(n^3 + 3kn^2 + 2n^2klog(2k))|:clap:
+    k > n| O(2n^3 + 2n^2klog(2n) (★)| O(4n^3 + 2n^2klog(2n))|:clap:
 
 - table of running time for k-best  
 
