@@ -180,6 +180,7 @@ test time on `flip`| 0.769 s (DIY version)| - | 0.314 s|-
 
 #### running time for k-best  
 - table for 4 implemenations
+
     length|k-best|alg2_1<br>logn|alg2_2<br>logk|alg3<br>pure lazy |benchmark
     ---:|---:|---:|---:|---:|---:  
     40 |10   | 0.023 s| 0.042 s |0.010 s |0.036 s
