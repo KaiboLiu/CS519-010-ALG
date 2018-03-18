@@ -167,6 +167,26 @@ test time on `flip`| 0.769 s (DIY version)| - | 0.314 s|-
 
 ### RNA problem
 #### k-best
-![tree structure for k-best](./img/k-best%20tree.png)
+![tree structure for k-best](./img/k-best%20tree.png)  
+- I implemented several versions for q3:k-best:
+    +|alg2_1<br>log n |alg2_2<br>log k|alg3<br>pure lazy
+    :--:|--|--|--
+    implementaion|unlazy generate+lazy get<br>baby dijkstra, **one heap**|alg2_1+**qselect**<br>cut & maitain heap size of k|lazy generate<br>**dict{(i,j):heap**}
+    time complexity|O(2n^3 + 2n^2klog(2n))|O(n^3 + 3mn^2 + 2n^2klog(2m))<br> -- m=min(k, n)|O(n^3 + nklogn)
+    k < 0.4n| O(2n^3 + 2n^2klog(2n)) | O(n^3 + 3kn^2 + 2n^2klog(2k)) (☆)|(★)
+    0.4n < k < n| O(2n^3 + 2n^2klog(2n) (☆)| O(n^3 + 3kn^2 + 2n^2klog(2k))|(★)
+    k > n| O(2n^3 + 2n^2klog(2n) (☆)| O(4n^3 + 2n^2klog(2n))|(★)
 
+- table of running time for k-best
+    length|k-best|alg2_1<br>logn|alg2_2<br>logk|alg3<br>pure lazy |benchmark
+    ---:|---:|---:|---:|---:|---:  
+    40 |10   | 0.023 s| 0.042 s |0.010 s |0.036 s
+    40 |100  | 0.129 s| 0.105 s |0.023 s |0.206  s
+    40 |1000 | 1.002 s| 1.038 s |0.101 s |1.646 s
+    111|10   | 0.275 s| 0.364 s |0.193 s |0.466 s
+    111|100  | 1.354 s| 1.387 s |0.203 s |2.348 s
+    111|1000 |11.355 s|11.125 s |0.591 s |19.298 s
+    210|10   | 1.402 s| 1.769 s |1.186 s |2.163 s
+    210|100  | 6.022 s| 5.912 s |1.297 s |8.804 s
+    210|1000 |46.544 s|48.438 s |2.634 s |81.134 s
 [***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)  
