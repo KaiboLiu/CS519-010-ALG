@@ -9,7 +9,7 @@
 - [BFS and DFS](#bfs-and-dfs)  
 - [graph algorithm comparison](#graph-algorithm-comparison)  
 - [priority queue(PQ) implememtations for Dijkstra](#priority-queuepq-implememtations-for-dijkstra)  
-  
+- [RNA counting problem](#rna-counting-problem)  
   
 ### HW1: Python 3, qsort, BST, and qselect   
 [code and description](./hw1)   [10/10 cases] Total Time: 0.083 s  
@@ -165,23 +165,24 @@ test time on `flip`| 0.769 s (DIY version)| - | 0.314 s|-
 [***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)  
 
 
-### RNA problem
+### RNA counting problem
 #### k-best
 ![tree structure for k-best](./img/k-best%20tree.png)  
 - I implemented several versions for q3:k-best:  
 
-    +|alg2_1 (log n) |alg2_2 (log k)|alg3 (pure lazy)
+    +|alg2_1 (heap-n) |alg2_2 (heap-k)|alg3 (pure lazy)
     :--:|--|--|--
     implementaion|unlazy generate+lazy get<br>baby dijkstra, **one heap**|alg2_1+**qselect**<br>cut & maitain heap size of k|lazy generate<br>dict{**(i,j):heap**}
-    time complexity|O(2n^3 + 2n^2klog(2n))|O(n^3 + 3mn^2 + 2n^2klog(2m))<br> -- m=min(k, n)|O(n^3 + nklogn)
-    k < 0.4n| O(2n^3 + 2n^2klog(2n)) | O(n^3 + 3kn^2 + 2n^2klog(2k)) (★)|:clap:
-    0.4n < k < n| O(2n^3 + 2n^2klog(2n) (★)| O(n^3 + 3kn^2 + 2n^2klog(2k))|:clap:
-    k > n| O(2n^3 + 2n^2klog(2n) (★)| O(4n^3 + 2n^2klog(2n))|:clap:
+    time complexity|O(2n^3 + 2n^2klog(n+2k))|O(n^3 + 3mn^2 + 2n^2klog(m+2k))<br> -- m=min(k, n)|O(n^3 + nklogn)
+    k < 0.48n| O(2n^3 + 2n^2klog(n+2k)) | O(n^3 + 3kn^2 + 2n^2klog(3k)) (★)|:clap:
+    0.48n < k < n| O(2n^3 + 2n^2klog(n+2k) (★)| O(n^3 + 3kn^2 + 2n^2klog(3k))|:clap:
+    k > n| O(2n^3 + 2n^2klog(n+2k) (★)| O(4n^3 + 2n^2klog(n+2k))|:clap:
+
 
 #### running time for k-best  
 - table for 4 implemenations
 
-    length|k-best|alg2_1<br>logn|alg2_2<br>logk|alg3<br>pure lazy |benchmark
+    length|k-best|alg2_1<br>heap-n|alg2_2<br>heap-k|alg3<br>pure lazy |benchmark
     ---:|---:|---:|---:|---:|---:  
     40 |10   | 0.023 s| 0.042 s |0.010 s |0.036 s
     40 |100  | 0.129 s| 0.105 s |0.023 s |0.206  s
