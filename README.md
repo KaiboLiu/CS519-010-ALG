@@ -192,7 +192,7 @@ test time on `flip`| 0.769 s (DIY version)| - | 0.314 s|-
     210|100  | 6.022 s| 5.912 s |1.297 s |8.804 s
     210|1000 |46.544 s|48.438 s |2.634 s |81.134 s
 
-![t-l figure](./img/t-l%20figure.png| width=300) ![t-k figure](./img/t-k%20figure.png| width=200)  
+![t-l figure](./img/t-l%20figure.png | width=300) ![t-k figure](./img/t-k%20figure.png | width=200)  
 
 
 [***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)  
