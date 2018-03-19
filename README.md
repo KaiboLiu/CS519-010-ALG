@@ -173,7 +173,7 @@ test time on `flip`| 0.769 s (DIY version)| - | 0.314 s|-
     +|alg2_1 (heap-n) |alg2_2 (heap-k)|alg3 (pure lazy)
     :--:|--|--|--
     **implementaion**|unlazy generate+lazy get<br>baby dijkstra, **one heap**|alg2_1+**qselect**<br>cut & maitain heap size of k|lazy generate<br>dict{**(i,j):heap**}
-    **time complexity**|O(2n^3 + 2n^2klog(n+2k))|O(n^3 + 3mn^2 + 2n^2klog(m+2k))<br> -- m=min(k, n)|O(n^3 + nklogn)
+    **time complexity**|O(2n^3 + 2n^2klog(n+2k))|O(n^3 + 3mn^2 + 2n^2klog(m+2k))<br> -- m=min(k, n)|O(n^3 + nklog(n+2k))
     k < 0.48n| O(2n^3 + 2n^2klog(n+2k)) | O(n^3 + 3kn^2 + 2n^2klog(3k)) (★)|:clap:
     0.48n < k < n| O(2n^3 + 2n^2klog(n+2k) (★)| O(n^3 + 3kn^2 + 2n^2klog(3k))|:clap:
     k > n| O(2n^3 + 2n^2klog(n+2k) (★)| O(4n^3 + 2n^2klog(n+2k))|:clap:
