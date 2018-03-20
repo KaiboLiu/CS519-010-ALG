@@ -5,7 +5,7 @@ Process Time: Feb 28, 2018
 '''
 
 from collections import defaultdict
-from heapq import heapify, heapreplace, heappush, heappop, nlargest
+from heapq import heapify, heapreplace, heappush, heappop
 import rna_liang
 import pdb
 
