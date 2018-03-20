@@ -1,0 +1,67 @@
+check with benchmark: on
+
+seq: CAUCGGGGUCUGAGAUGGCCAUGAAGGGCACGUACUGUUU
+len: 40
+time of 10-best_liang:  0.033
+time of 10-best_alg1.5: 0.031
+time of 10-best_alg2:   0.021
+time of 10-best_lazy:   0.009
+
+time of 40-best_liang:  0.096
+time of 40-best_alg1.5: 0.089
+time of 40-best_alg2:   0.054
+time of 40-best_lazy:   0.009
+
+time of 100-best_liang:  0.206
+time of 100-best_alg1.5: 0.259
+time of 100-best_alg2:   0.120
+time of 100-best_lazy:   0.022
+
+time of 1000-best_liang:  1.568
+time of 1000-best_alg1.5: 8.716
+time of 1000-best_alg2:   0.908
+time of 1000-best_lazy:   0.084
+
+seq: GCUGGCGGGCCCCUUCGCAUGGUUCGGCGGUGAAUCUGGUCAGGUCGGGAACGAAGCAGCCAUAGUCGUUCAGAACCAGUGCCGGAGUAAGGCUCGCCUACCGGUAUCCCU
+len: 111
+time of 10-best_liang:  0.398
+time of 10-best_alg1.5: 0.444
+time of 10-best_alg2:   0.232
+time of 10-best_lazy:   0.167
+
+time of 40-best_liang:  0.971
+time of 40-best_alg1.5: 1.240
+time of 40-best_alg2:   0.580
+time of 40-best_lazy:   0.183
+
+time of 100-best_liang:  2.082
+time of 100-best_alg1.5: 3.337
+time of 100-best_alg2:   1.252
+time of 100-best_lazy:   0.202
+
+time of 1000-best_liang:  19.631
+time of 1000-best_alg1.5: 119.876
+time of 1000-best_alg2:   11.389
+time of 1000-best_lazy:   0.569
+
+seq: GAAUGGCUCGGAUUUGAUGGGCCAUUCAACUUAUAACAGGCUCCGAAGUGACCUGUAACAGUGCCAAAAUGCGGGAAUUAGCCACCUUGGUGGUGAAACCCGCAGCUGAUCACCGCGUCAGUUCAACGACUAGAUGGUACUGGCUGGUUCGUUCCAGUUAAGAUAUAGUCUCUCACCGGGGGUAAAUCCCAGUGCUUCACGGCAUUAAAU
+len: 210
+time of 10-best_liang:  2.252
+time of 10-best_alg1.5: 2.696
+time of 10-best_alg2:   1.406
+time of 10-best_lazy:   1.215
+
+time of 40-best_liang:  4.290
+time of 40-best_alg1.5: 7.126
+time of 40-best_alg2:   2.862
+time of 40-best_lazy:   1.285
+
+time of 100-best_liang:  8.486
+time of 100-best_alg1.5: 18.103
+time of 100-best_alg2:   5.518
+time of 100-best_lazy:   1.357
+
+time of 1000-best_liang:  80.927
+time of 1000-best_alg1.5: 512.494
+time of 1000-best_alg2:   46.260
+time of 1000-best_lazy:   2.619
