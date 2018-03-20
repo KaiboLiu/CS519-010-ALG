@@ -29,7 +29,7 @@
 ### HW9: Graph Algorithms (part 2), DP (part 4)    
 [code and description](./hw9)  [10/10 cases] Total Time: 0.314 s
 ### HW10: Challenge Problem - RNA Structure Prediction (6%)    
-[code and description](./rna)  [25/25 cases] Total Time: 0.582 s
+[code and description](./hw10)  [25/25 cases] Total Time: 0.582 s
   
 [***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)  
   
