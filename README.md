@@ -133,7 +133,7 @@ start from| source| sink
 #### 03/01/2018 Thu  
 +| Viterbi | Dijkstra
 ---|---|---|
-restriction| DAG<br>(**BIG restriction**) | non-gegative weights
+restriction| DAG<br>(**BIG restriction**) | non-negative weights
 advantage| fast | works in undirected graph<br>works in acyclic/cylic gragh<br>could have early termination
 usage| longest/shortest/<br>number/minmax<br>(LIS, TSP, knapsacks, MIS, etc.) | shortest path <br>single source (***s*** to any)|
 implementation| topological sort+<br>BFS(**queue**) | best-first<br>(**priority** queue) <br>with **decrease key**
