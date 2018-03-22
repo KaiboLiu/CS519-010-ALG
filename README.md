@@ -135,7 +135,7 @@ start from| source| sink
 ---|---|---|
 restriction| DAG<br>(**BIG restriction**) | non-gegative weights
 advantage| fast | works in undirected graph<br>works in acyclic/cylic gragh<br>could have early termination
-usage| longest/shortest/<br>number/minmax | shortest path <br>single source (***s*** to any)|
+usage| longest/shortest/<br>number/minmax<br>(LIS, TSP, knapsacks, MIS, etc.) | shortest path <br>single source (***s*** to any)|
 implementation| topological sort+<br>BFS(**queue**) | best-first<br>(**priority** queue) <br>with **decrease key**
 time complexity | ![O(V+E)](https://img.shields.io/badge/O-V+E-orange.svg) | ![O((V+E)logV)](https://img.shields.io/badge/O-(V+E)logV-orange.svg)  
 common| coin problem, TSP | coin problem, TSP   
