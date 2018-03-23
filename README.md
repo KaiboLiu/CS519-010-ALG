@@ -66,7 +66,7 @@ heapify |O(nlogn)|O(1)|O(n)|O(nlogn)|O(1)|O(nlogn)
 +| optimization | summary  
 ---|---|---  
 graph | MIS<br> max,min<br>maxmin<br>Unbunded | (sum, expectation)<br>Fib<br>bitstrings   
-hyperGraph | matrix-chain | # of BSTs  
+hyperGraph | matrix-chain | # of BSTs<br> # RNA structure<br> # of boolean expressions to T  
   
 - Number of n-node BSTs problem is a hyperpraph problem  
   
