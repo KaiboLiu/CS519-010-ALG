@@ -11,24 +11,24 @@
 - [priority queue(PQ) implememtations for Dijkstra](#priority-queuepq-implememtations-for-dijkstra)  
 - [RNA counting problem](#rna-counting-problem)  
   
-### HW1: Python 3, qsort, BST, and qselect   
+#### HW1: Python 3, qsort, BST, and qselect   
 [code and description](./hw1)   [10/10 cases] Total Time: 0.083 s  
-### HW2: Divide-n-conquer: mergesort, number of inversions, longest path   
+#### HW2: Divide-n-conquer: mergesort, number of inversions, longest path   
 [code and description](./hw2)  [10/10 cases] Total Time: 0.377 s  
-### HW3: K closest numbers; Two Pointers   
+#### HW3: K closest numbers; Two Pointers   
 [code and description](./hw3)  [10/10 cases] Total Time: 0.276 s  
-### HW4: Priority Queue and Heaps   
+#### HW4: Priority Queue and Heaps   
 [code and description](./hw4)  [10/10 cases] Total Time: 0.288 s  
-### HW5: DP (part 1: simple)   
+#### HW5: DP (part 1: simple)   
 [code and description](./hw5)  [10/10 cases] Total Time: 0.009 s  
-### HW6: DP (part 2)   
+#### HW6: DP (part 2)   
 [code and description](./hw6)  [10/10 cases] Total Time: 0.067 s  
-### HW7: Void (Midterm Week)   
-### HW8: DP (part 3), Graph Algorithms (part 1)   
+#### HW7: Void (Midterm Week)   
+#### HW8: DP (part 3), Graph Algorithms (part 1)   
 [code and description](./hw8)  [10/10 cases] Total Time: 0.269 s  
-### HW9: Graph Algorithms (part 2), DP (part 4)    
+#### HW9: Graph Algorithms (part 2), DP (part 4)    
 [code and description](./hw9)  [10/10 cases] Total Time: 0.314 s
-### HW10: Challenge Problem - RNA Structure Prediction (6%)    
+#### HW10: Challenge Problem - RNA Structure Prediction (6%)    
 [code and description](./hw10)  [25/25 cases] Total Time: 0.582 s
   
 [***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)  
