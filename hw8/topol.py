@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-
+'''
 def order1(n, edges):
     from heapq import heapify, heappop
     degree, nodes, succ = defaultdict(int), [], defaultdict(list)
@@ -25,7 +25,7 @@ def order1(n, edges):
             nodes[idx][0] -= 1
         heapify(nodes)
     return res
-
+'''
 
 ## BFS, use list as a queue
 def order(n, edges):
@@ -84,6 +84,7 @@ def order_DFS1(n, edges):
     print(res)
     return res if len(res) == n else None
 
+'''
 ## added on 03/16/2018
 ## DFS
 def order_DFS2(n, edges):
@@ -143,7 +144,7 @@ def order_DFS3(n, edges):
         pred[v].append(u)
     acyclic = DFS(n,res)
     return res[:-1] if acyclic else None
-
+'''
 
 if __name__ == "__main__":
     print(order_DFS3(8, [(0,2), (1,2), (2,3), (2,4), (3,4), (3,5), (4,5), (5,6), (5,7)]))
