@@ -131,6 +131,7 @@ start from| source| sink
   
 ### graph algorithm comparison  
 #### 03/01/2018 Thu  
+
 +| Viterbi | Dijkstra
 ---|---|---|
 restriction| DAG<br>(**BIG restriction**) | non-negative weights
