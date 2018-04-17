@@ -198,3 +198,51 @@ test time on `flip`| 0.769 s (DIY version)| - | 0.314 s|-
     210|1000 |46.544 s|48.438 s |2.634 s |81.134 s
 
 [***Back*** to Contents ***CS 519-010***](#cs519-010-algorithms)  
+
+
+
+#### learning memo in Algorithm by myself
+1. single update, interval query(interval sum)  
+    BIT  
+    - time: **sum** O(nlogn), **update** single O(nlogn)  
+    - space: O(n)  
+
+    1-index  
+    c[i] = sum(a[j],a[i]),  j=i-LowBit(i)+1  
+    sum(a[1],a[i]) = sum(c[i]), i -> i-LowBit(i)  
+    ```
+    def _sum(x, res):
+        s = 0
+        while x > 0:
+            s += c[x]
+            x -=  (x & (-x))
+        return s
+
+    def _update(x, d):  # d is delta d
+        while x <= n:
+            c[x] += d
+            x += (x & (-x))
+    ```
+
+2. interval update, interval query(interval sum)
+    as above, c[i] = sum(a[j],a[i]),  j=i-LowBit(i)+1  
+    let b[i] = a[i]-a[i-1], b[1] = a[1]  
+    ```
+    sum(a[1],a[i])  
+    = (b[1]) + (b[1]+b[2]) + ... + (b[1]+b[2]+...+b[n]) 
+    = n*b[1] + (n-1)*b[2] +... +b[n]
+    = n * (b[1]+b[2]+...+b[n]) - (0*b[1]+1*b[2]+...+(n-1)*b[n]) 
+    ```
+    #let d[n] = sigma{(i-1)*b[i]}, i=1~n
+    let d[i] = (i-1)*b[i]
+    then
+    ```
+    **getSum**: sum(i) = sum(a[1],...,a[i]) = = n * sum(b[1],...,b[n]) - sum(d[1],..,d[n])
+    ```
+    **update**: [i,j] with increment x
+    b[i] += x, b[j] -= x
+    d[i] += (i-1)x, d[j] += (j-1)x
+    sum(a[i],...,a[j]) = sum(j)-sum(i-1)
+    update: O(1)
+
+3. segment tree
