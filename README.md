@@ -224,7 +224,8 @@ test time on `flip`| 0.769 s (DIY version)| - | 0.314 s|-
 2. interval update, interval query(interval sum)  
     use **magic** math  
     - time: **sum** ![O(n)](https://img.shields.io/badge/O-n-orange.svg) then ![O(1)](https://img.shields.io/badge/O-1-orange.svg), **update** inverval ![O(1)](https://img.shields.io/badge/O-1-orange.svg)   
-    - space: ![O(n)](https://img.shields.io/badge/O-n-orange.svg)    
+    - space: ![O(n)](https://img.shields.io/badge/O-n-orange.svg)   
+     
     // as above, c[i] = sum(a[j],a[i]),  j=i-LowBit(i)+1    
     let b[i] = a[i]-a[i-1], b[1] = a[1]    
     ```  
