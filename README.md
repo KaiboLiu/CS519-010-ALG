@@ -203,10 +203,9 @@ test time on `flip`| 0.769 s (DIY version)| - | 0.314 s|-
 
   #### learning memo in Algorithm by myself  
 1. single update, interval query(interval sum)    
-    BIT    
-    - time: **sum** O(nlogn), **update** single O(nlogn)    
-    - space: O(n)    
-
+    BIT
+    - time: **sum** ![O(nlogn)](https://img.shields.io/badge/O-nlogn-orange.svg), **update** single ![O(nlogn)](https://img.shields.io/badge/O-nlogn-orange.svg)   
+    - space: ![O(n)](https://img.shields.io/badge/O-n-orange.svg)    
       1-index    
     c[i] = sum(a[j],a[i]),  j=i-LowBit(i)+1    
     sum(a[1],a[i]) = sum(c[i]), i -> i-LowBit(i)    
@@ -217,15 +216,16 @@ test time on `flip`| 0.769 s (DIY version)| - | 0.314 s|-
             s += c[x]  
             x -=  (x & (-x))  
         return s  
-
       def _update(x, d):  # d is delta d  
         while x <= n:  
             c[x] += d  
             x += (x & (-x))  
     ```  
-
 2. interval update, interval query(interval sum)  
-    as above, c[i] = sum(a[j],a[i]),  j=i-LowBit(i)+1    
+    use **magic** math  
+    - time: **sum** ![O(n)](https://img.shields.io/badge/O-n-orange.svg) then ![O(1)](https://img.shields.io/badge/O-1-orange.svg), **update** single ![O(1)](https://img.shields.io/badge/O-1-orange.svg)   
+    - space: ![O(n)](https://img.shields.io/badge/O-n-orange.svg)    
+    # as above, c[i] = sum(a[j],a[i]),  j=i-LowBit(i)+1    
     let b[i] = a[i]-a[i-1], b[1] = a[1]    
     ```  
     sum(a[1],a[i])    
@@ -238,9 +238,10 @@ test time on `flip`| 0.769 s (DIY version)| - | 0.314 s|-
     then    
     **getSum**: `sum(i) = sum(a[1],...,a[i]) = = n * sum(b[1],...,b[n]) - sum(d[1],..,d[n])`    
     **update**: [i,j] with increment x    
+    ```
     b[i] += x, b[j] -= x  
     d[i] += (i-1)x, d[j] += (j-1)x  
     sum(a[i],...,a[j]) = sum(j)-sum(i-1)  
-    update: O(1)  
-
+    ```
+    update: ![O(1)](https://img.shields.io/badge/O-1-orange.svg)  
 3. segment tree  
